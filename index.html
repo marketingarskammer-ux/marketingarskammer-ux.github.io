@@ -1196,42 +1196,55 @@ p,span,div{font-family:var(--font-b)}
   S11 · CTA FINAL
 ══════════════════════════════════════ -->
 <div class="slide sd" id="s11" style="overflow:hidden">
-  <!-- Fallback: video_cta.mp4 (oculto por padrão, aparece só se Drive falhar) -->
-  <video id="s11-vid" autoplay muted playsinline loop
+  <!-- YouTube showroom — fullscreen sem controles -->
+  <div id="s11-yt-wrap" style="position:absolute;inset:0;overflow:hidden;z-index:1;pointer-events:none;background:#030c1a"></div>
+  <!-- video_cta.mp4 — toca após o YouTube terminar -->
+  <video id="s11-vid" muted playsinline loop
          style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.05) saturate(1.7) contrast(1.12);z-index:0">
     <source src="video_cta.mp4" type="video/mp4">
   </video>
-  <!-- Drive iframe: showroom em fullscreen -->
-  <div id="s11-drive-wrap" style="position:absolute;inset:0;overflow:hidden;z-index:1">
-    <iframe id="s11-frame"
-      src="https://drive.google.com/file/d/1iorMlYr6nxUd0_A2H8lcH_Ta-ysuOEJE/preview?autoplay=1"
-      style="position:absolute;width:177.78vh;min-width:100%;height:177.78vw;min-height:100%;top:50%;left:50%;transform:translate(-50%,-50%);border:none;filter:brightness(1.05) saturate(1.7) contrast(1.12)"
-      allow="autoplay; fullscreen"
-      allowfullscreen>
-    </iframe>
-    <!-- máscaras cobrindo header e controles do Drive -->
-    <div style="position:absolute;top:0;left:0;right:0;height:56px;background:#030c1a;z-index:3;pointer-events:none"></div>
-    <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:#030c1a;z-index:3;pointer-events:none"></div>
-  </div>
   <script>
   (function(){
-    var frame=document.getElementById('s11-frame');
+    var wrap=document.getElementById('s11-yt-wrap');
     var vid=document.getElementById('s11-vid');
-    var wrap=document.getElementById('s11-drive-wrap');
-    frame.addEventListener('load',function(){
-      setTimeout(function(){
-        try{
-          /* CORS error = Drive carregou vídeo público → mantém iframe */
-          frame.contentDocument;
-          /* se chegou aqui = mesmo domínio = página de login → usa fallback */
-          wrap.style.display='none';
-          vid.style.display='block';
-          vid.play();
-        }catch(e){
-          /* CORS block = Drive funcionando → mantém iframe visível */
+    /* carrega API YouTube */
+    var s=document.createElement('script');
+    s.src='https://www.youtube.com/iframe_api';
+    document.head.appendChild(s);
+    window.onYouTubeIframeAPIReady=function(){
+      /* div alvo precisa existir ANTES de criar o player */
+      var d=document.createElement('div');
+      d.id='s11-yt-player';
+      wrap.appendChild(d);
+      new YT.Player('s11-yt-player',{
+        videoId:'Rmkc1bMfxkE',
+        playerVars:{
+          autoplay:1,mute:1,controls:0,rel:0,
+          modestbranding:1,iv_load_policy:3,
+          disablekb:1,showinfo:0,fs:0,playsinline:1
+        },
+        events:{
+          onReady:function(e){
+            e.target.playVideo();
+            /* getIframe() = forma oficial de obter o elemento iframe */
+            var f=e.target.getIframe();
+            if(f)f.style.cssText='position:absolute;width:177.78vh;min-width:100%;height:177.78vw;min-height:100%;top:50%;left:50%;transform:translate(-50%,-50%);border:none;filter:brightness(1.05) saturate(1.7) contrast(1.12)';
+          },
+          onStateChange:function(e){
+            if(e.data===YT.PlayerState.ENDED){
+              wrap.style.display='none';
+              vid.style.display='block';
+              vid.play();
+            }
+          },
+          onError:function(){
+            wrap.style.display='none';
+            vid.style.display='block';
+            vid.play();
+          }
         }
-      },2000);
-    });
+      });
+    };
   })();
   </script>
   <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,12,26,.35) 0%,rgba(3,12,26,.08) 50%,rgba(3,12,26,.30) 100%)"></div>
