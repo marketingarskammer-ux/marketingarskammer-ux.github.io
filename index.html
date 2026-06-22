@@ -909,7 +909,7 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- DENVER -->
     <div class="val-panel">
-      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/20-destaque-denver-externa-noturna-a-02.webp);background-position:center 18%">
+      <div class="val-ph" style="background-image:url(denver.png);background-position:center 30%">
         <div class="val-name">DENVER</div>
         <div class="val-sub">RESIDENCE</div>
         <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
@@ -930,7 +930,7 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- LISBOA -->
     <div class="val-panel">
-      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/21-destaque-rua-247-externa-a-13.webp);background-position:center 18%">
+      <div class="val-ph" style="background-image:url(lisboa.png);background-position:left 25%">
         <div class="val-name">LISBOA</div>
         <div class="val-sub">RESIDENCE</div>
         <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
@@ -1196,10 +1196,27 @@ p,span,div{font-family:var(--font-b)}
   S11 · CTA FINAL
 ══════════════════════════════════════ -->
 <div class="slide sd" id="s11" style="overflow:hidden">
-  <video autoplay loop muted playsinline preload="auto"
+  <video id="s11-vid" autoplay muted playsinline preload="auto"
          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.05) saturate(1.7) contrast(1.12)">
-    <source src="video_cta.mp4" type="video/mp4">
+    <source src="showroom.mp4" type="video/mp4">
   </video>
+  <script>
+  (function(){
+    var v=document.getElementById('s11-vid');
+    var seq=['showroom.mp4','video_cta_hq.mp4'];
+    var idx=0;
+    /* fallback: se showroom não estiver disponível (versão online), usa só o CTA */
+    v.addEventListener('error',function(){
+      if(idx===0){v.src='video_cta_hq.mp4';v.loop=true;v.load();v.play();}
+    });
+    v.addEventListener('ended',function(){
+      idx=(idx+1)%seq.length;
+      v.src=seq[idx];
+      v.loop=(idx===seq.length-1&&seq.length===1);
+      v.load();v.play();
+    });
+  })();
+  </script>
   <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,12,26,.35) 0%,rgba(3,12,26,.08) 50%,rgba(3,12,26,.30) 100%)"></div>
   <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:60px;opacity:.15;pointer-events:none">
     <path d="M0,40 C360,70 720,10 1080,45 C1260,62 1380,32 1440,40 L1440,80 L0,80Z" fill="#fff"/>
