@@ -1196,25 +1196,36 @@ p,span,div{font-family:var(--font-b)}
   S11 · CTA FINAL
 ══════════════════════════════════════ -->
 <div class="slide sd" id="s11" style="overflow:hidden">
-  <video id="s11-vid" autoplay muted playsinline preload="auto"
+  <video id="s11-vid" autoplay muted playsinline
          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.05) saturate(1.7) contrast(1.12)">
-    <source src="showroom.mp4" type="video/mp4">
   </video>
   <script>
   (function(){
     var v=document.getElementById('s11-vid');
-    var seq=['showroom.mp4','video_cta_hq.mp4'];
     var idx=0;
-    /* fallback: se showroom não estiver disponível (versão online), usa só o CTA */
+    var seq=['showroom.mp4','video_cta.mp4'];
+
+    function play(i){
+      idx=i;
+      v.src=seq[i];
+      v.load();
+      var p=v.play();
+      if(p&&p.catch)p.catch(function(){});
+    }
+
+    /* se showroom.mp4 não existir online (404) → vai direto para video_cta.mp4 */
     v.addEventListener('error',function(){
-      if(idx===0){v.src='video_cta_hq.mp4';v.loop=true;v.load();v.play();}
-    });
+      if(idx===0){play(1);}
+      else{v.loop=true;var p=v.play();if(p&&p.catch)p.catch(function(){});}
+    },true);
+
+    /* quando termina → próximo da sequência */
     v.addEventListener('ended',function(){
-      idx=(idx+1)%seq.length;
-      v.src=seq[idx];
-      v.loop=(idx===seq.length-1&&seq.length===1);
-      v.load();v.play();
+      if(idx===0){play(1);}
+      else{play(0);}
     });
+
+    play(0);
   })();
   </script>
   <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,12,26,.35) 0%,rgba(3,12,26,.08) 50%,rgba(3,12,26,.30) 100%)"></div>
