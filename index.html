@@ -102,6 +102,74 @@ p,span,div{font-family:var(--font-b)}
 .tc-red{background:#e0242c}
 .tc-blue{background:#1565c0}
 .tc-green{background:#1e8c3a}
+
+/* ── VALORIZAÇÃO SLIDES S7–S9 ── */
+.val-wrap{position:absolute;inset:0;top:78px;display:grid;gap:5px;padding:0 5px 5px}
+.val-wrap-2{grid-template-columns:1fr 1fr}
+.val-wrap-3{grid-template-columns:1fr 1fr 1fr}
+.val-panel{display:flex;flex-direction:column;height:100%;overflow:hidden;border-radius:3px}
+.val-ph{flex:1;position:relative;background-size:cover;background-position:center 18%;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 22px 13px;min-height:0}
+.val-ph::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,.0) 35%,rgba(0,0,0,.65) 100%)}
+.val-name{font-family:var(--font-t);font-size:clamp(1.4rem,2vw,2.6rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;position:relative;z-index:2;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.val-sub{font-family:var(--font-t);font-size:clamp(.5rem,.7vw,.82rem);font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);position:relative;z-index:2;margin:1px 0 6px}
+.val-loc{font-family:var(--font-b);font-size:.66rem;color:rgba(255,255,255,.78);position:relative;z-index:2}
+.val-meta{background:#fff;padding:11px 20px 10px;flex-shrink:0;border-top:4px solid var(--blue)}
+.val-rows{display:flex;flex-direction:column;gap:1px;margin-bottom:5px}
+.val-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.val-row:last-child{border-bottom:none}
+.val-lbl{font-family:var(--font-b);font-size:.62rem;color:#999}
+.val-val{font-family:var(--font-t);font-size:.84rem;font-weight:700;color:var(--dark)}
+.val-val-hi{color:var(--blue)}
+.val-pct-row{display:flex;align-items:baseline;gap:8px;margin:4px 0 2px}
+.val-pct{font-family:var(--font-t);font-size:clamp(1.6rem,2.6vw,2.8rem);font-weight:800;color:var(--blue);line-height:1}
+.val-pct-tag{font-family:var(--font-t);font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#aaa}
+.val-dates{font-family:var(--font-t);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-top:3px}
+.val-slide-hdr{position:absolute;top:0;left:220px;right:0;height:78px;display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none}
+.val-slide-hdr-title{font-family:var(--font-t);font-size:clamp(1rem,1.6vw,1.45rem);font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:var(--dark);text-align:center}
+.val-slide-hdr-sub{font-family:var(--font-t);font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:#bbb;margin-top:2px;text-align:center}
+/* ── PORTFOLIO TIMELINE S6 ── */
+@keyframes ptl-hint{0%,100%{opacity:.3}50%{opacity:.9}}
+#ptl-scroll::-webkit-scrollbar{display:none}
+#ptl-scroll{-ms-overflow-style:none}
+.ptl-grab{cursor:grabbing!important}
+.ptl-dev{display:flex;flex-direction:column;align-items:center;width:92px;flex-shrink:0;cursor:pointer;position:relative}
+.ptl-top{height:165px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;padding-bottom:4px;position:relative;z-index:2}
+.ptl-name{font-family:var(--font-t);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);text-align:center;white-space:nowrap;line-height:1.1;transition:color .25s}
+.ptl-city{font-family:var(--font-b);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:#c0bbb5;margin-bottom:2px}
+.ptl-dot-e{width:8px;height:8px;border-radius:50%;background:var(--blue);border:2.5px solid #f5f4f1;flex-shrink:0;transition:transform .3s,box-shadow .3s}
+.ptl-dot-o{width:8px;height:8px;border-radius:50%;background:#d07800;border:2.5px solid #f5f4f1;flex-shrink:0;transition:transform .3s,box-shadow .3s}
+.ptl-bot{flex:1;display:flex;flex-direction:column;align-items:center;width:100%}
+.ptl-year{font-family:var(--font-t);font-size:.6rem;letter-spacing:.05em;color:#c0bbb5;margin-top:8px;margin-bottom:10px}
+.ptl-bwrap{flex:1;width:80px;display:flex;align-items:flex-end}
+.ptl-bldg{width:100%;border-radius:1px 1px 0 0;background-size:cover;background-position:top center;background-repeat:no-repeat;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s,opacity .3s;position:relative;overflow:hidden}
+.ptl-bldg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 45%,rgba(0,0,0,.30) 100%);pointer-events:none;z-index:1}
+.ptl-dev:hover .ptl-bldg{transform:translateY(-8px);box-shadow:0 -4px 28px rgba(26,58,110,.22)}
+.ptl-dev:hover .ptl-dot-e,.ptl-dev:hover .ptl-dot-o{transform:scale(1.8);box-shadow:0 0 0 5px rgba(26,58,110,.12)}
+.ptl-dev:hover .ptl-name{color:var(--blue)}
+/* Entregue — borda azul no topo da imagem */
+.ptl-bldg::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);z-index:2;pointer-events:none}
+/* Em Obras — tinte âmbar + borda laranja */
+.ptl-future .ptl-bldg{opacity:1;filter:saturate(.88)}
+.ptl-future .ptl-bldg::before{background:#d07800}
+.ptl-future .ptl-bldg::after{background:linear-gradient(to bottom,rgba(0,0,0,0) 45%,rgba(120,60,0,.28) 100%)}
+.ptl-future .ptl-name{color:#9a6a10}
+.ptl-future .ptl-dot-o{animation:ptl-pulse 1.8s ease-in-out infinite}
+@keyframes ptl-pulse{0%,100%{box-shadow:0 0 0 0 rgba(208,120,0,.4)}50%{box-shadow:0 0 0 5px rgba(208,120,0,0)}}
+/* Badge Em Obras */
+.ptl-obras-badge{position:absolute;top:6px;left:50%;transform:translateX(-50%);background:rgba(208,120,0,.92);color:#fff;font-family:var(--font-t);font-size:.42rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 5px;border-radius:1px;z-index:3;white-space:nowrap;pointer-events:none}
+/* Badge Entregue */
+.ptl-entregue-badge{position:absolute;top:6px;left:50%;transform:translateX(-50%);background:rgba(26,58,110,.82);color:#fff;font-family:var(--font-t);font-size:.42rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 5px;border-radius:1px;z-index:3;white-space:nowrap;pointer-events:none}
+.ptl-card{background:#fff;border-radius:6px;box-shadow:0 16px 56px rgba(0,0,0,.18),0 4px 16px rgba(0,0,0,.08);overflow:hidden;border:1px solid rgba(26,58,110,.07)}
+.ptl-card-acc{height:4px;width:100%}
+.ptl-st-e{background:var(--blue)}
+.ptl-st-o{background:#d07800}
+.ptl-card-img{width:100%;height:108px;object-fit:cover;display:block}
+.ptl-card-body{padding:12px 14px 13px}
+.ptl-card-name{font-family:var(--font-t);font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);line-height:1.15;margin-bottom:3px}
+.ptl-card-info{font-family:var(--font-b);font-size:.6rem;color:#aaa;margin-bottom:7px}
+.ptl-card-badge{display:inline-block;font-family:var(--font-t);font-size:.57rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:10px;color:#fff}
+.ptl-card-cta{display:block;text-align:center;font-family:var(--font-t);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--blue);padding:7px 10px;text-decoration:none;border-radius:3px;transition:background .2s}
+.ptl-card-cta:hover{background:#0f2950}
 </style>
 </head>
 <body>
@@ -703,47 +771,384 @@ p,span,div{font-family:var(--font-b)}
 </div>
 
 <!-- ══════════════════════════════════════
-  S6 · LAND BANK 2035
+  S6 · PORTFÓLIO ARS KAMMER — LINHA DO TEMPO
 ══════════════════════════════════════ -->
-<div class="slide" id="s6" style="display:grid;grid-template-columns:245px 1fr;overflow:hidden">
+<div class="slide sl" id="s6" style="overflow:hidden;background:#f5f4f1">
+
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+
+  <div style="position:absolute;top:24px;left:0;right:0;text-align:center;z-index:10;pointer-events:none">
+    <div style="font-family:var(--font-t);font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:700;letter-spacing:.48em;text-transform:uppercase;color:var(--dark)">PORTFÓLIO</div>
+    <div style="font-family:var(--font-t);font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:#bbb;margin-top:2px">20 anos · 2005 — 2032 · 18 empreendimentos</div>
+  </div>
+
+  <div id="ptl-outer" style="position:absolute;left:0;right:0;top:108px;bottom:44px;overflow:hidden">
+    <div id="ptl-scroll" style="width:100%;height:100%;overflow-x:auto;overflow-y:hidden;cursor:grab;user-select:none;-webkit-user-select:none;scrollbar-width:none">
+      <div id="ptl-track" style="display:flex;align-items:flex-start;height:100%;padding:0 72px;position:relative;min-width:max-content;gap:2px">
+        <div id="ptl-line" style="position:absolute;left:0;right:0;top:161px;height:1px;background:rgba(0,0,0,.11);pointer-events:none;z-index:1"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ptl-tip" style="display:none;position:absolute;z-index:300;width:210px;pointer-events:none"></div>
+
+  <div style="position:absolute;bottom:12px;left:60px;display:flex;gap:20px;align-items:center;z-index:10">
+    <div style="display:flex;align-items:center;gap:6px">
+      <div style="width:7px;height:7px;border-radius:50%;background:var(--blue)"></div>
+      <span style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#bbb">Entregue</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <div style="width:7px;height:7px;border-radius:50%;background:#d07800"></div>
+      <span style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#bbb">Em Obras</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:13px;right:60px;display:flex;align-items:center;gap:8px;font-family:var(--font-t);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#ccc;animation:ptl-hint 2.8s ease-in-out infinite;z-index:10">
+    <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M1 5h18M13.5 1.5L18 5l-4.5 3.5" stroke="#c0bbb5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Arraste
+  </div>
+
+  <script>
+  (function(){
+    var B='https://www.arskammer.com.br/';
+    var DEVS=[
+      {n:'Classic',f:'Classic Residence',y:2012,c:'Itapema',s:'e',h:118,pos:'center 25%',img:'img/empreendimentos/listagem/25-listagem-c1.webp',u:'empreendimento/classic-residence/25/'},
+      {n:'Kammer',f:'Kammer Center',y:2013,c:'Itapema',s:'e',h:134,pos:'center 20%',img:'img/empreendimentos/listagem/28-listagem-k1.webp',u:'empreendimento/kammer-center/28/'},
+      {n:'Cannes',f:'Cannes Residence',y:2015,c:'Itapema',s:'e',h:152,pos:'center 28%',img:'img/empreendimentos/listagem/24-listagem-97c238b125b18af4f9a473af40fd7158cannes-quebra.jpg',u:'empreendimento/cannes-residence/24/'},
+      {n:'Lunen',f:'Lunen Residence',y:2016,c:'Itapema',s:'e',h:164,pos:'center 18%',img:'img/empreendimentos/listagem/27-listagem-02.webp',u:'empreendimento/lunen-residence/27/'},
+      {n:'Linz',f:'Linz Residence',y:2017,c:'Itapema',s:'e',h:180,pos:'center 32%',img:'img/empreendimentos/listagem/26-listagem-linz-sacada-a-01.webp',u:'empreendimento/linz-residence/26/'},
+      {n:'Hanôver',f:'Hanôver Residence',y:2018,c:'Itapema',s:'e',h:210,pos:'center 18%',img:'img/empreendimentos/listagem/23-listagem-hanover-2.webp',u:'empreendimento/hanover-residence/23/'},
+      {n:'Kalin',f:'Kalin Residence',y:2019,c:'Itapema',s:'e',h:228,pos:'center 12%',img:'img/empreendimentos/listagem/22-listagem-d09cef3bd8594d211ee334c75b082d67topkalin.jpg',u:'empreendimento/kalin-residence/22/'},
+      {n:'Lisboa',f:'Lisboa Residence',y:2021,c:'Itapema',s:'e',h:255,pos:'center 22%',img:'img/empreendimentos/listagem/21-listagem-d38f5a96fb1c0c8879515ce53ccfce4blisboa-externa-detalhes.jpg',u:'empreendimento/lisboa-residence/21/'},
+      {n:'Denver',f:'Denver Residence',y:2021,c:'Itapema',s:'e',h:244,pos:'center 18%',img:'img/empreendimentos/listagem/20-listagem-a1e175354ad6e2203383cc76dc814cbbdenver-intro-web1.jpg',u:'empreendimento/denver-residence/20/'},
+      {n:'Acqua Blue',f:'Acqua Blue Residence',y:2023,c:'Itapema',s:'e',h:338,pos:'center 18%',img:'img/empreendimentos/destaque/19-destaque-rua-269-externa-aerea-avenida-a-02.webp',tip:'img/empreendimentos/listagem/19-listagem-d28f6e385321fd0dfbf83403aa62454eacqua-intro-web.jpg',u:'empreendimento/acqua-blue-residence/19/'},
+      {n:'Riverside',f:'Riverside Residence',y:2024,c:'Itapema',s:'e',h:308,pos:'center 18%',img:'img/empreendimentos/listagem/18-listagem-ca502dbec5345b745b8f73a86f9fee2ccapariver.jpg',u:'empreendimento/riverside-residence/18/'},
+      {n:'Horizon',f:'Horizon Palace',y:2025,c:'Itapema',s:'e',h:282,pos:'center 16%',img:'img/empreendimentos/listagem/15-listagem-d012f0f6c146792f076bc36f47e346d9horizon-intro-web.jpg',u:'empreendimento/horizon-palace/15/'},
+      {n:'Soltéro',f:'Soltéro Residence',y:2026,c:'Itapema',s:'e',h:265,pos:'center 20%',img:'img/empreendimentos/listagem/17-listagem-7618e8e07e8d8c842a219229c8feeac6123123.jpg',u:'empreendimento/soltero-residence/17/'},
+      {n:'Thiesen',f:'Thiesen Residence',y:2026,c:'Itapema',s:'e',h:250,pos:'center 18%',img:'img/empreendimentos/listagem/8-listagem-fc42c6770db36fa9ee66bd0859fdf8e5thiesencapa.jpg',u:'empreendimento/thiesen-residence/8/'},
+      {n:'Serenity',f:'Serenity Residence',y:2027,c:'Itapema',s:'o',h:268,pos:'center 22%',img:'img/empreendimentos/listagem/14-listagem-12124ee91044f303bd0b37ae3c89463f3233.webp',u:'empreendimento/serenity-residence/14/'},
+      {n:'Mellizo',f:'Mellizo Residence',y:2028,c:'Itapema',s:'o',h:252,pos:'center 18%',img:'img/empreendimentos/listagem/16-listagem-16topo20d059b1c34099b0af76a78d32510e5bbgdesktop2158x1798.webp',u:'empreendimento/mellizo-residence/16/'},
+      {n:'Accendis',f:'Accendis Home Living',y:2031,c:'Itapema',s:'o',h:238,pos:'center 20%',img:'img/empreendimentos/listagem/10-listagem-a35c441cb69bb224067ccbae1b17fe6cbackgrounddesktop.jpg',u:'empreendimento/accendis-home-living/10/'},
+      {n:'Vieiras',f:'Vieiras',y:2032,c:'Porto Belo',s:'o',h:224,pos:'center 38%',wdev:155,wbldg:143,img:'img/empreendimentos/listagem/31-listagem-3-ars-vie-fotomontagem-vista-de-portobelo-ef-1.webp',u:'empreendimento/vieiras/31/'}
+    ];
+    var track=document.getElementById('ptl-track');
+    var scroll=document.getElementById('ptl-scroll');
+    var tip=document.getElementById('ptl-tip');
+    var slide=document.getElementById('s6');
+    var outer=document.getElementById('ptl-outer');
+    DEVS.forEach(function(d){
+      var isO=d.s==='o';
+      var div=document.createElement('div');
+      div.className='ptl-dev'+(isO?' ptl-future':'');
+      if(d.wdev)div.style.width=d.wdev+'px';
+      var badge=isO
+        ?'<div class="ptl-obras-badge">Em Obras</div>'
+        :'<div class="ptl-entregue-badge">Entregue</div>';
+      div.innerHTML=
+        '<div class="ptl-top">'+
+          '<div class="ptl-name">'+d.n+'</div>'+
+          '<div class="ptl-city">'+d.c+'</div>'+
+          '<div class="'+(isO?'ptl-dot-o':'ptl-dot-e')+'"></div>'+
+        '</div>'+
+        '<div class="ptl-bot">'+
+          '<div class="ptl-year">'+d.y+'</div>'+
+          '<div class="ptl-bwrap" style="width:'+(d.wbldg||80)+'px">'+
+            '<div class="ptl-bldg" style="height:'+d.h+'px;background-image:url('+B+d.img+');background-position:'+d.pos+'">'+
+              badge+
+            '</div>'+
+          '</div>'+
+        '</div>';
+      div.addEventListener('mouseenter',function(){
+        var sr=div.getBoundingClientRect();
+        var pr=slide.getBoundingClientRect();
+        var ot=outer.getBoundingClientRect().top-pr.top;
+        var tw=210,bx=(sr.left-pr.left)+sr.width/2-tw/2;
+        bx=Math.max(8,Math.min(bx,pr.width-tw-8));
+        var by=ot+161+18;
+        var sl=isO?'ptl-st-o':'ptl-st-e';
+        var slTx=isO?'Em Obras':'Entregue';
+        tip.innerHTML='<div class="ptl-card">'+
+          '<div class="ptl-card-acc '+sl+'"></div>'+
+          '<img class="ptl-card-img" src="'+B+(d.tip||d.img)+'" alt="'+d.f+'" loading="lazy">'+
+          '<div class="ptl-card-body">'+
+            '<div class="ptl-card-name">'+d.f+'</div>'+
+            '<div class="ptl-card-info">'+d.c+', SC &middot; '+d.y+'</div>'+
+            '<div class="ptl-card-badge '+sl+'">'+slTx+'</div>'+
+            '<a class="ptl-card-cta" href="'+B+d.u+'" target="_blank" rel="noopener">Ver empreendimento &#8599;</a>'+
+          '</div>'+
+        '</div>';
+        tip.style.cssText='display:block;position:absolute;z-index:300;width:210px;left:'+bx+'px;top:'+by+'px;pointer-events:all';
+      });
+      div.addEventListener('mouseleave',function(e){
+        if(!tip.contains(e.relatedTarget))tip.style.display='none';
+      });
+      tip.addEventListener('mouseleave',function(){tip.style.display='none';});
+      div.addEventListener('click',function(){window.open(B+d.u,'_blank','noopener');});
+      track.appendChild(div);
+    });
+    var isDown=false,startX=0,scrollL=0;
+    scroll.addEventListener('mousedown',function(e){isDown=true;startX=e.pageX-scroll.offsetLeft;scrollL=scroll.scrollLeft;scroll.classList.add('ptl-grab');e.preventDefault();});
+    document.addEventListener('mouseup',function(){isDown=false;scroll.classList.remove('ptl-grab');});
+    scroll.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();scroll.scrollLeft=scrollL-(e.pageX-scroll.offsetLeft-startX)*1.5;});
+  })();
+  </script>
+</div>
+
+<!-- ══════════════════════════════════════
+  S7 · VALORIZAÇÃO · DENVER + LISBOA
+══════════════════════════════════════ -->
+<div class="slide sl" id="s7" style="overflow:hidden;background:#f5f4f1">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="val-slide-hdr">
+    <div>
+      <div class="val-slide-hdr-title">VALORIZAÇÃO DE PORTFÓLIO</div>
+      <div class="val-slide-hdr-sub">Empreendimentos entregues · Rentabilidade comprovada</div>
+    </div>
+  </div>
+  <div class="val-wrap val-wrap-2">
+
+    <!-- DENVER -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/20-destaque-denver-externa-noturna-a-02.webp);background-position:center 18%">
+        <div class="val-name">DENVER</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 550 mil</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 1,55 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 2,89 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">425,5%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2016 &nbsp;·&nbsp; Entregue em 2021</div>
+      </div>
+    </div>
+
+    <!-- LISBOA -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/21-destaque-rua-247-externa-a-13.webp);background-position:center 18%">
+        <div class="val-name">LISBOA</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,4 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 2,8 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 3,5 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">150,0%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2017 &nbsp;·&nbsp; Entregue em 2021</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S8 · VALORIZAÇÃO · ACQUA BLUE + RIVERSIDE + HORIZON
+══════════════════════════════════════ -->
+<div class="slide sl" id="s8" style="overflow:hidden;background:#f5f4f1">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="val-slide-hdr">
+    <div>
+      <div class="val-slide-hdr-title">VALORIZAÇÃO DE PORTFÓLIO</div>
+      <div class="val-slide-hdr-sub">Empreendimentos entregues · Rentabilidade comprovada</div>
+    </div>
+  </div>
+  <div class="val-wrap val-wrap-3">
+
+    <!-- ACQUA BLUE -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/19-destaque-rua-269-externa-aerea-avenida-a-02.webp);background-position:95% 18%">
+        <div class="val-name">ACQUA BLUE</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,5 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 4,3 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 6,00 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">300%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2020 &nbsp;·&nbsp; Entregue em 2023</div>
+      </div>
+    </div>
+
+    <!-- RIVERSIDE -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/18-destaque-dsc09971.webp);background-position:center 18%">
+        <div class="val-name">RIVERSIDE</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Bal. Perequê, Porto Belo &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 450 mil</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 1,2 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 1,6 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">256%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2019 &nbsp;·&nbsp; Entregue em 2024</div>
+      </div>
+    </div>
+
+    <!-- HORIZON -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/15-destaque-horizon-externa-rf-a-03.webp);background-position:center 16%">
+        <div class="val-name">HORIZON</div>
+        <div class="val-sub">PALACE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 3,26 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 6,3 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 7,99 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">145%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2021 &nbsp;·&nbsp; Entregue em 2025</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S9 · VALORIZAÇÃO · SOLTÉRO + THIESEN + SERENITY
+══════════════════════════════════════ -->
+<div class="slide sl" id="s9" style="overflow:hidden;background:#f5f4f1">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="val-slide-hdr">
+    <div>
+      <div class="val-slide-hdr-title">VALORIZAÇÃO EM ANDAMENTO</div>
+      <div class="val-slide-hdr-sub">Empreendimentos em obras · Projeção de valorização</div>
+    </div>
+  </div>
+  <div class="val-wrap val-wrap-3">
+
+    <!-- SOLTÉRO -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/17-destaque-kammer-soltero-externa-principal-r2-a-07.webp);background-position:center 18%">
+        <div class="val-name">SOLTÉRO</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Bal. Perequê, Porto Belo &middot; SC</div>
+      </div>
+      <div class="val-meta" style="border-top-color:#d07800">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,12 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 2,89 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct" style="color:#d07800">158,7%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2021 &nbsp;·&nbsp; Entrega em 2026</div>
+      </div>
+    </div>
+
+    <!-- THIESEN -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/8-destaque-t5.webp);background-position:center 18%">
+        <div class="val-name">THIESEN</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta" style="border-top-color:#d07800">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 2,18 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 4,49 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct" style="color:#d07800">106%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2021 &nbsp;·&nbsp; Entrega em 2026</div>
+      </div>
+    </div>
+
+    <!-- SERENITY -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/14-destaque-kammer-serenity-externa-rf-a-07.webp);background-position:center 20%">
+        <div class="val-name">SERENITY</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta" style="border-top-color:#d07800">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,55 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 2,99 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct" style="color:#d07800">93%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2022 &nbsp;·&nbsp; Entrega em 2027</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S10 · LAND BANK 2035
+══════════════════════════════════════ -->
+<div class="slide" id="s10" style="display:grid;grid-template-columns:245px 1fr;overflow:hidden">
 
   <!-- ── ESQUERDA: texto + legenda ── -->
   <div style="position:relative;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:84px 18px 32px 28px;background:#0d1b2e;overflow:hidden">
     <div class="logo-wrap" style="position:absolute;top:22px;left:28px;z-index:20"><img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer"></div>
     <div style="position:absolute;left:0;bottom:0;width:110px;height:110px;background:var(--blue);clip-path:polygon(0 100%,100% 100%,0 0);opacity:.25"></div>
 
-    <div style="font-family:var(--font-t);font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:5px" data-i18n="s6-vision">Visão Estratégica</div>
+    <div style="font-family:var(--font-t);font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:5px" data-i18n="s10-vision">Visão Estratégica</div>
     <div style="font-family:var(--font-t);font-size:3.8rem;font-weight:800;color:#fff;line-height:1;margin-bottom:3px">2035</div>
-    <h2 style="font-family:var(--font-t);font-size:1.35rem;font-weight:800;letter-spacing:.06em;line-height:1.15;margin-bottom:12px;color:#fff;text-transform:uppercase" data-i18n="s6-title">Land Bank Assegurado</h2>
-    <p style="font-family:var(--font-b);font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.55;margin-bottom:16px" data-i18n="s6-desc">Banco de terrenos estratégicos garante lançamentos até 2035 — segurança e crescimento sustentado.</p>
+    <h2 style="font-family:var(--font-t);font-size:1.35rem;font-weight:800;letter-spacing:.06em;line-height:1.15;margin-bottom:12px;color:#fff;text-transform:uppercase" data-i18n="s10-title">Land Bank Assegurado</h2>
+    <p style="font-family:var(--font-b);font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.55;margin-bottom:16px" data-i18n="s10-desc">Banco de terrenos estratégicos garante lançamentos até 2035 — segurança e crescimento sustentado.</p>
 
     <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
       <div style="padding:9px 12px;background:rgba(255,255,255,.07);border-left:3px solid var(--blue)">
-        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s6-pill1">Segurança</span>
+        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s10-pill1">Segurança</span>
       </div>
       <div style="padding:9px 12px;background:rgba(255,255,255,.07);border-left:3px solid var(--blue)">
-        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s6-pill2">Previsibilidade</span>
+        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s10-pill2">Previsibilidade</span>
       </div>
       <div style="padding:9px 12px;background:rgba(255,255,255,.07);border-left:3px solid var(--blue)">
-        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s6-pill3">Valorização</span>
+        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s10-pill3">Valorização</span>
       </div>
     </div>
 
     <!-- LEGENDA (abaixo de Valorização) -->
     <div style="border-top:1px solid rgba(255,255,255,.12);padding-top:14px">
-      <div style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px" data-i18n="s6-legend-title">Legenda</div>
+      <div style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px" data-i18n="s10-legend-title">Legenda</div>
       <div style="display:flex;flex-direction:column;gap:9px">
         <div style="display:flex;align-items:center;gap:9px">
           <div style="width:12px;height:12px;border-radius:50%;background:#1e8c3a;flex-shrink:0;border:2px solid rgba(255,255,255,.4)"></div>
-          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s6-leg1">Entregues</span>
+          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s10-leg1">Entregues</span>
         </div>
         <div style="display:flex;align-items:center;gap:9px">
           <div style="width:12px;height:12px;border-radius:50%;background:#1565c0;flex-shrink:0;border:2px solid rgba(255,255,255,.4)"></div>
-          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s6-leg2">Em construção</span>
+          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s10-leg2">Em construção</span>
         </div>
         <div style="display:flex;align-items:center;gap:9px">
           <div style="width:12px;height:12px;border-radius:50%;background:#e0242c;flex-shrink:0;border:2px solid rgba(255,255,255,.4)"></div>
-          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s6-leg3">Futuros lançamentos</span>
+          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s10-leg3">Futuros lançamentos</span>
         </div>
       </div>
     </div>
@@ -756,9 +1161,9 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- ══ ITAPEMA CENTRO E CANTO DA PRAIA — posições calibradas por pixel scan ══ -->
     <div class="mpin" style="left:23%;top:16%"><div class="mpin-tip tc-green">LINS</div></div>
-    <div class="mpin" style="left:34%;top:16%"><div class="mpin-tip tc-red" data-i18n="s6-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:34%;top:16%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
     <div class="mpin" style="left:63%;top:10%"><div class="mpin-tip tc-blue">Accendis</div></div>
-    <div class="mpin" style="left:84%;top:18%"><div class="mpin-tip tc-red" data-i18n="s6-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:84%;top:18%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
 
     <!-- ══ MEIA PRAIA — posições calibradas por pixel scan ══ -->
     <div class="mpin" style="left:17%;top:42%"><div class="mpin-tip tc-blue">Thiesen</div></div>
@@ -774,13 +1179,13 @@ p,span,div{font-family:var(--font-b)}
     <div class="mpin" style="left:57%;top:42%"><div class="mpin-tip tc-green">Classic</div></div>
     <div class="mpin" style="left:59%;top:42%"><div class="mpin-tip tc-green">Hanôver</div></div>
     <div class="mpin" style="left:60%;top:42%"><div class="mpin-tip tc-green">Kalin</div></div>
-    <div class="mpin" style="left:50%;top:47%"><div class="mpin-tip tc-red" data-i18n="s6-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:50%;top:47%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
 
     <!-- ══ PORTO BELO — posições calibradas por pixel scan ══ -->
     <div class="mpin" style="left:16%;top:82%"><div class="mpin-tip tc-blue">Vieiras</div></div>
-    <div class="mpin" style="left:36%;top:79%"><div class="mpin-tip tc-red" data-i18n="s6-pin-soon">Em Breve</div></div>
-    <div class="mpin" style="left:51%;top:77%"><div class="mpin-tip tc-red" data-i18n="s6-pin-soon">Em Breve</div></div>
-    <div class="mpin" style="left:81%;top:78%"><div class="mpin-tip tc-red" data-i18n="s6-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:36%;top:79%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:51%;top:77%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:81%;top:78%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
     <div class="mpin" style="left:85%;top:79%"><div class="mpin-tip tc-green">Riverside</div></div>
     <div class="mpin" style="left:83%;top:79%"><div class="mpin-tip tc-blue">Soltero</div></div>
 
@@ -788,9 +1193,9 @@ p,span,div{font-family:var(--font-b)}
 </div>
 
 <!-- ══════════════════════════════════════
-  S7 · CTA FINAL
+  S11 · CTA FINAL
 ══════════════════════════════════════ -->
-<div class="slide sd" id="s7" style="overflow:hidden">
+<div class="slide sd" id="s11" style="overflow:hidden">
   <video autoplay loop muted playsinline preload="auto"
          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.05) saturate(1.7) contrast(1.12)">
     <source src="video_cta.mp4" type="video/mp4">
@@ -803,25 +1208,25 @@ p,span,div{font-family:var(--font-b)}
   <div class="deco slash slash-g" style="height:114px;top:30px;right:84px;opacity:.32"></div>
   <div class="deco" style="position:absolute;right:0;bottom:0;width:220px;height:220px;background:var(--blue);clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.2"></div>
   <!-- Logo canto superior esquerdo (desativado) -->
-  <div id="s7-logo-corner" class="logo-wrap" style="display:none">
+  <div id="s11-logo-corner" class="logo-wrap" style="display:none">
     <img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer">
   </div>
   <div class="inner" style="position:relative;z-index:5;justify-content:center;align-items:flex-end;padding-bottom:90px">
     <div style="text-align:center;max-width:640px">
       <!-- Logo + textos centrais (ocultos) -->
-      <div id="s7-header" style="display:none">
+      <div id="s11-header" style="display:none">
         <img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer" style="height:100px;object-fit:contain;margin-bottom:20px">
         <div style="width:52px;height:3px;background:var(--blue);margin:0 auto 22px"></div>
         <div style="font-family:var(--font-t);font-weight:800;font-size:clamp(1.8rem,4vw,3.2rem);letter-spacing:.1em;text-transform:uppercase;line-height:1;color:#fff;margin-bottom:4px">Costa Esmeralda</div>
-        <div style="font-family:var(--font-t);font-weight:300;font-size:clamp(.88rem,1.8vw,1.2rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px" data-i18n="s7-region">Litoral Catarinense</div>
-        <div style="font-family:var(--font-t);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:30px" data-i18n="s7-cities">Itapema &amp; Porto Belo · Santa Catarina · Brasil</div>
-        <div style="font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;font-family:var(--font-t);color:rgba(255,255,255,.32);margin-bottom:32px" data-i18n="s7-tag">Incorporadora de Alto Padrão</div>
+        <div style="font-family:var(--font-t);font-weight:300;font-size:clamp(.88rem,1.8vw,1.2rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px" data-i18n="s11-region">Litoral Catarinense</div>
+        <div style="font-family:var(--font-t);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:30px" data-i18n="s11-cities">Itapema &amp; Porto Belo · Santa Catarina · Brasil</div>
+        <div style="font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;font-family:var(--font-t);color:rgba(255,255,255,.32);margin-bottom:32px" data-i18n="s11-tag">Incorporadora de Alto Padrão</div>
       </div>
       <a href="https://www.arskammer.com.br/empreendimentos/" target="_blank"
          style="display:inline-flex;align-items:center;gap:16px;padding:26px 72px;background:var(--blue);color:#fff;font-family:var(--font-t);font-weight:800;font-size:1.5rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border:3px solid var(--blue);margin-bottom:24px;cursor:pointer;box-shadow:0 8px 32px rgba(26,58,110,.55)"
          onmouseover="this.style.background='transparent';this.style.borderColor='rgba(255,255,255,.8)';this.style.boxShadow='0 8px 40px rgba(255,255,255,.15)'"
          onmouseout="this.style.background='#1a3a6e';this.style.borderColor='#1a3a6e';this.style.boxShadow='0 8px 32px rgba(26,58,110,.55)'"
-         data-i18n="s7-cta">&#8599;&nbsp; Conheça Nossos Projetos
+         data-i18n="s11-cta">&#8599;&nbsp; Conheça Nossos Projetos
       </a>
       <br>
       <a href="https://www.arskammer.com.br/empreendimentos/" target="_blank"
@@ -840,11 +1245,11 @@ p,span,div{font-family:var(--font-b)}
     <div class="ndots" id="dots"></div>
     <button class="nbtn" onclick="go(1)">&#8594;</button>
   </div>
-  <div id="ctr">1 / 7</div>
+  <div id="ctr">1 / 11</div>
 </div><!-- /pres -->
 
 <script>
-const TOTAL=7;let cur=1;
+const TOTAL=11;let cur=1;
 function buildDots(){
   const c=document.getElementById('dots');c.innerHTML='';
   for(let i=1;i<=TOTAL;i++){
@@ -980,23 +1385,24 @@ var i18n = {
     's5-n3-sub': 'assegurado',
     's5-n4-label': 'Em Breve',
     's5-office': 'ARS Kammer · Escritório',
-    // S6 · LAND BANK
-    's6-vision': 'Visão Estratégica',
-    's6-title': 'Land Bank Assegurado',
-    's6-desc': 'Banco de terrenos estratégicos garante lançamentos até 2035 — segurança e crescimento sustentado.',
-    's6-pill1': 'Segurança',
-    's6-pill2': 'Previsibilidade',
-    's6-pill3': 'Valorização',
-    's6-legend-title': 'Legenda',
-    's6-leg1': 'Entregues',
-    's6-leg2': 'Em construção',
-    's6-leg3': 'Futuros lançamentos',
-    's6-pin-soon': 'Em Breve',
-    // S7 · CTA
-    's7-region': 'Litoral Catarinense',
-    's7-cities': 'Itapema & Porto Belo · Santa Catarina · Brasil',
-    's7-tag': 'Incorporadora de Alto Padrão',
-    's7-cta': '↗ Conheça Nossos Projetos',
+    // S6 · PORTFÓLIO (gerado por JS — sem chaves)
+    // S7 · LAND BANK
+    's10-vision': 'Visão Estratégica',
+    's10-title': 'Land Bank Assegurado',
+    's10-desc': 'Banco de terrenos estratégicos garante lançamentos até 2035 — segurança e crescimento sustentado.',
+    's10-pill1': 'Segurança',
+    's10-pill2': 'Previsibilidade',
+    's10-pill3': 'Valorização',
+    's10-legend-title': 'Legenda',
+    's10-leg1': 'Entregues',
+    's10-leg2': 'Em construção',
+    's10-leg3': 'Futuros lançamentos',
+    's10-pin-soon': 'Em Breve',
+    // S8 · CTA
+    's11-region': 'Litoral Catarinense',
+    's11-cities': 'Itapema & Porto Belo · Santa Catarina · Brasil',
+    's11-tag': 'Incorporadora de Alto Padrão',
+    's11-cta': '↗ Conheça Nossos Projetos',
   },
   en: {
     // S1 · COVER
@@ -1100,23 +1506,24 @@ var i18n = {
     's5-n3-sub': 'secured',
     's5-n4-label': 'Coming Soon',
     's5-office': 'ARS Kammer · Office',
-    // S6 · LAND BANK
-    's6-vision': 'Strategic Vision',
-    's6-title': 'Land Bank Secured',
-    's6-desc': 'Strategic land bank ensures launches through 2035 — security and sustained growth.',
-    's6-pill1': 'Security',
-    's6-pill2': 'Predictability',
-    's6-pill3': 'Appreciation',
-    's6-legend-title': 'Legend',
-    's6-leg1': 'Delivered',
-    's6-leg2': 'Under construction',
-    's6-leg3': 'Future launches',
-    's6-pin-soon': 'Coming Soon',
-    // S7 · CTA
-    's7-region': 'Santa Catarina Coast',
-    's7-cities': 'Itapema & Porto Belo · Santa Catarina · Brazil',
-    's7-tag': 'High-End Real Estate Developer',
-    's7-cta': '↗ Discover Our Projects',
+    // S6 · PORTFOLIO (JS-generated — no keys)
+    // S7 · LAND BANK
+    's10-vision': 'Strategic Vision',
+    's10-title': 'Land Bank Secured',
+    's10-desc': 'Strategic land bank ensures launches through 2035 — security and sustained growth.',
+    's10-pill1': 'Security',
+    's10-pill2': 'Predictability',
+    's10-pill3': 'Appreciation',
+    's10-legend-title': 'Legend',
+    's10-leg1': 'Delivered',
+    's10-leg2': 'Under construction',
+    's10-leg3': 'Future launches',
+    's10-pin-soon': 'Coming Soon',
+    // S8 · CTA
+    's11-region': 'Santa Catarina Coast',
+    's11-cities': 'Itapema & Porto Belo · Santa Catarina · Brazil',
+    's11-tag': 'High-End Real Estate Developer',
+    's11-cta': '↗ Discover Our Projects',
   },
   es: {
     // S1 · PORTADA
@@ -1220,23 +1627,24 @@ var i18n = {
     's5-n3-sub': 'asegurado',
     's5-n4-label': 'Próximamente',
     's5-office': 'ARS Kammer · Oficina',
-    // S6 · LAND BANK
-    's6-vision': 'Visión Estratégica',
-    's6-title': 'Land Bank Asegurado',
-    's6-desc': 'Banco de terrenos estratégicos garantiza lanzamientos hasta 2035 — seguridad y crecimiento sostenido.',
-    's6-pill1': 'Seguridad',
-    's6-pill2': 'Previsibilidad',
-    's6-pill3': 'Valorización',
-    's6-legend-title': 'Leyenda',
-    's6-leg1': 'Entregados',
-    's6-leg2': 'En construcción',
-    's6-leg3': 'Futuros lanzamientos',
-    's6-pin-soon': 'Próximamente',
-    // S7 · CTA
-    's7-region': 'Litoral Catarinense',
-    's7-cities': 'Itapema & Porto Belo · Santa Catarina · Brasil',
-    's7-tag': 'Desarrolladora Inmobiliaria de Alto Estándar',
-    's7-cta': '↗ Conoce Nuestros Proyectos',
+    // S6 · PORTAFOLIO (generado por JS — sin claves)
+    // S7 · LAND BANK
+    's10-vision': 'Visión Estratégica',
+    's10-title': 'Land Bank Asegurado',
+    's10-desc': 'Banco de terrenos estratégicos garantiza lanzamientos hasta 2035 — seguridad y crecimiento sostenido.',
+    's10-pill1': 'Seguridad',
+    's10-pill2': 'Previsibilidad',
+    's10-pill3': 'Valorización',
+    's10-legend-title': 'Leyenda',
+    's10-leg1': 'Entregados',
+    's10-leg2': 'En construcción',
+    's10-leg3': 'Futuros lanzamientos',
+    's10-pin-soon': 'Próximamente',
+    // S8 · CTA
+    's11-region': 'Litoral Catarinense',
+    's11-cities': 'Itapema & Porto Belo · Santa Catarina · Brasil',
+    's11-tag': 'Desarrolladora Inmobiliaria de Alto Estándar',
+    's11-cta': '↗ Conoce Nuestros Proyectos',
   }
 };
 
@@ -1296,10 +1704,10 @@ document.addEventListener('click', fecharTodosPinos);
 
 // ── S7 · OCULTAR HEADER QUANDO VÍDEO TOCA ──
 (function(){
-  var s7 = document.getElementById('s7');
+  var s7 = document.getElementById('s11');
   var s7vid = s7 ? s7.querySelector('video') : null;
-  var s7header = document.getElementById('s7-header');
-  var s7corner = document.getElementById('s7-logo-corner');
+  var s7header = document.getElementById('s11-header');
+  var s7corner = document.getElementById('s11-logo-corner');
   if (!s7vid || !s7header || !s7corner) return;
   var s7timer = null;
   function hideHeader() {
