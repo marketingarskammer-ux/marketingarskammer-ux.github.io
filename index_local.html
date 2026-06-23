@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARS Kammer | Pesquisa de Mercado Imobiliário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--blue:#1a3a6e;--dark:#1e1e1e;--mid:#434142;--white:#fff;--lg:#f0f2f5;--font-t:'Barlow Condensed','Arial Narrow',Arial,sans-serif;--font-b:'Raleway','Gill Sans',sans-serif}
+html,body{width:100%;height:100%;overflow:hidden;background:#030c1a;margin:0;padding:0}
+body{width:100%;height:100%;overflow:hidden}
+.pres{width:100vw;height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:all}
+.sd{background:#0d1b2e;color:#fff}
+.sl{background:#fff;color:var(--dark)}
+
+/* TYPOGRAPHY */
+h1,h2,h3{font-family:var(--font-t);text-transform:uppercase;letter-spacing:.06em}
+p,span,div{font-family:var(--font-b)}
+.stitle{display:flex;align-items:stretch;gap:12px;margin-bottom:18px}
+.stitle .bar{width:4px;background:var(--blue);flex-shrink:0;border-radius:2px}
+.stitle .txt{font-family:var(--font-t);font-weight:700;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);padding:2px 0}
+
+/* LOGO */
+.logo-wrap{position:absolute;top:22px;left:30px;z-index:20}
+.logo-wrap img{height:56px;object-fit:contain}
+
+/* DECO */
+.deco{position:absolute;pointer-events:none}
+.slash{width:3px;border-radius:2px;transform:rotate(14deg)}
+.slash-b{background:var(--blue)}
+.slash-g{background:rgba(255,255,255,.12)}
+
+/* STAT CARDS — white slides */
+.sc{padding:14px 18px 14px 20px;border-left:4px solid var(--blue);background:#f8f9fb;margin-bottom:10px}
+.sc .n{font-family:var(--font-t);font-weight:800;font-size:2.8rem;line-height:1;color:var(--blue)}
+.sc .l{font-family:var(--font-t);font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;margin-top:4px;color:var(--dark)}
+.sc .s{font-family:var(--font-b);font-size:.9rem;margin-top:4px;color:#333;line-height:1.5}
+
+/* LAYOUT */
+.inner{flex:1;display:flex;align-items:center;justify-content:center;padding:74px 48px 50px}
+.city-hero{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px;min-height:100%;color:#fff}
+.city-bg-itapema{background:linear-gradient(180deg,rgba(3,12,26,.15) 0%,rgba(3,12,26,.45) 45%,rgba(3,12,26,.9) 78%,#030c1a 100%),linear-gradient(135deg,#0d4f8a,#1a6fa0,#0d3560)}
+.city-bg-portobelo{background:linear-gradient(180deg,rgba(3,12,26,.15) 0%,rgba(3,12,26,.45) 45%,rgba(3,12,26,.9) 78%,#030c1a 100%),linear-gradient(135deg,#0d5a5a,#1a8a70,#0d4035)}
+
+/* HORIZONTAL BAR CHART */
+.hbar-wrap{display:flex;flex-direction:column;gap:6px;width:100%}
+.hbar-row{display:flex;align-items:center}
+.hbar-city{font-family:var(--font-b);font-size:.8rem;font-weight:600;width:165px;flex-shrink:0;padding-right:10px;text-align:right;line-height:1.2;color:var(--dark)}
+.hbar-city.top{color:#1a7a32;font-weight:800}
+.hbar-track{flex:1;height:38px;background:rgba(67,65,66,.1);border-radius:3px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px}
+.hbar-fill.top-bar{background:#1a7a32}
+.hbar-fill.sc-bar{background:rgba(26,58,110,.52)}
+.hbar-fill.other{background:rgba(67,65,66,.34)}
+.hbar-val{font-family:var(--font-t);font-size:.9rem;font-weight:700;color:#fff;white-space:nowrap}
+.hbar-pct{font-family:var(--font-t);font-size:.86rem;font-weight:700;width:72px;flex-shrink:0;padding-left:10px}
+.hbar-pct.up{color:#1a7a32}
+.hbar-pct.dn{color:#e0242c}
+
+/* TIMELINE */
+.tl-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.tl-dot{width:10px;height:10px;background:var(--blue);border-radius:50%;flex-shrink:0;margin-top:5px}
+.tl-title{font-family:var(--font-t);font-weight:700;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.95);margin-bottom:2px}
+.tl-desc{font-family:var(--font-b);font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.45}
+
+/* COVER */
+.cover-shimmer{position:absolute;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.blue-line{width:52px;height:3px;background:var(--blue);margin:16px auto}
+
+/* SOURCES */
+.fontes{border-top:1px solid rgba(67,65,66,.18);padding-top:8px;margin-top:12px;font-family:var(--font-b);font-size:.68rem;color:#1a1a1a;line-height:1.8}
+.fontes a{color:var(--blue);text-decoration:none;font-weight:600}
+.fontes a:hover{text-decoration:underline}
+
+/* NAV */
+#nav{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:200;opacity:0;transition:opacity .4s}
+.nbtn{width:34px;height:34px;border:1.5px solid rgba(255,255,255,.35);background:rgba(20,20,20,.65);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;backdrop-filter:blur(8px)}
+.nbtn:hover{background:var(--blue);border-color:var(--blue)}
+.ndots{display:flex;gap:5px;align-items:center}
+.ndot{width:5px;height:5px;border-radius:3px;background:rgba(255,255,255,.28);cursor:pointer;transition:all .25s}
+.ndot.active{width:20px;background:var(--blue)}
+#lang{position:absolute;top:14px;right:18px;display:flex;gap:5px;z-index:200}
+.lbtn{padding:4px 10px;border:1.5px solid rgba(255,255,255,.32);background:rgba(20,20,20,.6);color:rgba(255,255,255,.65);cursor:pointer;font-family:var(--font-t);font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s;backdrop-filter:blur(8px)}
+.lbtn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.lbtn-flag{padding:0;border:2px solid rgba(255,255,255,.35);background:transparent;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px);border-radius:4px;overflow:hidden;width:32px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.lbtn-flag .fi{width:32px;height:22px;background-size:cover;border-radius:2px;pointer-events:none}
+.lbtn-flag:hover{border-color:rgba(255,255,255,.8);transform:scale(1.1)}
+.lbtn-flag.active{border-color:#fff;box-shadow:0 0 0 2px var(--blue)}
+#ctr{position:absolute;bottom:20px;right:22px;font-family:var(--font-t);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.12em;z-index:200}
+@media(max-width:768px){.inner{padding:74px 24px 50px}}
+
+/* ── PINOS INTERATIVOS LAND BANK ── */
+.mpin{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:30;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.02)}
+.mpin-tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);padding:5px 13px;border-radius:4px;font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;pointer-events:none;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.55);z-index:40}
+.mpin-tip.show{display:block}
+.tc-red{background:#e0242c}
+.tc-blue{background:#1565c0}
+.tc-green{background:#1e8c3a}
+
+/* ── VALORIZAÇÃO SLIDES S7–S9 ── */
+.val-wrap{position:absolute;inset:0;top:78px;display:grid;gap:5px;padding:0 5px 5px}
+.val-wrap-2{grid-template-columns:1fr 1fr}
+.val-wrap-3{grid-template-columns:1fr 1fr 1fr}
+.val-panel{display:flex;flex-direction:column;height:100%;overflow:hidden;border-radius:3px}
+.val-ph{flex:1;position:relative;background-size:cover;background-position:center 18%;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 22px 13px;min-height:0}
+.val-ph::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,.0) 30%,rgba(0,0,0,.78) 100%)}
+.val-name{font-family:var(--font-t);font-size:clamp(2rem,3vw,3.6rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;position:relative;z-index:2;line-height:1;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.val-sub{font-family:var(--font-t);font-size:clamp(.8rem,1.1vw,1.3rem);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#fff;position:relative;z-index:2;margin:2px 0 8px;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.val-loc{font-family:var(--font-b);font-size:.88rem;color:#fff;position:relative;z-index:2;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.val-meta{background:#fff;padding:9px 18px 8px;flex-shrink:0;border-top:4px solid var(--blue)}
+.val-rows{display:flex;flex-direction:column;gap:1px;margin-bottom:4px}
+.val-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.07)}
+.val-row:last-child{border-bottom:none}
+.val-lbl{font-family:var(--font-b);font-size:.88rem;color:#222;font-weight:700}
+.val-val{font-family:var(--font-t);font-size:1.05rem;font-weight:700;color:var(--dark)}
+.val-val-hi{color:var(--blue)}
+.val-pct-row{display:flex;align-items:baseline;gap:10px;margin:3px 0 2px}
+.val-pct{font-family:var(--font-t);font-size:clamp(2.2rem,3.6vw,4rem);font-weight:800;color:var(--blue);line-height:1}
+.val-pct-tag{font-family:var(--font-t);font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#444}
+.val-dates{font-family:var(--font-t);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:#444;margin-top:2px}
+.val-slide-hdr{position:absolute;top:0;left:220px;right:0;height:78px;display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none}
+.val-slide-hdr-title{font-family:var(--font-t);font-size:clamp(1.2rem,2vw,1.9rem);font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:var(--dark);text-align:center}
+.val-slide-hdr-sub{font-family:var(--font-t);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#666;margin-top:2px;text-align:center}
+/* ── PORTFOLIO TIMELINE S6 ── */
+@keyframes ptl-hint{0%,100%{opacity:.3}50%{opacity:.9}}
+#ptl-scroll::-webkit-scrollbar{display:none}
+#ptl-scroll{-ms-overflow-style:none}
+.ptl-grab{cursor:grabbing!important}
+.ptl-dev{display:flex;flex-direction:column;align-items:center;width:92px;flex-shrink:0;cursor:pointer;position:relative}
+.ptl-top{height:165px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;padding-bottom:4px;position:relative;z-index:2}
+.ptl-name{font-family:var(--font-t);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);text-align:center;white-space:nowrap;line-height:1.1;transition:color .25s}
+.ptl-city{font-family:var(--font-b);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:#c0bbb5;margin-bottom:2px}
+.ptl-dot-e{width:8px;height:8px;border-radius:50%;background:var(--blue);border:2.5px solid #f5f4f1;flex-shrink:0;transition:transform .3s,box-shadow .3s}
+.ptl-dot-o{width:8px;height:8px;border-radius:50%;background:#d07800;border:2.5px solid #f5f4f1;flex-shrink:0;transition:transform .3s,box-shadow .3s}
+.ptl-bot{flex:1;display:flex;flex-direction:column;align-items:center;width:100%}
+.ptl-year{font-family:var(--font-t);font-size:.6rem;letter-spacing:.05em;color:#c0bbb5;margin-top:8px;margin-bottom:10px}
+.ptl-bwrap{flex:1;width:80px;display:flex;align-items:flex-end}
+.ptl-bldg{width:100%;border-radius:1px 1px 0 0;background-size:cover;background-position:top center;background-repeat:no-repeat;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s,opacity .3s;position:relative;overflow:hidden}
+.ptl-bldg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 45%,rgba(0,0,0,.30) 100%);pointer-events:none;z-index:1}
+.ptl-dev:hover .ptl-bldg{transform:translateY(-8px);box-shadow:0 -4px 28px rgba(26,58,110,.22)}
+.ptl-dev:hover .ptl-dot-e,.ptl-dev:hover .ptl-dot-o{transform:scale(1.8);box-shadow:0 0 0 5px rgba(26,58,110,.12)}
+.ptl-dev:hover .ptl-name{color:var(--blue)}
+/* Entregue — borda azul no topo da imagem */
+.ptl-bldg::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);z-index:2;pointer-events:none}
+/* Em Obras — tinte âmbar + borda laranja */
+.ptl-future .ptl-bldg{opacity:1;filter:saturate(.88)}
+.ptl-future .ptl-bldg::before{background:#d07800}
+.ptl-future .ptl-bldg::after{background:linear-gradient(to bottom,rgba(0,0,0,0) 45%,rgba(120,60,0,.28) 100%)}
+.ptl-future .ptl-name{color:#9a6a10}
+.ptl-future .ptl-dot-o{animation:ptl-pulse 1.8s ease-in-out infinite}
+@keyframes ptl-pulse{0%,100%{box-shadow:0 0 0 0 rgba(208,120,0,.4)}50%{box-shadow:0 0 0 5px rgba(208,120,0,0)}}
+/* Badge Em Obras */
+.ptl-obras-badge{position:absolute;top:6px;left:50%;transform:translateX(-50%);background:rgba(208,120,0,.92);color:#fff;font-family:var(--font-t);font-size:.42rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 5px;border-radius:1px;z-index:3;white-space:nowrap;pointer-events:none}
+/* Badge Entregue */
+.ptl-entregue-badge{position:absolute;top:6px;left:50%;transform:translateX(-50%);background:rgba(26,58,110,.82);color:#fff;font-family:var(--font-t);font-size:.42rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 5px;border-radius:1px;z-index:3;white-space:nowrap;pointer-events:none}
+.ptl-card{background:#fff;border-radius:6px;box-shadow:0 16px 56px rgba(0,0,0,.18),0 4px 16px rgba(0,0,0,.08);overflow:hidden;border:1px solid rgba(26,58,110,.07)}
+.ptl-card-acc{height:4px;width:100%}
+.ptl-st-e{background:var(--blue)}
+.ptl-st-o{background:#d07800}
+.ptl-card-img{width:100%;height:108px;object-fit:cover;display:block}
+.ptl-card-body{padding:12px 14px 13px}
+.ptl-card-name{font-family:var(--font-t);font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);line-height:1.15;margin-bottom:3px}
+.ptl-card-info{font-family:var(--font-b);font-size:.6rem;color:#aaa;margin-bottom:7px}
+.ptl-card-badge{display:inline-block;font-family:var(--font-t);font-size:.57rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:10px;color:#fff}
+.ptl-card-cta{display:block;text-align:center;font-family:var(--font-t);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--blue);padding:7px 10px;text-decoration:none;border-radius:3px;transition:background .2s}
+.ptl-card-cta:hover{background:#0f2950}
+</style>
+</head>
+<body>
+<div class="pres" id="pres">
+
+<!-- ══════════════════════════════════════
+  S1 · CAPA
+══════════════════════════════════════ -->
+<div class="slide active" id="s1" style="overflow:hidden;color:#fff">
+  <video autoplay loop muted playsinline preload="auto"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:brightness(.58) saturate(1.6) contrast(1.08)">
+    <source src="IMG_0037.MOV" type="video/mp4">
+    <source src="IMG_0037.MOV" type="video/quicktime">
+    <!-- fallback caso o browser não suporte o vídeo -->
+    <img src="7.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 30%" alt="">
+  </video>
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,12,26,.70) 0%,rgba(3,12,26,.38) 45%,rgba(3,12,26,.62) 100%)"></div>
+<div class="cover-shimmer" style="top:46%"></div>
+  <div class="cover-shimmer" style="top:51%;height:1px;opacity:.5"></div>
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:80px;opacity:.18;pointer-events:none">
+    <path d="M0,50 C180,80 360,20 540,55 C720,90 900,25 1080,55 C1260,85 1380,45 1440,50 L1440,100 L0,100Z" fill="rgba(255,255,255,.5)"/>
+  </svg>
+  <div class="deco slash slash-b" style="height:88px;top:52px;right:118px;opacity:.45"></div>
+  <div class="deco slash slash-g" style="height:116px;top:32px;right:88px;opacity:.32"></div>
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer"></div>
+  <div class="inner" style="align-items:center;justify-content:center;position:relative;z-index:5">
+    <div style="text-align:center;padding:0 20px">
+      <div style="font-family:var(--font-t);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.24em;color:rgba(255,255,255,.55)" data-i18n="s1-subtitle">Santa Catarina · Brasil · 2026</div>
+      <div class="blue-line"></div>
+      <div style="font-family:var(--font-t);font-weight:800;font-size:clamp(2.6rem,5.5vw,5.2rem);line-height:.93;text-transform:uppercase;letter-spacing:.06em;text-shadow:0 4px 40px rgba(0,0,0,.8)"><span data-i18n="s1-title">Costa Esmeralda</span><br><span style="font-weight:300;font-size:.65em;letter-spacing:.2em" data-i18n="s1-region">Litoral Catarinense</span></div>
+      <div style="font-family:var(--font-t);font-weight:300;font-size:clamp(1rem,2.2vw,1.65rem);letter-spacing:.32em;text-transform:uppercase;margin-top:14px;opacity:.68" data-i18n="s1-cities">Itapema &amp; Porto Belo</div>
+      <div style="margin-top:16px;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-family:var(--font-t);opacity:.42" data-i18n="s1-tag">Pesquisa de Mercado Imobiliário</div>
+      <div style="margin-top:16px;font-size:.65rem;letter-spacing:.26em;text-transform:uppercase;font-family:var(--font-t);opacity:.28" data-i18n="s1-years">2024 · 2025 · 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S2 · DADOS DO TERRITÓRIO
+══════════════════════════════════════ -->
+<div class="slide sl" id="s2">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+
+  <div class="inner" style="padding:96px 44px 24px;align-items:flex-start;overflow:hidden">
+    <div style="width:100%;max-width:1280px">
+
+      <!-- CABEÇALHO -->
+      <div style="margin-bottom:14px">
+        <div style="font-family:var(--font-t);font-weight:700;font-size:.92rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue);margin-bottom:5px" data-i18n="s2-supertitle">Costa Esmeralda · Santa Catarina · Dados 2021–2026</div>
+        <h2 style="font-family:var(--font-t);font-weight:800;font-size:clamp(2.1rem,3.4vw,3rem);color:var(--dark);line-height:1" data-i18n="s2-title">Dados do Território</h2>
+      </div>
+
+      <!-- 3 COLUNAS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:stretch">
+
+        <!-- ── SANTA CATARINA ── -->
+        <div style="background:#f4f6fb;border-top:4px solid var(--blue);overflow:hidden;display:flex;flex-direction:column">
+          <div style="background:var(--blue);padding:12px 20px">
+            <div style="font-family:var(--font-t);font-weight:800;font-size:1.3rem;letter-spacing:.18em;text-transform:uppercase;color:#fff">Santa Catarina</div>
+          </div>
+          <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px;flex:1">
+
+            <div style="padding-bottom:10px;border-bottom:1px solid rgba(26,58,110,.1)">
+              <div style="font-family:var(--font-t);font-weight:800;font-size:3.1rem;line-height:1;color:var(--blue)">+5,3%</div>
+              <div style="font-family:var(--font-t);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);margin-top:5px" data-i18n="s2-sc-gdp-label">Crescimento PIB 2024</div>
+              <div style="font-family:var(--font-b);font-size:1rem;color:#1a1a1a;margin-top:4px;line-height:1.55" data-i18n="s2-sc-gdp-desc">SC cresce 56% mais rápido que o Brasil · IBGE/SEPLAN-SC 2024</div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <div style="font-family:var(--font-t);font-weight:800;font-size:2.6rem;line-height:1;color:var(--blue)">8,18M</div>
+                <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin-top:4px" data-i18n="s2-sc-pop-label">Habitantes</div>
+                <div style="font-family:var(--font-b);font-size:.94rem;color:#222;margin-top:3px" data-i18n="s2-sc-pop-source">Estimativa IBGE 2025</div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-t);font-weight:800;font-size:2.6rem;line-height:1;color:var(--blue)">6ª</div>
+                <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin-top:4px" data-i18n="s2-sc-rank-label">Maior Economia</div>
+                <div style="font-family:var(--font-b);font-size:.94rem;color:#222;margin-top:3px" data-i18n="s2-sc-rank-source">PIB ~R$ 531 bi · 2024</div>
+              </div>
+            </div>
+
+            <div style="padding:9px 12px;background:rgba(26,58,110,.07);border-left:3px solid var(--blue)">
+              <div style="font-family:var(--font-t);font-weight:800;font-size:1.8rem;line-height:1;color:var(--blue)">4,6%</div>
+              <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin-top:4px" data-i18n="s2-sc-pib-label">Do PIB Nacional</div>
+              <div style="font-family:var(--font-b);font-size:.76rem;color:#1a1a1a;margin-top:3px;line-height:1.5" data-i18n="s2-sc-pib-desc">Participação crescente — IBGE 2022 (última apuração oficial disponível)</div>
+            </div>
+
+          </div>
+          <div style="padding:8px 22px;background:rgba(26,58,110,.05);border-top:1px solid rgba(26,58,110,.1);flex-shrink:0">
+            <div style="font-family:var(--font-b);font-size:.82rem;color:#222">Fontes:
+              <a href="https://www.ibge.gov.br/cidades-e-estados/sc.html" target="_blank" style="color:var(--blue);font-weight:600">IBGE · SC</a> ·
+              <a href="https://www.seplan.sc.gov.br" target="_blank" style="color:var(--blue);font-weight:600">SEPLAN-SC · PIB 2024</a> ·
+              <a href="https://www.sc.gov.br" target="_blank" style="color:var(--blue);font-weight:600">Governo do Estado de SC</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ITAPEMA ── -->
+        <div style="background:#f4f6fb;border-top:4px solid var(--blue);overflow:hidden;display:flex;flex-direction:column">
+          <div style="background:var(--blue);padding:12px 20px">
+            <div style="font-family:var(--font-t);font-weight:800;font-size:1.3rem;letter-spacing:.18em;text-transform:uppercase;color:#fff">Itapema</div>
+          </div>
+          <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px;flex:1">
+
+            <div style="padding-bottom:10px;border-bottom:1px solid rgba(26,58,110,.1)">
+              <div style="font-family:var(--font-t);font-weight:800;font-size:3.1rem;line-height:1;color:var(--blue)">86.116</div>
+              <div style="font-family:var(--font-t);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);margin-top:5px" data-i18n="s2-ita-pop-label">Habitantes permanentes</div>
+              <div style="font-family:var(--font-b);font-size:1rem;color:#1a1a1a;margin-top:4px;line-height:1.55" data-i18n="s2-ita-pop-desc">Estimativa oficial IBGE 2025 · até 800 mil visitantes no verão</div>
+            </div>
+
+            <div>
+              <div style="font-family:var(--font-t);font-weight:800;font-size:2.6rem;line-height:1;color:var(--blue)">Nº 1</div>
+              <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin-top:4px" data-i18n="s2-ita-rank-label">Valorização + Crescimento Econômico</div>
+              <div style="font-family:var(--font-b);font-size:.94rem;color:#222;margin-top:3px" data-i18n="s2-ita-rank-source">m² que mais valoriza no Brasil · R$ 15.226/m² · FipeZAP Mai/2026</div>
+            </div>
+
+            <div style="padding:9px 12px;background:rgba(26,58,110,.07);border-left:3px solid var(--blue)">
+              <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:9px" data-i18n="s2-ita-beaches-title">Praias principais</div>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <div style="font-family:var(--font-b);font-size:1rem;color:var(--dark)" data-i18n="s2-ita-beach1">Centro de Itapema</div>
+                  <div style="font-family:var(--font-t);font-weight:800;font-size:1rem;color:var(--blue)">~1,5 km</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <div style="font-family:var(--font-b);font-size:1rem;color:var(--dark)" data-i18n="s2-ita-beach2">Canto da Praia</div>
+                  <div style="font-family:var(--font-t);font-weight:800;font-size:1rem;color:var(--blue)">~1 km</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <div style="font-family:var(--font-b);font-size:1rem;color:var(--dark)" data-i18n="s2-ita-beach3">Meia Praia</div>
+                  <div style="font-family:var(--font-t);font-weight:800;font-size:1rem;color:var(--blue)">~4,75 km</div>
+                </div>
+              </div>
+              <div style="font-family:var(--font-b);font-size:.88rem;color:#333;margin-top:8px;border-top:1px solid rgba(26,58,110,.15);padding-top:6px" data-i18n="s2-ita-beach-note">Meia Praia: projeto de alargamento aprovado · IMA-SC 2025</div>
+            </div>
+
+          </div>
+          <div style="padding:8px 22px;background:rgba(26,58,110,.05);border-top:1px solid rgba(26,58,110,.1);flex-shrink:0">
+            <div style="font-family:var(--font-b);font-size:.82rem;color:#222">Fontes:
+              <a href="https://www.ibge.gov.br/cidades-e-estados/sc/itapema.html" target="_blank" style="color:var(--blue);font-weight:600">IBGE · Itapema 2025</a> ·
+              <a href="https://www.itapema.sc.gov.br" target="_blank" style="color:var(--blue);font-weight:600">Prefeitura de Itapema</a> ·
+              <a href="https://fipezap.zapimoveis.com.br" target="_blank" style="color:var(--blue);font-weight:600">FipeZAP Mai/2026</a> ·
+              <a href="https://www.ima.sc.gov.br" target="_blank" style="color:var(--blue);font-weight:600">IMA-SC</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── PORTO BELO ── -->
+        <div style="background:#f4f6fb;border-top:4px solid var(--blue);overflow:hidden;display:flex;flex-direction:column">
+          <div style="background:var(--blue);padding:12px 20px">
+            <div style="font-family:var(--font-t);font-weight:800;font-size:1.3rem;letter-spacing:.18em;text-transform:uppercase;color:#fff">Porto Belo</div>
+          </div>
+          <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px;flex:1">
+
+            <div style="padding-bottom:10px;border-bottom:1px solid rgba(26,58,110,.1)">
+              <div style="font-family:var(--font-t);font-weight:800;font-size:3.1rem;line-height:1;color:var(--blue)">31.557</div>
+              <div style="font-family:var(--font-t);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);margin-top:5px" data-i18n="s2-pb-pop-label">Habitantes permanentes</div>
+              <div style="font-family:var(--font-b);font-size:1rem;color:#1a1a1a;margin-top:4px;line-height:1.55" data-i18n="s2-pb-pop-desc">Estimativa oficial IBGE 2025 · Alta densidade turística no verão</div>
+            </div>
+
+            <div>
+              <div style="font-family:var(--font-t);font-weight:800;font-size:2.6rem;line-height:1;color:var(--blue)">30ª</div>
+              <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin-top:4px" data-i18n="s2-pb-rank-label">Cidade + cresce Brasil</div>
+              <div style="font-family:var(--font-b);font-size:.94rem;color:#222;margin-top:3px" data-i18n="s2-pb-rank-source">Ranking IBGE · Censo 2022</div>
+            </div>
+
+            <div style="padding:9px 12px;background:rgba(26,58,110,.07);border-left:3px solid var(--blue)">
+              <div style="font-family:var(--font-t);font-weight:700;font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:9px" data-i18n="s2-pb-beaches-title">Praias principais</div>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <div style="font-family:var(--font-b);font-size:1rem;color:var(--dark)" data-i18n="s2-pb-beach1">Praia de Perequê</div>
+                  <div style="font-family:var(--font-t);font-weight:800;font-size:1rem;color:var(--blue)">~2,5 km</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <div style="font-family:var(--font-b);font-size:1rem;color:var(--dark)" data-i18n="s2-pb-beach2">Praia Central</div>
+                  <div style="font-family:var(--font-t);font-weight:800;font-size:1rem;color:var(--blue)">~600 m</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <div style="font-family:var(--font-b);font-size:1rem;color:var(--dark)" data-i18n="s2-pb-beach3">Praia do Araçá</div>
+                  <div style="font-family:var(--font-t);font-weight:800;font-size:1rem;color:var(--blue)">~400 m</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div style="padding:8px 22px;background:rgba(26,58,110,.05);border-top:1px solid rgba(26,58,110,.1);flex-shrink:0">
+            <div style="font-family:var(--font-b);font-size:.82rem;color:#222">Fontes:
+              <a href="https://cidades.ibge.gov.br/brasil/sc/porto-belo/panorama" target="_blank" style="color:var(--blue);font-weight:600">IBGE · Porto Belo 2025</a> ·
+              <a href="https://www.portobelo.sc.gov.br" target="_blank" style="color:var(--blue);font-weight:600">Prefeitura de Porto Belo</a> ·
+              <a href="https://www.sc.gov.br" target="_blank" style="color:var(--blue);font-weight:600">Governo do Estado de SC</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S3 · CONECTIVIDADE
+══════════════════════════════════════ -->
+<div class="slide sl" id="s3">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="deco" style="position:absolute;right:0;bottom:0;width:150px;height:150px;background:var(--blue);clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.05"></div>
+  <div class="inner" style="padding:56px 36px 22px;align-items:stretch;overflow:hidden">
+    <div style="width:100%;max-width:1120px;display:flex;flex-direction:column;height:100%">
+      <div class="stitle"><div class="bar"></div><div class="txt" data-i18n="s3-stitle">Infraestrutura &amp; Acesso</div></div>
+      <h2 style="font-size:clamp(2rem,3.4vw,3rem);margin-bottom:16px;color:var(--dark)" data-i18n="s3-title">Conectividade Itapema e Porto Belo</h2>
+
+      <div style="display:grid;grid-template-columns:216px 1fr 216px;gap:12px;flex:1;min-height:0;margin-bottom:10px;align-items:stretch">
+
+        <!-- ── ESQUERDA: FLN + SDEN ── -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+
+          <!-- FLN -->
+          <div style="flex:1;background:#fff;border-top:3px solid var(--blue);padding:14px 16px;display:flex;flex-direction:column;min-height:0;box-shadow:0 2px 10px rgba(26,58,110,.08)">
+            <div style="font-family:var(--font-t);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:6px" data-i18n="s3-fln-label">✈ FLN · Florianópolis</div>
+            <div style="font-family:var(--font-t);font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dark);line-height:1.3;margin-bottom:8px" data-i18n="s3-fln-name">Aeroporto Internacional de Florianópolis</div>
+            <div style="font-family:var(--font-t);font-size:3rem;font-weight:800;color:var(--blue);line-height:1">80 km</div>
+            <div style="font-family:var(--font-t);font-size:.82rem;font-weight:700;color:var(--dark);margin-top:3px;padding-bottom:8px;border-bottom:1px solid rgba(26,58,110,.12)" data-i18n="s3-fln-drive">1h 10 min de carro</div>
+            <p style="font-size:.82rem;color:#222;line-height:1.5;margin-top:8px;flex:1" data-i18n="s3-fln-desc">Voos diretos SP (GRU/CGH), Rio de Janeiro, Brasília e destinos internacionais</p>
+            <div style="margin-top:8px;display:inline-flex;align-items:center;gap:5px;background:rgba(26,58,110,.08);border:1px solid rgba(26,58,110,.2);border-radius:3px;padding:3px 7px">
+              <span style="font-size:.78rem">🌐</span>
+              <span style="font-family:var(--font-t);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)" data-i18n="s3-fln-intl">Conexões Internacionais</span>
+            </div>
+          </div>
+
+          <!-- SDEN -->
+          <div style="flex:1;background:#fff;border-top:3px solid var(--blue);padding:14px 16px;display:flex;flex-direction:column;min-height:0;box-shadow:0 2px 10px rgba(26,58,110,.08)">
+            <div style="font-family:var(--font-t);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:6px" data-i18n="s3-sden-label">✈ SDEN · Porto Belo</div>
+            <div style="font-family:var(--font-t);font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dark);line-height:1.3;margin-bottom:8px" data-i18n="s3-sden-name">Aeródromo Costa Esmeralda Porto Belo</div>
+            <div style="font-family:var(--font-t);font-size:3rem;font-weight:800;color:var(--blue);line-height:1">7 km</div>
+            <div style="font-family:var(--font-t);font-size:.82rem;font-weight:700;color:var(--dark);margin-top:3px;padding-bottom:8px;border-bottom:1px solid rgba(26,58,110,.12)" data-i18n="s3-sden-drive">8 min · O mais próximo</div>
+            <p style="font-size:.82rem;color:#222;line-height:1.5;margin-top:8px;flex:1" data-i18n="s3-sden-desc">Aeródromo privado · Táxi aéreo e helicóptero · ANAC cód. SDEN · Pista de 1.195 m</p>
+          </div>
+
+          <!-- FONTES (abaixo dos dados, fora do botão de navegação) -->
+          <div style="font-family:var(--font-b);font-size:.58rem;color:#555;line-height:1.7;border-top:1px solid rgba(26,58,110,.15);padding-top:6px">
+            <strong style="color:#333">Fontes:</strong>
+            <a href="https://www.anac.gov.br" target="_blank" style="color:var(--blue);font-weight:600;text-decoration:none">ANAC · SDEN</a> ·
+            <a href="https://www.infraero.gov.br" target="_blank" style="color:var(--blue);font-weight:600;text-decoration:none">Infraero · NVT</a> ·
+            Google Maps / Waze ·
+            <a href="https://www.adistanciaentre.com" target="_blank" style="color:var(--blue);font-weight:600;text-decoration:none">adistanciaentre.com</a>
+          </div>
+
+        </div>
+
+        <!-- ── CENTRO: MAPA SVG ── -->
+        <div style="position:relative;overflow:hidden;border:1px solid rgba(26,58,110,.15);box-shadow:0 2px 16px rgba(26,58,110,.1)">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+            <defs>
+              <linearGradient id="oceanG" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#c8dff0" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#6aaed6" stop-opacity="1"/>
+              </linearGradient>
+              <linearGradient id="landG" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#d4e4cc"/>
+                <stop offset="100%" stop-color="#e2ecda"/>
+              </linearGradient>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.25"/>
+              </filter>
+            </defs>
+
+            <!-- Terra -->
+            <rect width="400" height="500" fill="url(#landG)"/>
+
+            <!-- Oceano -->
+            <path d="M216,0 Q220,50 222,105 Q222,145 219,168 Q220,190 222,228 Q222,246 222,260 Q222,272 228,284 Q242,295 246,310 Q244,326 233,333 Q222,342 218,365 Q214,395 211,430 Q209,462 208,500 L400,500 L400,0 Z" fill="url(#oceanG)"/>
+
+            <!-- Peninsula Porto Belo (destaque) -->
+            <path d="M228,284 Q250,290 258,305 Q258,322 242,328 Q233,332 233,333" fill="#8ec4de" opacity="0.85" stroke="#5a9abf" stroke-width="0.8"/>
+
+            <!-- Linha da costa -->
+            <path d="M216,0 Q220,50 222,105 Q222,145 219,168 Q220,190 222,228 Q222,246 222,260 Q222,272 228,284 Q242,295 246,310 Q244,326 233,333 Q222,342 218,365 Q214,395 211,430 Q209,462 208,500" fill="none" stroke="#2c5f8c" stroke-width="2.5" opacity="0.55"/>
+
+            <!-- Grade de referência leve -->
+            <line x1="0" y1="250" x2="400" y2="250" stroke="#1a3a6e" stroke-width="0.4" stroke-dasharray="4,8" opacity="0.15"/>
+            <line x1="200" y1="0" x2="200" y2="500" stroke="#1a3a6e" stroke-width="0.4" stroke-dasharray="4,8" opacity="0.15"/>
+
+            <!-- ── ROTAS ── -->
+            <!-- Itapema → FLN -->
+            <line x1="222" y1="260" x2="211" y2="432" stroke="#e0242c" stroke-width="2.2" stroke-dasharray="8,5" opacity="0.75"/>
+            <!-- Itapema → NVT -->
+            <line x1="222" y1="260" x2="220" y2="165" stroke="#e0242c" stroke-width="2.2" stroke-dasharray="8,5" opacity="0.75"/>
+            <!-- Itapema → SDEN -->
+            <line x1="222" y1="260" x2="222" y2="282" stroke="#1a3a6e" stroke-width="1.8" stroke-dasharray="5,3" opacity="0.7"/>
+            <!-- Itapema → Blumenau -->
+            <line x1="222" y1="260" x2="62" y2="168" stroke="#7a8c99" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.55"/>
+
+            <!-- ── MARCADORES ── -->
+
+            <!-- Blumenau (caneca de chop) -->
+            <circle cx="62" cy="164" r="16" fill="#f5c842" stroke="#c89a00" stroke-width="2"/>
+            <text x="62" y="164" text-anchor="middle" dy=".38em" font-size="16">🍺</text>
+            <rect x="4" y="182" width="60" height="26" rx="3" fill="white" fill-opacity="0.94"/>
+            <text x="34" y="192" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="700" font-size="9.5" fill="#434142">Blumenau</text>
+            <text x="34" y="203" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="700" font-size="9.5" fill="#e0242c">75 km</text>
+
+            <!-- NVT (aviãozinho) -->
+            <circle cx="220" cy="165" r="14" fill="#1a3a6e" stroke="white" stroke-width="2"/>
+            <text x="220" y="165" text-anchor="middle" dy=".38em" font-size="15" fill="white">✈</text>
+            <rect x="238" y="155" width="74" height="24" rx="3" fill="white" fill-opacity="0.95"/>
+            <text x="242" y="165" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="13.5" fill="#1a3a6e">NVT</text>
+            <text x="242" y="176" font-family="Arial,sans-serif" font-size="8.5" fill="#222">Navegantes</text>
+            <!-- Badge NVT -->
+            <rect x="154" y="205" width="52" height="19" rx="4" fill="#e0242c" filter="url(#shadow)"/>
+            <text x="180" y="218" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="12" fill="white">45 km</text>
+
+            <!-- Bal. Camboriú -->
+            <circle cx="222" cy="242" r="3.5" fill="#7a8c99" opacity="0.6"/>
+            <text x="230" y="246" font-family="Arial,sans-serif" font-size="7.5" fill="#555" opacity="0.85">Bal. Camboriú</text>
+
+            <!-- SDEN (aviãozinho menor) -->
+            <circle cx="222" cy="282" r="10" fill="#1a3a6e" stroke="white" stroke-width="1.5" opacity="0.92"/>
+            <text x="222" y="282" text-anchor="middle" dy=".38em" font-size="11" fill="white">✈</text>
+            <rect x="235" y="273" width="100" height="22" rx="3" fill="white" fill-opacity="0.95"/>
+            <text x="239" y="282" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="11" fill="#1a3a6e">SDEN · Porto Belo</text>
+            <text x="239" y="292" font-family="Arial,sans-serif" font-size="7.5" fill="#333">7 km · aeródromo privado</text>
+
+            <!-- FLN (aviãozinho) -->
+            <circle cx="211" cy="432" r="14" fill="#1a3a6e" stroke="white" stroke-width="2"/>
+            <text x="211" y="432" text-anchor="middle" dy=".38em" font-size="15" fill="white">✈</text>
+            <rect x="229" y="422" width="66" height="24" rx="3" fill="white" fill-opacity="0.95"/>
+            <text x="233" y="432" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="13.5" fill="#1a3a6e">FLN</text>
+            <text x="233" y="443" font-family="Arial,sans-serif" font-size="8.5" fill="#222">Florianópolis</text>
+            <!-- Badge FLN -->
+            <rect x="154" y="348" width="52" height="19" rx="4" fill="#e0242c" filter="url(#shadow)"/>
+            <text x="180" y="361" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="12" fill="white">80 km</text>
+
+            <!-- ── ITAPEMA (estrela central) ── -->
+            <circle cx="222" cy="260" r="22" fill="rgba(224,36,44,0.12)"/>
+            <circle cx="222" cy="260" r="14" fill="#e0242c" filter="url(#shadow)"/>
+            <circle cx="222" cy="260" r="7" fill="white"/>
+            <circle cx="222" cy="260" r="3.5" fill="#e0242c"/>
+            <!-- Label Itapema -->
+            <rect x="130" y="226" width="86" height="22" rx="3" fill="white" fill-opacity="0.96" filter="url(#shadow)"/>
+            <text x="173" y="241" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="14" fill="#1a3a6e">ITAPEMA</text>
+            <rect x="128" y="250" width="90" height="13" rx="3" fill="white" fill-opacity="0.85"/>
+            <text x="173" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-size="8.5" fill="#434142">Costa Esmeralda</text>
+
+            <!-- ── PORTO BELO CIDADE ── -->
+            <line x1="222" y1="282" x2="234" y2="318" stroke="#1a3a6e" stroke-width="1.4" stroke-dasharray="4,3" opacity="0.45"/>
+            <circle cx="234" cy="320" r="8" fill="#1a3a6e" stroke="white" stroke-width="1.5"/>
+            <text x="234" y="320" text-anchor="middle" dy=".38em" font-size="9" fill="white" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800">PB</text>
+            <rect x="245" y="313" width="76" height="16" rx="2" fill="white" fill-opacity="0.96"/>
+            <text x="249" y="324" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="11" fill="#1a3a6e">Porto Belo</text>
+
+            <!-- ── SANTUÁRIO MADRE PAULINA — NOVA TRENTO ── -->
+            <line x1="222" y1="260" x2="72" y2="282" stroke="#7a5099" stroke-width="1.6" stroke-dasharray="6,4" opacity="0.65"/>
+            <circle cx="72" cy="282" r="15" fill="#7a5099" stroke="white" stroke-width="1.8"/>
+            <text x="72" y="282" text-anchor="middle" dy=".38em" font-size="14">⛪</text>
+            <!-- Badge km -->
+            <rect x="90" y="270" width="48" height="18" rx="4" fill="#7a5099" filter="url(#shadow)"/>
+            <text x="114" y="283" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="12" fill="white">68 km</text>
+            <!-- Label -->
+            <rect x="2" y="300" width="140" height="28" rx="3" fill="white" fill-opacity="0.96"/>
+            <text x="72" y="311" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="700" font-size="8.5" fill="#434142">Santuário Madre Paulina</text>
+            <text x="72" y="322" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="700" font-size="8.5" fill="#7a5099">Nova Trento · 68 km</text>
+
+            <!-- ── ROSA DOS VENTOS ── -->
+            <g transform="translate(366,34)">
+              <circle cx="0" cy="0" r="22" fill="white" fill-opacity="0.95" stroke="#1a3a6e" stroke-width="1.5" filter="url(#shadow)"/>
+              <polygon points="0,-15 4,-5 0,-8 -4,-5" fill="#1a3a6e"/>
+              <polygon points="0,15 4,5 0,8 -4,5" fill="#ccc"/>
+              <line x1="-15" y1="0" x2="15" y2="0" stroke="#ddd" stroke-width="1"/>
+              <text x="0" y="-19" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="800" font-size="11" fill="#1a3a6e">N</text>
+            </g>
+
+            <!-- ── ESCALA ── -->
+            <g transform="translate(14,478)">
+              <rect x="0" y="-5" width="80" height="10" rx="2" fill="white" fill-opacity="0.75"/>
+              <rect x="0" y="-5" width="40" height="10" rx="2" fill="#1a3a6e" fill-opacity="0.6"/>
+              <line x1="0" y1="-5" x2="0" y2="5" stroke="#1a3a6e" stroke-width="1.5"/>
+              <line x1="40" y1="-5" x2="40" y2="5" stroke="#1a3a6e" stroke-width="1.5"/>
+              <line x1="80" y1="-5" x2="80" y2="5" stroke="#1a3a6e" stroke-width="1.5"/>
+              <text x="0" y="15" font-family="Arial,sans-serif" font-size="8" fill="#333">0</text>
+              <text x="28" y="15" font-family="Arial,sans-serif" font-size="8" fill="#333">20 km</text>
+              <text x="64" y="15" font-family="Arial,sans-serif" font-size="8" fill="#333">40 km</text>
+            </g>
+
+            <!-- ── TÍTULO DO MAPA ── -->
+            <rect x="0" y="0" width="400" height="30" fill="#1a3a6e" opacity="0.88"/>
+            <text x="14" y="20" font-family="Barlow Condensed,Arial Narrow,Arial" font-weight="700" font-size="12" fill="white" letter-spacing="2">COSTA ESMERALDA · SC</text>
+            <text x="386" y="20" text-anchor="end" font-family="Arial,sans-serif" font-size="8.5" fill="rgba(255,255,255,.7)">Litoral Catarinense</text>
+
+          </svg>
+        </div>
+
+        <!-- ── DIREITA: NVT + BR-101 ── -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="flex:1;background:#fff;border-top:3px solid var(--blue);padding:14px 16px;display:flex;flex-direction:column;min-height:0;box-shadow:0 2px 10px rgba(26,58,110,.08)">
+            <div style="font-family:var(--font-t);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:6px" data-i18n="s3-nvt-label">✈ NVT · Navegantes</div>
+            <div style="font-family:var(--font-t);font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dark);line-height:1.3;margin-bottom:8px" data-i18n="s3-nvt-name">Aeroporto Internacional de Navegantes</div>
+            <div style="font-family:var(--font-t);font-size:3rem;font-weight:800;color:var(--blue);line-height:1">45 km</div>
+            <div style="font-family:var(--font-t);font-size:.82rem;font-weight:700;color:var(--dark);margin-top:3px;padding-bottom:8px;border-bottom:1px solid rgba(26,58,110,.12)" data-i18n="s3-nvt-drive">45 min de carro</div>
+            <p style="font-size:.82rem;color:#222;line-height:1.5;margin-top:8px;flex:1" data-i18n="s3-nvt-desc">Voos regulares para São Paulo e outros destinos · O aeroporto comercial mais próximo da Costa Esmeralda</p>
+            <div style="margin-top:8px;display:inline-flex;align-items:center;gap:5px;background:rgba(26,58,110,.08);border:1px solid rgba(26,58,110,.2);border-radius:3px;padding:3px 7px">
+              <span style="font-size:.78rem">🌐</span>
+              <span style="font-family:var(--font-t);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)" data-i18n="s3-nvt-intl">Conexões Internacionais</span>
+            </div>
+          </div>
+          <!-- BR-101 movido para a lateral -->
+          <div style="background:#fff;border-top:3px solid var(--blue);padding:14px 16px;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(26,58,110,.08)">
+            <div style="font-size:1.3rem;margin-bottom:8px">🛣</div>
+            <div style="font-family:var(--font-t);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);font-weight:800;margin-bottom:6px" data-i18n="s3-br101-label">BR-101 · Acesso Rodoviário Direto</div>
+            <p style="font-size:.82rem;color:#222;line-height:1.5" data-i18n="s3-br101-desc">Conexão com Atrações: Beto Carrero World (Penha 51 km) · Blumenau / Oktoberfest: 75 km</p>
+          </div>
+          <!-- Santuário Madre Paulina -->
+          <div style="background:#fff;border-top:3px solid #7a5099;padding:14px 16px;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(122,80,153,.15)">
+            <div style="font-family:var(--font-t);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#7a5099;font-weight:700;margin-bottom:6px" data-i18n="s3-madre-label">⛪ Santuário · Nova Trento</div>
+            <div style="font-family:var(--font-t);font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dark);line-height:1.3;margin-bottom:8px" data-i18n="s3-madre-name">Santuário Madre Paulina</div>
+            <div style="font-family:var(--font-t);font-size:3rem;font-weight:800;color:#7a5099;line-height:1">68 km</div>
+            <div style="font-family:var(--font-t);font-size:.82rem;font-weight:700;color:var(--dark);margin-top:3px;padding-bottom:8px;border-bottom:1px solid rgba(122,80,153,.15)" data-i18n="s3-madre-drive">55 min de carro</div>
+            <p style="font-size:.82rem;color:#222;line-height:1.5;margin-top:8px" data-i18n="s3-madre-desc">Nova Trento · SC · Santuário da primeira santa brasileira · Destino de fé e turismo</p>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S4 · m² RANKING NACIONAL
+══════════════════════════════════════ -->
+<div class="slide sl" id="s4">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="deco" style="position:absolute;right:0;bottom:0;width:150px;height:150px;background:var(--blue);clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.05"></div>
+  <div class="inner" style="padding:58px 44px 32px;align-items:center">
+    <div style="width:100%;max-width:1260px">
+      <div class="stitle"><div class="bar"></div><div class="txt" data-i18n="s4-stitle">Comparativo Nacional · Preço por m²</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:32px;align-items:stretch">
+
+        <!-- ESQUERDA -->
+        <div style="display:flex;flex-direction:column;justify-content:space-between">
+          <h2 style="font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.02;margin-bottom:8px;color:var(--dark)" data-i18n="s4-title">Itapema lidera o Brasil no m²</h2>
+          <p style="font-size:.82rem;color:#333;margin-bottom:14px;line-height:1.55" data-i18n="s4-desc">A Costa Esmeralda catarinense ultrapassou todas as grandes capitais brasileiras no preço médio do metro quadrado residencial.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div style="padding:12px 14px;background:rgba(26,58,110,.08);border-left:4px solid var(--blue)">
+              <div style="font-family:var(--font-t);font-size:2rem;font-weight:800;color:var(--blue);line-height:1">+34%</div>
+              <div style="font-family:var(--font-t);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#333;margin-top:4px" data-i18n="s4-above-sp">acima de São Paulo</div>
+            </div>
+            <div style="padding:12px 14px;background:rgba(26,58,110,.08);border-left:4px solid var(--blue)">
+              <div style="font-family:var(--font-t);font-size:2rem;font-weight:800;color:var(--blue);line-height:1">+55%</div>
+              <div style="font-family:var(--font-t);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#333;margin-top:4px" data-i18n="s4-above-rj">acima do Rio de Janeiro</div>
+            </div>
+          </div>
+
+          <!-- VALOR EM DESTAQUE -->
+          <div style="padding:14px 18px;background:linear-gradient(135deg,#0d2447 0%,#1a3a6e 100%);color:#fff;margin-bottom:14px;border-left:6px solid #1a7a32;position:relative;overflow:hidden">
+            <div style="position:absolute;right:-10px;top:-10px;width:80px;height:80px;background:rgba(26,122,50,.15);border-radius:50%"></div>
+            <div style="font-family:var(--font-t);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px" data-i18n="s4-price-tag">Preço médio m² · Itapema · FipeZAP Mai/2026</div>
+            <div style="font-family:var(--font-t);font-size:2.8rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.01em">R$ 15.226</div>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:8px">
+              <div style="font-family:var(--font-t);font-size:.95rem;font-weight:700;color:rgba(255,255,255,.75)" data-i18n="s4-per-m2">/m² residencial</div>
+              <div style="height:14px;width:1px;background:rgba(255,255,255,.25)"></div>
+              <div style="font-family:var(--font-t);font-size:.95rem;font-weight:800;color:#3ecf6a" data-i18n="s4-rank1">Nº1 do Brasil 🏆</div>
+              <div style="height:14px;width:1px;background:rgba(255,255,255,.25)"></div>
+              <div style="font-family:var(--font-t);font-size:.95rem;font-weight:700;color:#3ecf6a">+6,47% em 12 meses</div>
+            </div>
+          </div>
+
+          <!-- Porto Belo título -->
+          <h2 style="font-size:clamp(1rem,1.8vw,1.5rem);line-height:1.1;margin-bottom:8px;color:var(--dark)">Porto Belo em Crescente Econômica:</h2>
+          <!-- Porto Belo card compacto — amarelo escuro -->
+          <div style="padding:10px 14px;background:linear-gradient(135deg,#6b4f00 0%,#c8960a 100%);color:#fff;margin-bottom:14px;border-left:6px solid #c8960a;position:relative;overflow:hidden">
+            <div style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:4px">Preço médio m² · Porto Belo · DWV 2025</div>
+            <div style="display:flex;align-items:baseline;gap:12px">
+              <div style="font-family:var(--font-t);font-size:1.9rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.01em">R$ 13.900</div>
+              <div style="font-family:var(--font-t);font-size:.8rem;font-weight:700;color:rgba(255,255,255,.8)">/m² residencial</div>
+            </div>
+            <div style="font-family:var(--font-t);font-size:.75rem;color:#ffe08a;margin-top:4px">+3,7% em 2025 · 2º maior VGV do Brasil</div>
+          </div>
+          <div class="fontes">
+            <strong>Fontes:</strong>
+            <a href="https://fipezap.zapimoveis.com.br" target="_blank">FipeZAP · Junho/2026</a> ·
+            <a href="https://www.crecesc.org.br" target="_blank">CRECI-SC</a> ·
+            <a href="https://sindusconsc.com.br" target="_blank">SINDUSCON-SC</a> ·
+            <a href="https://www.grupocostaleste.com.br/blog/porto-belo-maior-valorizacao-imobiliaria-brasil" target="_blank">DWV · 2025</a>
+          </div>
+        </div>
+
+        <!-- DIREITA: gráfico -->
+        <div>
+          <div style="font-family:var(--font-t);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#222;margin-bottom:10px" data-i18n="s4-chart-title">Preço médio por m² · Ranking Brasil · Junho/2026</div>
+          <!-- Cabeçalho das colunas -->
+          <div style="display:flex;align-items:center;margin-bottom:4px">
+            <div style="width:165px;flex-shrink:0"></div>
+            <div style="flex:1;font-family:var(--font-t);font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#555;text-align:right;padding-right:12px" data-i18n="s4-col-price">Preço / m²</div>
+          </div>
+          <div class="hbar-wrap">
+            <div class="hbar-row"><span class="hbar-city top">🏆 Itapema, SC</span><div class="hbar-track"><div class="hbar-fill top-bar" style="width:100%"><span class="hbar-val" style="color:#fff;font-weight:800">R$ 15.226</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city" style="color:rgba(26,58,110,.8);font-weight:700">Bal. Camboriú, SC</span><div class="hbar-track"><div class="hbar-fill sc-bar" style="width:99.9%"><span class="hbar-val">R$ 15.215</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city" style="color:#c8960a;font-weight:700">Porto Belo, SC</span><div class="hbar-track"><div class="hbar-fill" style="width:91.3%;background:#c8960a"><span class="hbar-val">R$ 13.900</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city">Florianópolis, SC</span><div class="hbar-track"><div class="hbar-fill other" style="width:78.9%"><span class="hbar-val">~R$ 12.000</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city">São Paulo, SP</span><div class="hbar-track"><div class="hbar-fill other" style="width:74.7%"><span class="hbar-val">R$ 11.374</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city">Rio de Janeiro, RJ</span><div class="hbar-track"><div class="hbar-fill other" style="width:64.4%"><span class="hbar-val">~R$ 9.800</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city">Brasília, DF</span><div class="hbar-track"><div class="hbar-fill other" style="width:59.2%"><span class="hbar-val">~R$ 9.000</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city">Curitiba, PR</span><div class="hbar-track"><div class="hbar-fill other" style="width:55.9%"><span class="hbar-val">~R$ 8.500</span></div></div></div>
+            <div class="hbar-row"><span class="hbar-city">Porto Alegre, RS</span><div class="hbar-track"><div class="hbar-fill other" style="width:49.3%"><span class="hbar-val">~R$ 7.500</span></div></div></div>
+          </div>
+          <div style="margin-top:8px;font-family:var(--font-t);font-size:.6rem;color:#888;letter-spacing:.1em;text-transform:uppercase" data-i18n="s4-source">Fonte: FipeZAP · Junho/2026 · Índice de 56 municípios brasileiros</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S5 · ARS KAMMER — 20 ANOS
+══════════════════════════════════════ -->
+<div class="slide" id="s5" style="display:grid;grid-template-columns:1fr 1fr;overflow:hidden;color:#fff">
+
+  <!-- ESQUERDA: foto Embasamento.jpg -->
+  <div style="position:relative;overflow:hidden">
+    <img src="ARS_KAMMER_ESCRITORIO.jpeg" alt="ARS Kammer Escritório"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center">
+    <!-- gradiente suave no topo para o logo -->
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(3,12,26,.55) 0%,rgba(3,12,26,.15) 30%,rgba(3,12,26,.05) 60%,rgba(3,12,26,.45) 100%)"></div>
+    <!-- logo ARS -->
+    <div style="position:absolute;top:22px;left:28px;z-index:10">
+      <img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer" style="height:54px;object-fit:contain">
+    </div>
+    <!-- caption inferior -->
+    <div style="position:absolute;bottom:22px;left:28px;z-index:10">
+      <div style="font-family:var(--font-t);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65)" data-i18n="s5-office">ARS Kammer · Escritório</div>
+    </div>
+  </div>
+
+  <!-- DIREITA: dark com título + timeline + números -->
+  <div style="background:#0d1b2e;display:flex;flex-direction:column;justify-content:center;padding:72px 40px 48px 44px;position:relative;overflow:hidden">
+    <!-- deco canto -->
+    <div style="position:absolute;right:0;bottom:0;width:140px;height:140px;background:var(--blue);clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.25"></div>
+    <div style="position:absolute;right:0;top:0;width:4px;height:100%;background:var(--blue);opacity:.5"></div>
+
+    <!-- label + título -->
+    <div style="font-family:var(--font-t);font-weight:700;font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px" data-i18n="s5-history">Nossa História · Desde 2005</div>
+    <!-- 20 ANOS -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+      <span style="font-family:var(--font-t);font-size:clamp(3.2rem,5vw,4.6rem);font-weight:800;color:#fff;letter-spacing:.02em;line-height:1">20</span>
+      <div style="width:3px;height:46px;background:var(--blue);border-radius:2px;flex-shrink:0"></div>
+      <span style="font-family:var(--font-t);font-size:clamp(3.2rem,5vw,4.6rem);font-weight:800;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;line-height:1" data-i18n="s5-anos">ANOS</span>
+    </div>
+    <h2 style="font-family:var(--font-t);font-weight:800;font-size:clamp(2.4rem,4vw,3.8rem);line-height:.95;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin-bottom:12px">
+      <span data-i18n="s5-title2">Construindo</span><br>
+      <span style="font-weight:300;font-size:.72em;letter-spacing:.14em;color:rgba(255,255,255,.65)" data-i18n="s5-title3">o Futuro de SC</span>
+    </h2>
+    <div style="width:44px;height:3px;background:var(--blue);margin-bottom:12px"></div>
+    <p style="font-family:var(--font-b);font-size:1.35rem;color:rgba(255,255,255,.88);line-height:1.65;margin-bottom:20px;max-width:460px" data-i18n="s5-desc">A ARS Kammer é referência em incorporação de alto padrão na Costa Esmeralda, com duas décadas de experiência local e visão estratégica.</p>
+
+    <!-- Timeline compacta -->
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="width:8px;height:8px;background:var(--blue);border-radius:50%;flex-shrink:0"></div>
+        <div style="font-family:var(--font-t);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#fff"><span data-i18n="s5-tl1-title">Fundação · <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2005</span></span> <span style="font-family:var(--font-b);font-weight:400;font-size:.82rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.6)" data-i18n="s5-tl1-desc">— Início em Itapema, SC</span></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="width:8px;height:8px;background:var(--blue);border-radius:50%;flex-shrink:0"></div>
+        <div style="font-family:var(--font-t);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#fff"><span data-i18n="s5-tl2-title">Consolidação</span> <span style="font-family:var(--font-b);font-weight:400;font-size:.82rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.6)" data-i18n="s5-tl2-desc">— Expansão para Porto Belo</span></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="width:8px;height:8px;background:var(--blue);border-radius:50%;flex-shrink:0"></div>
+        <div style="font-family:var(--font-t);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#fff"><span data-i18n="s5-tl3-title">Visão <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2035</span></span> <span style="font-family:var(--font-b);font-weight:400;font-size:.82rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.6)" data-i18n="s5-tl3-desc">— Land Bank assegurado</span></div>
+      </div>
+    </div>
+
+    <!-- Números em destaque (3 em linha) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+
+      <div style="background:rgba(255,255,255,.06);border-top:3px solid var(--blue);padding:14px 12px">
+        <div style="font-family:var(--font-t);font-weight:800;font-size:2.8rem;line-height:1;color:#fff">16</div>
+        <div style="font-family:var(--font-t);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-top:4px;line-height:1.2" data-i18n="s5-n1-label">Entregues</div>
+        <div style="font-family:var(--font-b);font-size:.72rem;color:rgba(255,255,255,.5);margin-top:3px" data-i18n="s5-n1-sub">no prazo</div>
+      </div>
+
+      <div style="background:var(--blue);border-top:3px solid #fff;padding:14px 12px">
+        <div style="font-family:var(--font-t);font-weight:800;font-size:2.8rem;line-height:1;color:#fff">06</div>
+        <div style="font-family:var(--font-t);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.95);margin-top:4px;line-height:1.2" data-i18n="s5-n2-label">Em Andamento</div>
+        <div style="font-family:var(--font-b);font-size:.72rem;color:rgba(255,255,255,.65);margin-top:3px">Costa Esmeralda</div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.05);border-top:3px solid rgba(255,255,255,.2);padding:14px 12px">
+        <div style="font-family:var(--font-t);font-weight:800;font-size:2.8rem;line-height:1;color:rgba(255,255,255,.7)">2035</div>
+        <div style="font-family:var(--font-t);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:4px;line-height:1.2" data-i18n="s5-n3-label">Land Bank</div>
+        <div style="font-family:var(--font-b);font-size:.72rem;color:rgba(255,255,255,.45);margin-top:3px" data-i18n="s5-n3-sub">assegurado</div>
+        <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,.15)">
+          <div style="font-family:var(--font-t);font-weight:800;font-size:1.4rem;line-height:1;color:#3ecf6a">06</div>
+          <div style="font-family:var(--font-t);font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#3ecf6a;margin-top:2px" data-i18n="s5-n4-label">Em Breve</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S6 · PORTFÓLIO ARS KAMMER
+══════════════════════════════════════ -->
+<div class="slide sl" id="s6" style="overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center">
+  <img src="portfolio_skyline.png" alt="Portfólio ARS Kammer" style="width:100%;height:100%;object-fit:contain;display:block">
+</div>
+
+<!-- ══════════════════════════════════════
+  S7 · VALORIZAÇÃO · DENVER + LISBOA
+══════════════════════════════════════ -->
+<div class="slide sl" id="s7" style="overflow:hidden;background:#f5f4f1">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="val-slide-hdr">
+    <div>
+      <div class="val-slide-hdr-title">VALORIZAÇÃO DE PORTFÓLIO</div>
+      <div class="val-slide-hdr-sub">Empreendimentos entregues · Rentabilidade comprovada</div>
+    </div>
+  </div>
+  <div class="val-wrap val-wrap-2">
+
+    <!-- DENVER -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(denver_render.png);background-position:center 20%">
+        <div class="val-name">DENVER</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 550 mil</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 1,55 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 2,89 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">425,5%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2016 &nbsp;·&nbsp; Entregue em 2021</div>
+      </div>
+    </div>
+
+    <!-- LISBOA -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(lisboa_render.jpg);background-position:center 15%">
+        <div class="val-name">LISBOA</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,4 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 2,8 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 3,5 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">150,0%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2017 &nbsp;·&nbsp; Entregue em 2021</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S8 · VALORIZAÇÃO · ACQUA BLUE + RIVERSIDE + HORIZON
+══════════════════════════════════════ -->
+<div class="slide sl" id="s8" style="overflow:hidden;background:#f5f4f1">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="val-slide-hdr">
+    <div>
+      <div class="val-slide-hdr-title">VALORIZAÇÃO DE PORTFÓLIO</div>
+      <div class="val-slide-hdr-sub">Empreendimentos entregues · Rentabilidade comprovada</div>
+    </div>
+  </div>
+  <div class="val-wrap val-wrap-3">
+
+    <!-- ACQUA BLUE -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(acqua_render.jpg);background-position:center 15%">
+        <div class="val-name">ACQUA BLUE</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,5 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 4,3 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 6,00 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">300%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2020 &nbsp;·&nbsp; Entregue em 2023</div>
+      </div>
+    </div>
+
+    <!-- RIVERSIDE -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(riverside_render.jpg);background-position:center 15%">
+        <div class="val-name">RIVERSIDE</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Bal. Perequê, Porto Belo &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 450 mil</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 1,2 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 1,6 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">256%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2019 &nbsp;·&nbsp; Entregue em 2024</div>
+      </div>
+    </div>
+
+    <!-- HORIZON -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/15-destaque-horizon-externa-rf-a-03.webp);background-position:center 16%">
+        <div class="val-name">HORIZON</div>
+        <div class="val-sub">PALACE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 3,26 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Entrega</span><span class="val-val">R$ 6,3 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 7,99 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct">145%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2021 &nbsp;·&nbsp; Entregue em 2025</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S9 · VALORIZAÇÃO · SOLTÉRO + THIESEN + SERENITY
+══════════════════════════════════════ -->
+<div class="slide sl" id="s9" style="overflow:hidden;background:#f5f4f1">
+  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
+  <div class="val-slide-hdr">
+    <div>
+      <div class="val-slide-hdr-title">VALORIZAÇÃO EM ANDAMENTO</div>
+      <div class="val-slide-hdr-sub">Empreendimentos em obras · Projeção de valorização</div>
+    </div>
+  </div>
+  <div class="val-wrap val-wrap-3">
+
+    <!-- SOLTÉRO -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/17-destaque-kammer-soltero-externa-principal-r2-a-07.webp);background-position:center 18%">
+        <div class="val-name">SOLTÉRO</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Bal. Perequê, Porto Belo &middot; SC</div>
+      </div>
+      <div class="val-meta" style="border-top-color:#d07800">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,12 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 2,89 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct" style="color:#d07800">158,7%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2021 &nbsp;·&nbsp; Entrega em 2026</div>
+      </div>
+    </div>
+
+    <!-- THIESEN -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/8-destaque-t5.webp);background-position:center 18%">
+        <div class="val-name">THIESEN</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta" style="border-top-color:#d07800">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 2,18 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 4,49 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct" style="color:#d07800">106%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2021 &nbsp;·&nbsp; Entrega em 2026</div>
+      </div>
+    </div>
+
+    <!-- SERENITY -->
+    <div class="val-panel">
+      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/14-destaque-kammer-serenity-externa-rf-a-07.webp);background-position:center 20%">
+        <div class="val-name">SERENITY</div>
+        <div class="val-sub">RESIDENCE</div>
+        <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
+      </div>
+      <div class="val-meta" style="border-top-color:#d07800">
+        <div class="val-rows">
+          <div class="val-row"><span class="val-lbl">Valor Inicial</span><span class="val-val">R$ 1,55 mi</span></div>
+          <div class="val-row"><span class="val-lbl">Valor Atual</span><span class="val-val val-val-hi">R$ 2,99 mi</span></div>
+        </div>
+        <div class="val-pct-row">
+          <div class="val-pct" style="color:#d07800">93%</div>
+          <div class="val-pct-tag">Valorização</div>
+        </div>
+        <div class="val-dates">Lançamento 2022 &nbsp;·&nbsp; Entrega em 2027</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S10 · LAND BANK 2035
+══════════════════════════════════════ -->
+<div class="slide" id="s10" style="display:grid;grid-template-columns:245px 1fr;overflow:hidden">
+
+  <!-- ── ESQUERDA: texto + legenda ── -->
+  <div style="position:relative;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:84px 18px 32px 28px;background:#0d1b2e;overflow:hidden">
+    <div class="logo-wrap" style="position:absolute;top:22px;left:28px;z-index:20"><img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer"></div>
+    <div style="position:absolute;left:0;bottom:0;width:110px;height:110px;background:var(--blue);clip-path:polygon(0 100%,100% 100%,0 0);opacity:.25"></div>
+
+    <div style="font-family:var(--font-t);font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:5px" data-i18n="s10-vision">Visão Estratégica</div>
+    <div style="font-family:var(--font-t);font-size:3.8rem;font-weight:800;color:#fff;line-height:1;margin-bottom:3px">2035</div>
+    <h2 style="font-family:var(--font-t);font-size:1.35rem;font-weight:800;letter-spacing:.06em;line-height:1.15;margin-bottom:12px;color:#fff;text-transform:uppercase" data-i18n="s10-title">Land Bank Assegurado</h2>
+    <p style="font-family:var(--font-b);font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.55;margin-bottom:16px" data-i18n="s10-desc">Banco de terrenos estratégicos garante lançamentos até 2035 — segurança e crescimento sustentado.</p>
+
+    <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
+      <div style="padding:9px 12px;background:rgba(255,255,255,.07);border-left:3px solid var(--blue)">
+        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s10-pill1">Segurança</span>
+      </div>
+      <div style="padding:9px 12px;background:rgba(255,255,255,.07);border-left:3px solid var(--blue)">
+        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s10-pill2">Previsibilidade</span>
+      </div>
+      <div style="padding:9px 12px;background:rgba(255,255,255,.07);border-left:3px solid var(--blue)">
+        <span style="font-family:var(--font-t);font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff" data-i18n="s10-pill3">Valorização</span>
+      </div>
+    </div>
+
+    <!-- LEGENDA (abaixo de Valorização) -->
+    <div style="border-top:1px solid rgba(255,255,255,.12);padding-top:14px">
+      <div style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px" data-i18n="s10-legend-title">Legenda</div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:center;gap:9px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#1e8c3a;flex-shrink:0;border:2px solid rgba(255,255,255,.4)"></div>
+          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s10-leg1">Entregues</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#1565c0;flex-shrink:0;border:2px solid rgba(255,255,255,.4)"></div>
+          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s10-leg2">Em construção</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#e0242c;flex-shrink:0;border:2px solid rgba(255,255,255,.4)"></div>
+          <span style="font-family:var(--font-b);font-size:.78rem;color:rgba(255,255,255,.8)" data-i18n="s10-leg3">Futuros lançamentos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DIREITA: mapa com pinos interativos ── -->
+  <div style="position:relative;overflow:hidden;background:#020e1c">
+    <img src="mapa_empreendimentos.png" alt="Portfólio Costa Esmeralda"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block">
+
+    <!-- ══ ITAPEMA CENTRO E CANTO DA PRAIA — posições calibradas por pixel scan ══ -->
+    <div class="mpin" style="left:23%;top:16%"><div class="mpin-tip tc-green">LINS</div></div>
+    <div class="mpin" style="left:34%;top:16%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:63%;top:10%"><div class="mpin-tip tc-blue">Accendis</div></div>
+    <div class="mpin" style="left:84%;top:18%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+
+    <!-- ══ MEIA PRAIA — posições calibradas por pixel scan ══ -->
+    <div class="mpin" style="left:17%;top:42%"><div class="mpin-tip tc-blue">Thiesen</div></div>
+    <div class="mpin" style="left:74%;top:41%"><div class="mpin-tip tc-blue">Mellizo</div></div>
+    <div class="mpin" style="left:31%;top:44%"><div class="mpin-tip tc-green">Denver</div></div>
+    <div class="mpin" style="left:33%;top:45%"><div class="mpin-tip tc-blue">Serenity</div></div>
+    <div class="mpin" style="left:38%;top:44%"><div class="mpin-tip tc-green">Acqua</div></div>
+    <div class="mpin" style="left:40%;top:45%"><div class="mpin-tip tc-green">Horizon</div></div>
+    <div class="mpin" style="left:47%;top:44%"><div class="mpin-tip tc-green">Lunen</div></div>
+    <div class="mpin" style="left:49%;top:43%"><div class="mpin-tip tc-green">Cannes</div></div>
+    <div class="mpin" style="left:52%;top:44%"><div class="mpin-tip tc-green">Lisboa</div></div>
+    <div class="mpin" style="left:55%;top:42%"><div class="mpin-tip tc-green">K.Center</div></div>
+    <div class="mpin" style="left:57%;top:42%"><div class="mpin-tip tc-green">Classic</div></div>
+    <div class="mpin" style="left:59%;top:42%"><div class="mpin-tip tc-green">Hanôver</div></div>
+    <div class="mpin" style="left:60%;top:42%"><div class="mpin-tip tc-green">Kalin</div></div>
+    <div class="mpin" style="left:50%;top:47%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+
+    <!-- ══ PORTO BELO — posições calibradas por pixel scan ══ -->
+    <div class="mpin" style="left:16%;top:82%"><div class="mpin-tip tc-blue">Vieiras</div></div>
+    <div class="mpin" style="left:36%;top:79%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:51%;top:77%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:81%;top:78%"><div class="mpin-tip tc-red" data-i18n="s10-pin-soon">Em Breve</div></div>
+    <div class="mpin" style="left:85%;top:79%"><div class="mpin-tip tc-green">Riverside</div></div>
+    <div class="mpin" style="left:83%;top:79%"><div class="mpin-tip tc-blue">Soltero</div></div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  S11 · CTA FINAL
+══════════════════════════════════════ -->
+<div class="slide sd" id="s11" style="overflow:hidden">
+  <!-- Vieiras — video_cta.mp4 em loop, toca ao entrar no slide -->
+  <video id="s11-vid" muted playsinline loop
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+    <source src="video_cta.mp4" type="video/mp4">
+  </video>
+  <script>
+  (function(){
+    var vid=document.getElementById('s11-vid');
+    var slide=document.getElementById('s11');
+    new MutationObserver(function(muts){
+      muts.forEach(function(){
+        if(slide.classList.contains('active')){
+          vid.currentTime=0;
+          vid.play();
+        } else {
+          vid.pause();
+        }
+      });
+    }).observe(slide,{attributes:true,attributeFilter:['class']});
+  })();
+  </script>
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,12,26,.35) 0%,rgba(3,12,26,.08) 50%,rgba(3,12,26,.30) 100%)"></div>
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:60px;opacity:.15;pointer-events:none">
+    <path d="M0,40 C360,70 720,10 1080,45 C1260,62 1380,32 1440,40 L1440,80 L0,80Z" fill="#fff"/>
+  </svg>
+  <div class="deco slash slash-b" style="height:88px;top:52px;right:115px;opacity:.45"></div>
+  <div class="deco slash slash-g" style="height:114px;top:30px;right:84px;opacity:.32"></div>
+  <div class="deco" style="position:absolute;right:0;bottom:0;width:220px;height:220px;background:var(--blue);clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.2"></div>
+
+  <!-- ── 3 BOTÕES DE VÍDEO — rodapé direito ── -->
+  <div style="position:absolute;bottom:28px;right:40px;z-index:50;display:flex;align-items:center;gap:10px">
+    <button onclick="openConceito()"
+      style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border:1.5px solid rgba(255,255,255,.32);color:#fff;font-family:var(--font-t);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .25s,transform .2s;white-space:nowrap"
+      onmouseover="this.style.background='rgba(26,58,110,.8)';this.style.transform='translateY(-2px)'"
+      onmouseout="this.style.background='rgba(255,255,255,.12)';this.style.transform='translateY(0)'">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.2" stroke="rgba(255,255,255,.7)" stroke-width="1.3"/><polygon points="6.5,5 12,8 6.5,11" fill="#fff"/></svg>
+      VIEIRAS · CONCEITO
+    </button>
+    <button onclick="openVid('vieiras_apresentacao.mp4')"
+      style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border:1.5px solid rgba(255,255,255,.32);color:#fff;font-family:var(--font-t);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .25s,transform .2s;white-space:nowrap"
+      onmouseover="this.style.background='rgba(26,58,110,.8)';this.style.transform='translateY(-2px)'"
+      onmouseout="this.style.background='rgba(255,255,255,.12)';this.style.transform='translateY(0)'">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.2" stroke="rgba(255,255,255,.7)" stroke-width="1.3"/><polygon points="6.5,5 12,8 6.5,11" fill="#fff"/></svg>
+      VIEIRAS · APRESENTAÇÃO
+    </button>
+    <button onclick="openVid('accendis_conceito.mp4')"
+      style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border:1.5px solid rgba(255,255,255,.32);color:#fff;font-family:var(--font-t);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .25s,transform .2s;white-space:nowrap"
+      onmouseover="this.style.background='rgba(26,58,110,.8)';this.style.transform='translateY(-2px)'"
+      onmouseout="this.style.background='rgba(255,255,255,.12)';this.style.transform='translateY(0)'">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.2" stroke="rgba(255,255,255,.7)" stroke-width="1.3"/><polygon points="6.5,5 12,8 6.5,11" fill="#fff"/></svg>
+      ACCENDIS
+    </button>
+  </div>
+
+  <!-- Instagram CTA — canto inferior esquerdo -->
+  <a href="https://www.instagram.com/arskammer/" target="_blank" rel="noopener"
+     style="position:absolute;bottom:28px;left:40px;z-index:50;display:flex;align-items:center;gap:12px;text-decoration:none;padding:10px 20px 10px 14px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.22);border-radius:40px;transition:background .25s,transform .2s"
+     onmouseover="this.style.background='rgba(255,255,255,.2)';this.style.transform='translateY(-2px)'"
+     onmouseout="this.style.background='rgba(255,255,255,.1)';this.style.transform='translateY(0)'">
+    <!-- Ícone Instagram SVG -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f09433"/>
+          <stop offset="25%" stop-color="#e6683c"/>
+          <stop offset="50%" stop-color="#dc2743"/>
+          <stop offset="75%" stop-color="#cc2366"/>
+          <stop offset="100%" stop-color="#bc1888"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5.5" ry="5.5" fill="url(#ig-grad)"/>
+      <circle cx="12" cy="12" r="4.2" stroke="#fff" stroke-width="1.6" fill="none"/>
+      <circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/>
+    </svg>
+    <div>
+      <div style="font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1">Acesse nossas redes sociais</div>
+      <div style="font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:.92rem;font-weight:700;letter-spacing:.1em;color:#fff;line-height:1.2;margin-top:2px">@arskammer</div>
+    </div>
+  </a>
+  <!-- Logo canto superior esquerdo (desativado) -->
+  <div id="s11-logo-corner" class="logo-wrap" style="display:none">
+    <img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer">
+  </div>
+  <div class="inner" style="position:relative;z-index:5;justify-content:center;align-items:flex-end;padding-bottom:90px">
+    <div style="text-align:center;max-width:640px">
+      <!-- Logo + textos centrais (ocultos) -->
+      <div id="s11-header" style="display:none">
+        <img src="Logo ARS Rebrand - branco (2).png" alt="ARS Kammer" style="height:100px;object-fit:contain;margin-bottom:20px">
+        <div style="width:52px;height:3px;background:var(--blue);margin:0 auto 22px"></div>
+        <div style="font-family:var(--font-t);font-weight:800;font-size:clamp(1.8rem,4vw,3.2rem);letter-spacing:.1em;text-transform:uppercase;line-height:1;color:#fff;margin-bottom:4px">Costa Esmeralda</div>
+        <div style="font-family:var(--font-t);font-weight:300;font-size:clamp(.88rem,1.8vw,1.2rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px" data-i18n="s11-region">Litoral Catarinense</div>
+        <div style="font-family:var(--font-t);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:30px" data-i18n="s11-cities">Itapema &amp; Porto Belo · Santa Catarina · Brasil</div>
+        <div style="font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;font-family:var(--font-t);color:rgba(255,255,255,.32);margin-bottom:32px" data-i18n="s11-tag">Incorporadora de Alto Padrão</div>
+      </div>
+      <a href="https://www.arskammer.com.br/empreendimentos/" target="_blank"
+         style="display:inline-flex;align-items:center;gap:16px;padding:26px 72px;background:var(--blue);color:#fff;font-family:var(--font-t);font-weight:800;font-size:1.5rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border:3px solid var(--blue);margin-bottom:24px;cursor:pointer;box-shadow:0 8px 32px rgba(26,58,110,.55)"
+         onmouseover="this.style.background='transparent';this.style.borderColor='rgba(255,255,255,.8)';this.style.boxShadow='0 8px 40px rgba(255,255,255,.15)'"
+         onmouseout="this.style.background='#1a3a6e';this.style.borderColor='#1a3a6e';this.style.boxShadow='0 8px 32px rgba(26,58,110,.55)'"
+         data-i18n="s11-cta">&#8599;&nbsp; Conheça Nossos Projetos
+      </a>
+      <br>
+      <a href="https://www.arskammer.com.br/empreendimentos/" target="_blank"
+         style="font-family:var(--font-t);font-size:1rem;letter-spacing:.2em;color:rgba(255,255,255,.45);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:3px">www.arskammer.com.br/empreendimentos</a>
+    </div>
+  </div>
+</div>
+
+  <!-- ── MODAL DE VÍDEO ── -->
+  <div id="vid-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:9999">
+    <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay; fullscreen"
+            style="display:none;position:absolute;inset:0;width:100%;height:100%;border:none"></iframe>
+    <video id="vid-modal-player" controls playsinline
+           style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;object-fit:contain;outline:none;background:#000">
+    </video>
+    <button onclick="closeVidModal()"
+            style="position:absolute;top:16px;right:20px;z-index:10001;background:rgba(0,0,0,.7);border:1.5px solid rgba(255,255,255,.4);color:#fff;font-size:1.6rem;width:44px;height:44px;cursor:pointer;border-radius:50%;line-height:1;transition:background .2s"
+            onmouseover="this.style.background='rgba(180,0,0,.85)'"
+            onmouseout="this.style.background='rgba(0,0,0,.7)'">&#215;</button>
+  </div>
+
+  <div id="lang">
+    <button class="lbtn-flag active" id="btn-pt" onclick="changeLang('pt')" title="Português"><span class="fi fi-br fis"></span></button>
+    <button class="lbtn-flag" id="btn-en" onclick="changeLang('en')" title="English"><span class="fi fi-gb fis"></span></button>
+    <button class="lbtn-flag" id="btn-es" onclick="changeLang('es')" title="Español"><span class="fi fi-es fis"></span></button>
+  </div>
+  <div id="nav">
+    <button class="nbtn" onclick="go(-1)">&#8592;</button>
+    <div class="ndots" id="dots"></div>
+    <button class="nbtn" onclick="go(1)">&#8594;</button>
+  </div>
+  <div id="ctr">1 / 11</div>
+</div><!-- /pres -->
+
+<script>
+const TOTAL=11;let cur=1;
+function buildDots(){
+  const c=document.getElementById('dots');c.innerHTML='';
+  for(let i=1;i<=TOTAL;i++){
+    const d=document.createElement('span');
+    d.className='ndot'+(i===1?' active':'');
+    d.onclick=()=>goTo(i);
+    c.appendChild(d);
+  }
+}
+function goTo(n){
+  document.getElementById('s'+cur).classList.remove('active');
+  cur=Math.max(1,Math.min(TOTAL,n));
+  document.getElementById('s'+cur).classList.add('active');
+  document.getElementById('ctr').textContent=cur+' / '+TOTAL;
+  document.querySelectorAll('.ndot').forEach((d,i)=>d.classList.toggle('active',i+1===cur));
+}
+function go(d){goTo(cur+d);}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeVidModal();return;}
+  var modal=document.getElementById('vid-modal');
+  if(modal&&modal.style.display==='flex') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();go(1);}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();go(-1);}
+  if(e.key===' '){e.preventDefault();go(1);}
+  if(e.key==='Home') goTo(1);
+  if(e.key==='End') goTo(TOTAL);
+});
+/* nav aparece ao mover o mouse, some após 2,5 s parado */
+(function(){
+  var nav=document.getElementById('nav');
+  var t;
+  function showNav(){nav.style.opacity='1';clearTimeout(t);t=setTimeout(function(){nav.style.opacity='0';},2500);}
+  document.addEventListener('mousemove',showNav);
+})();
+/* ── MODAL DE VÍDEO ── */
+var driveIds={
+  pt:'1tEQfe7q_u9yo_Xj7K49PNoSCcfyK0ROY',
+  en:'1aYtpCAPQT_UFDADlXr-4CMno3_Hdvqsh',
+  es:'1hPl1ano8Yv4XLbcWHszsEXvuUqjoNijO',
+  accendis:'1J4hvBdnR2Ku1XzGnywZURZZ6u93sk9Wn'
+};
+function openConceito(){
+  var map={pt:'vieiras_conceito_pt.mp4',en:'vieiras_conceito_en.mp4',es:'vieiras_conceito_es.mp4'};
+  openVid(map[currentLang]||map.pt);
+}
+function openDriveVid(id){
+  var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
+  var player=document.getElementById('vid-modal-player');
+  iframe.src='https://drive.google.com/file/d/'+id+'/preview';
+  iframe.style.display='block';
+  player.style.display='none';
+  modal.style.display='flex';
+  document.getElementById('s11-vid').pause();
+}
+function openVid(src){
+  var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
+  var player=document.getElementById('vid-modal-player');
+  player.src=src;
+  player.style.display='block';
+  iframe.style.display='none';
+  modal.style.display='flex';
+  player.play();
+  document.getElementById('s11-vid').pause();
+}
+function closeVidModal(){
+  var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
+  var player=document.getElementById('vid-modal-player');
+  modal.style.display='none';
+  iframe.src='';iframe.style.display='none';
+  player.pause();player.removeAttribute('src');player.load();player.style.display='none';
+  var s11=document.getElementById('s11');
+  if(s11&&s11.classList.contains('active')) document.getElementById('s11-vid').play();
+}
+
+let sx=0;
+document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;});
+document.addEventListener('touchend',function(e){
+  const dx=e.changedTouches[0].clientX-sx;
+  if(Math.abs(dx)>50) go(dx<0?1:-1);
+});
+buildDots();
+
+// ── DICIONÁRIO I18N ──
+var i18n = {
+  pt: {
+    // S1 · CAPA
+    's1-title': 'Costa Esmeralda',
+    's1-subtitle': 'Santa Catarina · Brasil · 2026',
+    's1-region': 'Litoral Catarinense',
+    's1-cities': 'Itapema & Porto Belo',
+    's1-tag': 'Pesquisa de Mercado Imobiliário',
+    's1-years': '2024 · 2025 · 2026',
+    // S2 · DADOS DO TERRITÓRIO
+    's2-supertitle': 'Costa Esmeralda · Santa Catarina · Dados 2021–2026',
+    's2-title': 'Dados do Território',
+    // SC
+    's2-sc-gdp-label': 'Crescimento PIB 2024',
+    's2-sc-gdp-desc': 'SC cresce 56% mais rápido que o Brasil · IBGE/SEPLAN-SC 2024',
+    's2-sc-pop-label': 'Habitantes',
+    's2-sc-pop-source': 'Estimativa IBGE 2025',
+    's2-sc-rank-label': 'Maior Economia',
+    's2-sc-rank-source': 'PIB ~R$ 531 bi · 2024',
+    's2-sc-pib-label': 'Do PIB Nacional',
+    's2-sc-pib-desc': 'Participação crescente — IBGE 2022 (última apuração oficial disponível)',
+    's2-sc-sources': 'Fontes:',
+    // Itapema
+    's2-ita-pop-label': 'Habitantes permanentes',
+    's2-ita-pop-desc': 'Estimativa oficial IBGE 2025 · até 800 mil visitantes no verão',
+    's2-ita-rank-label': 'Valorização + Crescimento Econômico',
+    's2-ita-rank-source': 'm² que mais valoriza no Brasil · R$ 15.226/m² · FipeZAP Mai/2026',
+    's2-ita-beaches-title': 'Praias principais',
+    's2-ita-beach1': 'Centro de Itapema',
+    's2-ita-beach2': 'Canto da Praia',
+    's2-ita-beach3': 'Meia Praia',
+    's2-ita-beach-note': 'Meia Praia: projeto de alargamento aprovado · IMA-SC 2025',
+    's2-ita-sources': 'Fontes:',
+    // Porto Belo
+    's2-pb-pop-label': 'Habitantes permanentes',
+    's2-pb-pop-desc': 'Estimativa oficial IBGE 2025 · Alta densidade turística no verão',
+    's2-pb-rank-label': 'Cidade + cresce Brasil',
+    's2-pb-rank-source': 'Ranking IBGE · Censo 2022',
+    's2-pb-beaches-title': 'Praias principais',
+    's2-pb-beach1': 'Praia de Perequê',
+    's2-pb-beach2': 'Praia Central',
+    's2-pb-beach3': 'Praia do Araçá',
+    's2-pb-beach-note': 'Perequê: 2,5 km confirmados · Wikipedia/Prefeitura · demais: estimativa cartográfica',
+    's2-pb-sources': 'Fontes:',
+    // S3 · CONECTIVIDADE
+    's3-stitle': 'Infraestrutura & Acesso',
+    's3-title': 'Conectividade Itapema e Porto Belo',
+    's3-fln-label': '✈ FLN · Florianópolis',
+    's3-fln-name': 'Aeroporto Internacional de Florianópolis',
+    's3-fln-drive': '1h 10 min de carro',
+    's3-fln-desc': 'Voos diretos SP (GRU/CGH), Rio de Janeiro, Brasília e destinos internacionais',
+    's3-fln-intl': 'Conexões Internacionais',
+    's3-sden-label': '✈ SDEN · Porto Belo',
+    's3-sden-name': 'Aeródromo Costa Esmeralda Porto Belo',
+    's3-sden-drive': '8 min · O mais próximo',
+    's3-sden-desc': 'Aeródromo privado · Táxi aéreo e helicóptero · ANAC cód. SDEN · Pista de 1.195 m',
+    's3-nvt-label': '✈ NVT · Navegantes',
+    's3-nvt-name': 'Aeroporto Internacional de Navegantes',
+    's3-nvt-drive': '45 min de carro',
+    's3-nvt-desc': 'Voos regulares para São Paulo e outros destinos · O aeroporto comercial mais próximo da Costa Esmeralda',
+    's3-nvt-intl': 'Conexões Internacionais',
+    's3-br101-label': 'BR-101 · Acesso Rodoviário Direto',
+    's3-br101-desc': 'Conexão com Atrações: Beto Carrero World (Penha ~51 km) · Blumenau / Oktoberfest: ~75 km',
+    's3-madre-label': '⛪ Santuário · Nova Trento',
+    's3-madre-name': 'Santuário Madre Paulina',
+    's3-madre-drive': '55 min de carro',
+    's3-madre-desc': 'Nova Trento · SC · Santuário da primeira santa brasileira · Destino de fé e turismo',
+    // S4 · m² RANKING
+    's4-stitle': 'Comparativo Nacional · Preço por m²',
+    's4-title': 'Itapema lidera o Brasil no m²',
+    's4-desc': 'A Costa Esmeralda catarinense ultrapassou todas as grandes capitais brasileiras no preço médio do metro quadrado residencial.',
+    's4-above-sp': 'acima de São Paulo',
+    's4-above-rj': 'acima do Rio de Janeiro',
+    's4-price-tag': 'Preço médio m² · Itapema · FipeZAP Mai/2026',
+    's4-per-m2': '/m² residencial',
+    's4-rank1': 'Nº1 do Brasil 🏆',
+    's4-chart-title': 'Preço médio por m² · Ranking Brasil · Junho/2026',
+    's4-col-price': 'Preço / m²',
+    's4-col-var': 'Var. 12m ↑↓',
+    's4-var-legend': 'Variação do preço do m² nos últimos 12 meses (FipeZAP). <span style="color:#1a7a32;font-weight:700">Verde positivo</span> = valorização · <span style="color:#e0242c;font-weight:700">Vermelho negativo</span> = queda · "—" = sem dado publicado',
+    's4-var-legend-green': 'Verde positivo',
+    's4-var-legend-red': 'Vermelho negativo',
+    's4-source': 'Fonte: FipeZAP · Junho/2026 · Índice de 56 municípios brasileiros',
+    // S5 · ARS KAMMER
+    's5-history': 'Nossa História · Desde 2005',
+    's5-anos': 'ANOS',
+    's5-title1': '20 Anos',
+    's5-title2': 'Construindo',
+    's5-title3': 'o Futuro de SC',
+    's5-desc': 'A ARS Kammer é referência em incorporação de alto padrão na Costa Esmeralda, com duas décadas de experiência local e visão estratégica.',
+    's5-tl1-title': 'Fundação · <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2005</span>',
+    's5-tl1-desc': '— Início em Itapema, SC',
+    's5-tl2-title': 'Consolidação',
+    's5-tl2-desc': '— Expansão para Porto Belo',
+    's5-tl3-title': 'Visão <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2035</span>',
+    's5-tl3-desc': '— Land Bank assegurado',
+    's5-n1-label': 'Entregues',
+    's5-n1-sub': 'no prazo',
+    's5-n2-label': 'Em Andamento',
+    's5-n3-label': 'Land Bank',
+    's5-n3-sub': 'assegurado',
+    's5-n4-label': 'Em Breve',
+    's5-office': 'ARS Kammer · Escritório',
+    // S6 · PORTFÓLIO (gerado por JS — sem chaves)
+    // S7 · LAND BANK
+    's10-vision': 'Visão Estratégica',
+    's10-title': 'Land Bank Assegurado',
+    's10-desc': 'Banco de terrenos estratégicos garante lançamentos até 2035 — segurança e crescimento sustentado.',
+    's10-pill1': 'Segurança',
+    's10-pill2': 'Previsibilidade',
+    's10-pill3': 'Valorização',
+    's10-legend-title': 'Legenda',
+    's10-leg1': 'Entregues',
+    's10-leg2': 'Em construção',
+    's10-leg3': 'Futuros lançamentos',
+    's10-pin-soon': 'Em Breve',
+    // S8 · CTA
+    's11-region': 'Litoral Catarinense',
+    's11-cities': 'Itapema & Porto Belo · Santa Catarina · Brasil',
+    's11-tag': 'Incorporadora de Alto Padrão',
+    's11-cta': '↗ Conheça Nossos Projetos',
+  },
+  en: {
+    // S1 · COVER
+    's1-title': 'Emerald Coast',
+    's1-subtitle': 'Santa Catarina · Brazil · 2026',
+    's1-region': 'Santa Catarina Coast',
+    's1-cities': 'Itapema & Porto Belo',
+    's1-tag': 'Real Estate Market Research',
+    's1-years': '2024 · 2025 · 2026',
+    // S2 · TERRITORY
+    's2-supertitle': 'Costa Esmeralda · Santa Catarina · Data 2021–2026',
+    's2-title': 'Territory Overview',
+    // SC
+    's2-sc-gdp-label': 'GDP Growth 2024',
+    's2-sc-gdp-desc': 'SC grows 56% faster than Brazil (+3.4%) · IBGE/SEPLAN-SC 2024',
+    's2-sc-pop-label': 'Inhabitants',
+    's2-sc-pop-source': 'IBGE estimate 2025',
+    's2-sc-rank-label': 'Largest Economy',
+    's2-sc-rank-source': 'GDP ~R$ 531 bn · 2024',
+    's2-sc-pib-label': 'Of National GDP',
+    's2-sc-pib-desc': 'Growing share — IBGE 2022 (latest official data available)',
+    's2-sc-sources': 'Sources:',
+    // Itapema
+    's2-ita-pop-label': 'Permanent residents',
+    's2-ita-pop-desc': 'Official IBGE estimate 2025 · up to 800,000 visitors in summer',
+    's2-ita-rank-label': 'Appreciation + Economic Growth',
+    's2-ita-rank-source': 'Fastest appreciating m² in Brazil · R$ 15,226/m² · FipeZAP May/2026',
+    's2-ita-beaches-title': 'Main beaches',
+    's2-ita-beach1': 'Itapema City Center',
+    's2-ita-beach2': 'Canto da Praia',
+    's2-ita-beach3': 'Meia Praia',
+    's2-ita-beach-note': 'Meia Praia: beach widening project approved · IMA-SC 2025',
+    's2-ita-sources': 'Sources:',
+    // Porto Belo
+    's2-pb-pop-label': 'Permanent residents',
+    's2-pb-pop-desc': 'Official IBGE estimate 2025 · High tourist density in summer',
+    's2-pb-rank-label': 'Fastest growing city in Brazil',
+    's2-pb-rank-source': 'IBGE Ranking · Census 2022',
+    's2-pb-beaches-title': 'Main beaches',
+    's2-pb-beach1': 'Perequê Beach',
+    's2-pb-beach2': 'Central Beach',
+    's2-pb-beach3': 'Araçá Beach',
+    's2-pb-beach-note': 'Perequê: 2.5 km confirmed · Wikipedia/City Hall · others: cartographic estimate',
+    's2-pb-sources': 'Sources:',
+    // S3 · CONNECTIVITY
+    's3-stitle': 'Infrastructure & Access',
+    's3-title': 'Itapema &amp; Porto Belo Connectivity',
+    's3-fln-label': '✈ FLN · Florianópolis',
+    's3-fln-name': 'Florianópolis International Airport',
+    's3-fln-drive': '1h 10 min by car',
+    's3-fln-desc': 'Hercílio Luz · Direct flights to SP (GRU/CGH), Rio de Janeiro, Brasília and international destinations',
+    's3-fln-intl': 'International Connections',
+    's3-sden-label': '✈ SDEN · Porto Belo',
+    's3-sden-name': 'Costa Esmeralda Airstrip Porto Belo',
+    's3-sden-drive': '8 min · The closest',
+    's3-sden-desc': 'Private airstrip · Air taxi and helicopter · ANAC code SDEN · 1,195 m runway',
+    's3-nvt-label': '✈ NVT · Navegantes',
+    's3-nvt-name': 'Navegantes International Airport',
+    's3-nvt-drive': '45 min by car',
+    's3-nvt-desc': 'Regular flights to São Paulo and other destinations · The closest commercial airport to Costa Esmeralda',
+    's3-nvt-intl': 'International Connections',
+    's3-br101-label': 'BR-101 · Direct Road Access',
+    's3-br101-desc': 'Connection to Attractions: Beto Carrero World (Penha ~51 km) · Blumenau / Oktoberfest: ~75 km',
+    's3-madre-label': '⛪ Sanctuary · Nova Trento',
+    's3-madre-name': 'Madre Paulina Sanctuary',
+    's3-madre-drive': '55 min by car',
+    's3-madre-desc': 'Nova Trento · SC · Sanctuary of the first Brazilian saint · Faith and tourism destination',
+    // S4 · m² RANKING
+    's4-stitle': 'National Comparison · Price per m²',
+    's4-title': 'Itapema leads Brazil in price per m²',
+    's4-desc': 'The Santa Catarina Emerald Coast has surpassed all major Brazilian capitals in average residential price per square meter.',
+    's4-above-sp': 'above São Paulo',
+    's4-above-rj': 'above Rio de Janeiro',
+    's4-price-tag': 'Average m² price · Itapema · FipeZAP May/2026',
+    's4-per-m2': '/m² residential',
+    's4-rank1': 'Nº1 in Brazil 🏆',
+    's4-chart-title': 'Average price per m² · Brazil Ranking · June/2026',
+    's4-col-price': 'Price / m²',
+    's4-col-var': '12m Var. ↑↓',
+    's4-var-legend': '12-month price variation (FipeZAP). <span style="color:#1a7a32;font-weight:700">Positive green</span> = appreciation · <span style="color:#e0242c;font-weight:700">Negative red</span> = decline · "—" = no published data',
+    's4-var-legend-green': 'Positive green',
+    's4-var-legend-red': 'Negative red',
+    's4-source': 'Source: FipeZAP · June/2026 · Index of 56 Brazilian municipalities',
+    // S5 · ARS KAMMER
+    's5-history': 'Our History · Since 2005',
+    's5-anos': 'YEARS',
+    's5-title1': '20 Years',
+    's5-title2': 'Building',
+    's5-title3': 'the Future of SC',
+    's5-desc': 'ARS Kammer is a benchmark in high-end real estate development on the Costa Esmeralda, with two decades of local expertise and strategic vision.',
+    's5-tl1-title': 'Founded · <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2005</span>',
+    's5-tl1-desc': '— Launched in Itapema, SC',
+    's5-tl2-title': 'Consolidation',
+    's5-tl2-desc': '— Expansion to Porto Belo',
+    's5-tl3-title': 'Vision <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2035</span>',
+    's5-tl3-desc': '— Land Bank secured',
+    's5-n1-label': 'Delivered',
+    's5-n1-sub': 'on time',
+    's5-n2-label': 'Under Construction',
+    's5-n3-label': 'Land Bank',
+    's5-n3-sub': 'secured',
+    's5-n4-label': 'Coming Soon',
+    's5-office': 'ARS Kammer · Office',
+    // S6 · PORTFOLIO (JS-generated — no keys)
+    // S7 · LAND BANK
+    's10-vision': 'Strategic Vision',
+    's10-title': 'Land Bank Secured',
+    's10-desc': 'Strategic land bank ensures launches through 2035 — security and sustained growth.',
+    's10-pill1': 'Security',
+    's10-pill2': 'Predictability',
+    's10-pill3': 'Appreciation',
+    's10-legend-title': 'Legend',
+    's10-leg1': 'Delivered',
+    's10-leg2': 'Under construction',
+    's10-leg3': 'Future launches',
+    's10-pin-soon': 'Coming Soon',
+    // S8 · CTA
+    's11-region': 'Santa Catarina Coast',
+    's11-cities': 'Itapema & Porto Belo · Santa Catarina · Brazil',
+    's11-tag': 'High-End Real Estate Developer',
+    's11-cta': '↗ Discover Our Projects',
+  },
+  es: {
+    // S1 · PORTADA
+    's1-title': 'Costa Esmeralda',
+    's1-subtitle': 'Santa Catarina · Brasil · 2026',
+    's1-region': 'Litoral Catarinense',
+    's1-cities': 'Itapema & Porto Belo',
+    's1-tag': 'Investigación de Mercado Inmobiliario',
+    's1-years': '2024 · 2025 · 2026',
+    // S2 · TERRITORIO
+    's2-supertitle': 'Costa Esmeralda · Santa Catarina · Datos 2021–2026',
+    's2-title': 'Datos del Territorio',
+    // SC
+    's2-sc-gdp-label': 'Crecimiento PIB 2024',
+    's2-sc-gdp-desc': 'SC crece 56% más rápido que Brasil (+3,4%) · IBGE/SEPLAN-SC 2024',
+    's2-sc-pop-label': 'Habitantes',
+    's2-sc-pop-source': 'Estimación IBGE 2025',
+    's2-sc-rank-label': 'Mayor Economía',
+    's2-sc-rank-source': 'PIB ~R$ 531 mil mill. · 2024',
+    's2-sc-pib-label': 'Del PIB Nacional',
+    's2-sc-pib-desc': 'Participación creciente — IBGE 2022 (último dato oficial disponible)',
+    's2-sc-sources': 'Fuentes:',
+    // Itapema
+    's2-ita-pop-label': 'Residentes permanentes',
+    's2-ita-pop-desc': 'Estimación oficial IBGE 2025 · hasta 800.000 visitantes en verano',
+    's2-ita-rank-label': 'Valorización + Crecimiento Económico',
+    's2-ita-rank-source': 'm² que más valoriza en Brasil · R$ 15.226/m² · FipeZAP May/2026',
+    's2-ita-beaches-title': 'Playas principales',
+    's2-ita-beach1': 'Centro de Itapema',
+    's2-ita-beach2': 'Canto da Praia',
+    's2-ita-beach3': 'Meia Praia',
+    's2-ita-beach-note': 'Meia Praia: proyecto de ampliación aprobado · IMA-SC 2025',
+    's2-ita-sources': 'Fuentes:',
+    // Porto Belo
+    's2-pb-pop-label': 'Residentes permanentes',
+    's2-pb-pop-desc': 'Estimación oficial IBGE 2025 · Alta densidad turística en verano',
+    's2-pb-rank-label': 'Ciudad con más crecimiento en Brasil',
+    's2-pb-rank-source': 'Ranking IBGE · Censo 2022',
+    's2-pb-beaches-title': 'Playas principales',
+    's2-pb-beach1': 'Playa de Perequê',
+    's2-pb-beach2': 'Playa Central',
+    's2-pb-beach3': 'Playa del Araçá',
+    's2-pb-beach-note': 'Perequê: 2,5 km confirmados · Wikipedia/Municipio · demás: estimación cartográfica',
+    's2-pb-sources': 'Fuentes:',
+    // S3 · CONECTIVIDAD
+    's3-stitle': 'Infraestructura y Acceso',
+    's3-title': 'Conectividad Itapema y Porto Belo',
+    's3-fln-label': '✈ FLN · Florianópolis',
+    's3-fln-name': 'Aeropuerto Internacional de Florianópolis',
+    's3-fln-drive': '1h 10 min en auto',
+    's3-fln-desc': 'Hercílio Luz · Vuelos directos a SP (GRU/CGH), Río de Janeiro, Brasília y destinos internacionales',
+    's3-fln-intl': 'Conexiones Internacionales',
+    's3-sden-label': '✈ SDEN · Porto Belo',
+    's3-sden-name': 'Aeródromo Costa Esmeralda Porto Belo',
+    's3-sden-drive': '8 min · El más cercano',
+    's3-sden-desc': 'Aeródromo privado · Taxi aéreo y helicóptero · ANAC cód. SDEN · Pista de 1.195 m',
+    's3-nvt-label': '✈ NVT · Navegantes',
+    's3-nvt-name': 'Aeropuerto Internacional de Navegantes',
+    's3-nvt-drive': '45 min en auto',
+    's3-nvt-desc': 'Vuelos regulares a São Paulo y otros destinos · El aeropuerto comercial más cercano a Costa Esmeralda',
+    's3-nvt-intl': 'Conexiones Internacionales',
+    's3-br101-label': 'BR-101 · Acceso Vial Directo',
+    's3-br101-desc': 'Conexión con Atracciones: Beto Carrero World (Penha ~51 km) · Blumenau / Oktoberfest: ~75 km',
+    's3-madre-label': '⛪ Santuario · Nova Trento',
+    's3-madre-name': 'Santuario Madre Paulina',
+    's3-madre-drive': '55 min en auto',
+    's3-madre-desc': 'Nova Trento · SC · Santuario de la primera santa brasileña · Destino de fe y turismo',
+    // S4 · m² RANKING
+    's4-stitle': 'Comparativo Nacional · Precio por m²',
+    's4-title': 'Itapema lidera Brasil en precio por m²',
+    's4-desc': 'La Costa Esmeralda catarinense ha superado a todas las grandes capitales brasileñas en el precio promedio del metro cuadrado residencial.',
+    's4-above-sp': 'por encima de São Paulo',
+    's4-above-rj': 'por encima de Río de Janeiro',
+    's4-price-tag': 'Precio promedio m² · Itapema · FipeZAP May/2026',
+    's4-per-m2': '/m² residencial',
+    's4-rank1': 'Nº1 de Brasil 🏆',
+    's4-chart-title': 'Precio promedio por m² · Ranking Brasil · Junio/2026',
+    's4-col-price': 'Precio / m²',
+    's4-col-var': 'Var. 12m ↑↓',
+    's4-var-legend': 'Variación del precio del m² en los últimos 12 meses (FipeZAP). <span style="color:#1a7a32;font-weight:700">Verde positivo</span> = valorización · <span style="color:#e0242c;font-weight:700">Rojo negativo</span> = caída · "—" = sin dato publicado',
+    's4-var-legend-green': 'Verde positivo',
+    's4-var-legend-red': 'Rojo negativo',
+    's4-source': 'Fuente: FipeZAP · Junio/2026 · Índice de 56 municipios brasileños',
+    // S5 · ARS KAMMER
+    's5-history': 'Nuestra Historia · Desde 2005',
+    's5-anos': 'AÑOS',
+    's5-title1': '20 Años',
+    's5-title2': 'Construyendo',
+    's5-title3': 'el Futuro de SC',
+    's5-desc': 'ARS Kammer es referencia en desarrollo inmobiliario de alto estándar en Costa Esmeralda, con dos décadas de experiencia local y visión estratégica.',
+    's5-tl1-title': 'Fundación · <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2005</span>',
+    's5-tl1-desc': '— Inicio en Itapema, SC',
+    's5-tl2-title': 'Consolidación',
+    's5-tl2-desc': '— Expansión a Porto Belo',
+    's5-tl3-title': 'Visión <span style="font-size:1.4rem;font-weight:800;letter-spacing:.04em">2035</span>',
+    's5-tl3-desc': '— Land Bank asegurado',
+    's5-n1-label': 'Entregados',
+    's5-n1-sub': 'a tiempo',
+    's5-n2-label': 'En Construcción',
+    's5-n3-label': 'Land Bank',
+    's5-n3-sub': 'asegurado',
+    's5-n4-label': 'Próximamente',
+    's5-office': 'ARS Kammer · Oficina',
+    // S6 · PORTAFOLIO (generado por JS — sin claves)
+    // S7 · LAND BANK
+    's10-vision': 'Visión Estratégica',
+    's10-title': 'Land Bank Asegurado',
+    's10-desc': 'Banco de terrenos estratégicos garantiza lanzamientos hasta 2035 — seguridad y crecimiento sostenido.',
+    's10-pill1': 'Seguridad',
+    's10-pill2': 'Previsibilidad',
+    's10-pill3': 'Valorización',
+    's10-legend-title': 'Leyenda',
+    's10-leg1': 'Entregados',
+    's10-leg2': 'En construcción',
+    's10-leg3': 'Futuros lanzamientos',
+    's10-pin-soon': 'Próximamente',
+    // S8 · CTA
+    's11-region': 'Litoral Catarinense',
+    's11-cities': 'Itapema & Porto Belo · Santa Catarina · Brasil',
+    's11-tag': 'Desarrolladora Inmobiliaria de Alto Estándar',
+    's11-cta': '↗ Conoce Nuestros Proyectos',
+  }
+};
+
+var currentLang = 'pt';
+
+// Seletor de idioma — recebe o código direto ('pt','en','es')
+function changeLang(lang){
+  if(!i18n[lang]) return;
+  currentLang = lang;
+  // destaca botão ativo
+  ['pt','en','es'].forEach(function(l){
+    var b = document.getElementById('btn-'+l);
+    if(b) b.classList.toggle('active', l===lang);
+  });
+  // troca todos os textos
+  var dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.documentElement.lang = lang==='pt'?'pt-BR':lang;
+}
+// manter compatibilidade com código legado
+function setLang(btn){ changeLang(btn.getAttribute('data-lang')||'pt'); }
+
+// Listeners adicionais como backup
+document.getElementById('btn-pt').addEventListener('click',function(){changeLang('pt');});
+document.getElementById('btn-en').addEventListener('click',function(){changeLang('en');});
+document.getElementById('btn-es').addEventListener('click',function(){changeLang('es');});
+
+// Pinos interativos Land Bank
+function fecharTodosPinos(){
+  document.querySelectorAll('.mpin-tip').forEach(function(t){ t.classList.remove('show'); });
+}
+document.querySelectorAll('.mpin').forEach(function(pin){
+  var tip = pin.querySelector('.mpin-tip');
+  // Click: abre/fecha
+  pin.addEventListener('click', function(e){
+    e.stopPropagation();
+    var aberto = tip.classList.contains('show');
+    fecharTodosPinos();
+    if(!aberto) tip.classList.add('show');
+  });
+  // Hover também funciona
+  pin.addEventListener('mouseenter', function(){ tip.classList.add('show'); });
+  pin.addEventListener('mouseleave', function(){ tip.classList.remove('show'); });
+});
+// Clica fora = fecha tudo
+document.addEventListener('click', fecharTodosPinos);
+
+// ── S1 · VÍDEO DA CAPA MAIS LENTO (loop mais suave) ──
+(function(){
+  var s1vid = document.querySelector('#s1 video');
+  if (!s1vid) return;
+  s1vid.playbackRate = 0.78;
+})();
+
+// ── S7 · OCULTAR HEADER QUANDO VÍDEO TOCA ──
+(function(){
+  var s7 = document.getElementById('s11');
+  var s7vid = s7 ? s7.querySelector('video') : null;
+  var s7header = document.getElementById('s11-header');
+  var s7corner = document.getElementById('s11-logo-corner');
+  if (!s7vid || !s7header || !s7corner) return;
+  var s7timer = null;
+  function hideHeader() {
+    s7header.style.opacity = '0';
+    s7header.style.transform = 'translateY(-8px)';
+    s7header.style.pointerEvents = 'none';
+    s7corner.style.opacity = '1';
+    s7corner.style.pointerEvents = 'all';
+  }
+  function showHeader() {
+    s7header.style.opacity = '1';
+    s7header.style.transform = 'translateY(0)';
+    s7header.style.pointerEvents = 'auto';
+    s7corner.style.opacity = '0';
+    s7corner.style.pointerEvents = 'none';
+  }
+  s7vid.addEventListener('play', function(){
+    clearTimeout(s7timer);
+    s7timer = setTimeout(hideHeader, 1800);
+  });
+  // Resetar quando navegar para outro slide
+  var origGoTo = window.goTo;
+  window.goTo = function(n){
+    if (n !== 7) showHeader();
+    if (origGoTo) origGoTo(n);
+  };
+})();
+
+// ── RESPONSIVIDADE — imagem preenche tela toda, conteúdo escala proporcional ──
+function fitContent() {
+  var scale = Math.min(window.innerWidth / 1440, window.innerHeight / 900);
+  document.documentElement.style.setProperty('--vscale', scale);
+  document.documentElement.style.fontSize = (scale * 16) + 'px';
+}
+window.addEventListener('resize', fitContent);
+fitContent();
+</script>
+</body>
+</html>
