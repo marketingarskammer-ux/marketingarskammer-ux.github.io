@@ -1124,7 +1124,7 @@ p,span,div{font-family:var(--font-b)}
       <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.2" stroke="rgba(255,255,255,.7)" stroke-width="1.3"/><polygon points="6.5,5 12,8 6.5,11" fill="#fff"/></svg>
       VIEIRAS · APRESENTAÇÃO
     </button>
-    <button onclick="openVid('accendis_conceito.mp4')"
+    <button onclick="openDriveVid(driveIds.accendis)"
       style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border:1.5px solid rgba(255,255,255,.32);color:#fff;font-family:var(--font-t);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .25s,transform .2s;white-space:nowrap"
       onmouseover="this.style.background='rgba(26,58,110,.8)';this.style.transform='translateY(-2px)'"
       onmouseout="this.style.background='rgba(255,255,255,.12)';this.style.transform='translateY(0)'">
@@ -1189,8 +1189,10 @@ p,span,div{font-family:var(--font-b)}
   <!-- ── MODAL DE VÍDEO ── -->
   <div id="vid-modal" onclick="if(event.target===this)closeVidModal()"
        style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;align-items:center;justify-content:center;flex-direction:column">
+    <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay"
+            style="display:none;width:92vw;height:86vh;border:none;background:#000;box-shadow:0 0 60px rgba(0,0,0,.8)"></iframe>
     <video id="vid-modal-player" controls playsinline
-           style="max-width:92vw;max-height:86vh;outline:none;background:#000;box-shadow:0 0 60px rgba(0,0,0,.8)">
+           style="display:none;max-width:92vw;max-height:86vh;outline:none;background:#000;box-shadow:0 0 60px rgba(0,0,0,.8)">
     </video>
     <button onclick="closeVidModal()"
             style="position:absolute;top:18px;right:26px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.6rem;width:44px;height:44px;cursor:pointer;border-radius:50%;line-height:1;transition:background .2s"
@@ -1248,25 +1250,43 @@ document.addEventListener('keydown',function(e){
   document.addEventListener('mousemove',showNav);
 })();
 /* ── MODAL DE VÍDEO ── */
+var driveIds={
+  pt:'1tEQfe7q_u9yo_Xj7K49PNoSCcfyK0ROY',
+  en:'1aYtpCAPQT_UFDADlXr-4CMno3_Hdvqsh',
+  es:'1hPl1ano8Yv4XLbcWHszsEXvuUqjoNijO',
+  accendis:'1J4hvBdnR2Ku1XzGnywZURZZ6u93sk9Wn'
+};
 function openConceito(){
-  var map={pt:'vieiras_conceito_pt.mp4',en:'vieiras_conceito_en.mp4',es:'vieiras_conceito_es.mp4'};
-  openVid(map[currentLang]||map.pt);
+  openDriveVid(driveIds[currentLang]||driveIds.pt);
+}
+function openDriveVid(id){
+  var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
+  var player=document.getElementById('vid-modal-player');
+  iframe.src='https://drive.google.com/file/d/'+id+'/preview';
+  iframe.style.display='block';
+  player.style.display='none';
+  modal.style.display='flex';
+  document.getElementById('s11-vid').pause();
 }
 function openVid(src){
   var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
   var player=document.getElementById('vid-modal-player');
   player.src=src;
+  player.style.display='block';
+  iframe.style.display='none';
   modal.style.display='flex';
   player.play();
   document.getElementById('s11-vid').pause();
 }
 function closeVidModal(){
   var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
   var player=document.getElementById('vid-modal-player');
   modal.style.display='none';
-  player.pause();
-  player.removeAttribute('src');
-  player.load();
+  iframe.src='';iframe.style.display='none';
+  player.pause();player.removeAttribute('src');player.load();player.style.display='none';
   var s11=document.getElementById('s11');
   if(s11&&s11.classList.contains('active')) document.getElementById('s11-vid').play();
 }
