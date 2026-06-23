@@ -79,7 +79,7 @@ p,span,div{font-family:var(--font-b)}
 .fontes a:hover{text-decoration:underline}
 
 /* NAV */
-#nav{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:200}
+#nav{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:200;opacity:0;transition:opacity .4s}
 .nbtn{width:34px;height:34px;border:1.5px solid rgba(255,255,255,.35);background:rgba(20,20,20,.65);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;backdrop-filter:blur(8px)}
 .nbtn:hover{background:var(--blue);border-color:var(--blue)}
 .ndots{display:flex;gap:5px;align-items:center}
@@ -109,24 +109,24 @@ p,span,div{font-family:var(--font-b)}
 .val-wrap-3{grid-template-columns:1fr 1fr 1fr}
 .val-panel{display:flex;flex-direction:column;height:100%;overflow:hidden;border-radius:3px}
 .val-ph{flex:1;position:relative;background-size:cover;background-position:center 18%;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 22px 13px;min-height:0}
-.val-ph::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,.0) 35%,rgba(0,0,0,.65) 100%)}
-.val-name{font-family:var(--font-t);font-size:clamp(1.4rem,2vw,2.6rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;position:relative;z-index:2;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.5)}
-.val-sub{font-family:var(--font-t);font-size:clamp(.5rem,.7vw,.82rem);font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);position:relative;z-index:2;margin:1px 0 6px}
-.val-loc{font-family:var(--font-b);font-size:.66rem;color:rgba(255,255,255,.78);position:relative;z-index:2}
-.val-meta{background:#fff;padding:11px 20px 10px;flex-shrink:0;border-top:4px solid var(--blue)}
-.val-rows{display:flex;flex-direction:column;gap:1px;margin-bottom:5px}
-.val-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.val-ph::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,.0) 30%,rgba(0,0,0,.78) 100%)}
+.val-name{font-family:var(--font-t);font-size:clamp(2rem,3vw,3.6rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;position:relative;z-index:2;line-height:1;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.val-sub{font-family:var(--font-t);font-size:clamp(.8rem,1.1vw,1.3rem);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#fff;position:relative;z-index:2;margin:2px 0 8px;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.val-loc{font-family:var(--font-b);font-size:.88rem;color:#fff;position:relative;z-index:2;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.val-meta{background:#fff;padding:9px 18px 8px;flex-shrink:0;border-top:4px solid var(--blue)}
+.val-rows{display:flex;flex-direction:column;gap:1px;margin-bottom:4px}
+.val-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.07)}
 .val-row:last-child{border-bottom:none}
-.val-lbl{font-family:var(--font-b);font-size:.62rem;color:#999}
-.val-val{font-family:var(--font-t);font-size:.84rem;font-weight:700;color:var(--dark)}
+.val-lbl{font-family:var(--font-b);font-size:.88rem;color:#222;font-weight:700}
+.val-val{font-family:var(--font-t);font-size:1.05rem;font-weight:700;color:var(--dark)}
 .val-val-hi{color:var(--blue)}
-.val-pct-row{display:flex;align-items:baseline;gap:8px;margin:4px 0 2px}
-.val-pct{font-family:var(--font-t);font-size:clamp(1.6rem,2.6vw,2.8rem);font-weight:800;color:var(--blue);line-height:1}
-.val-pct-tag{font-family:var(--font-t);font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#aaa}
-.val-dates{font-family:var(--font-t);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-top:3px}
+.val-pct-row{display:flex;align-items:baseline;gap:10px;margin:3px 0 2px}
+.val-pct{font-family:var(--font-t);font-size:clamp(2.2rem,3.6vw,4rem);font-weight:800;color:var(--blue);line-height:1}
+.val-pct-tag{font-family:var(--font-t);font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#444}
+.val-dates{font-family:var(--font-t);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:#444;margin-top:2px}
 .val-slide-hdr{position:absolute;top:0;left:220px;right:0;height:78px;display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none}
-.val-slide-hdr-title{font-family:var(--font-t);font-size:clamp(1rem,1.6vw,1.45rem);font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:var(--dark);text-align:center}
-.val-slide-hdr-sub{font-family:var(--font-t);font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:#bbb;margin-top:2px;text-align:center}
+.val-slide-hdr-title{font-family:var(--font-t);font-size:clamp(1.2rem,2vw,1.9rem);font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:var(--dark);text-align:center}
+.val-slide-hdr-sub{font-family:var(--font-t);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#666;margin-top:2px;text-align:center}
 /* ── PORTFOLIO TIMELINE S6 ── */
 @keyframes ptl-hint{0%,100%{opacity:.3}50%{opacity:.9}}
 #ptl-scroll::-webkit-scrollbar{display:none}
@@ -771,127 +771,10 @@ p,span,div{font-family:var(--font-b)}
 </div>
 
 <!-- ══════════════════════════════════════
-  S6 · PORTFÓLIO ARS KAMMER — LINHA DO TEMPO
+  S6 · PORTFÓLIO ARS KAMMER
 ══════════════════════════════════════ -->
-<div class="slide sl" id="s6" style="overflow:hidden;background:#f5f4f1">
-
-  <div class="logo-wrap"><img src="Logo ARS Rebrand - preto (4).png" alt="ARS Kammer"></div>
-
-  <div style="position:absolute;top:24px;left:0;right:0;text-align:center;z-index:10;pointer-events:none">
-    <div style="font-family:var(--font-t);font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:700;letter-spacing:.48em;text-transform:uppercase;color:var(--dark)">PORTFÓLIO</div>
-    <div style="font-family:var(--font-t);font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:#bbb;margin-top:2px">20 anos · 2005 — 2032 · 18 empreendimentos</div>
-  </div>
-
-  <div id="ptl-outer" style="position:absolute;left:0;right:0;top:108px;bottom:44px;overflow:hidden">
-    <div id="ptl-scroll" style="width:100%;height:100%;overflow-x:auto;overflow-y:hidden;cursor:grab;user-select:none;-webkit-user-select:none;scrollbar-width:none">
-      <div id="ptl-track" style="display:flex;align-items:flex-start;height:100%;padding:0 72px;position:relative;min-width:max-content;gap:2px">
-        <div id="ptl-line" style="position:absolute;left:0;right:0;top:161px;height:1px;background:rgba(0,0,0,.11);pointer-events:none;z-index:1"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="ptl-tip" style="display:none;position:absolute;z-index:300;width:210px;pointer-events:none"></div>
-
-  <div style="position:absolute;bottom:12px;left:60px;display:flex;gap:20px;align-items:center;z-index:10">
-    <div style="display:flex;align-items:center;gap:6px">
-      <div style="width:7px;height:7px;border-radius:50%;background:var(--blue)"></div>
-      <span style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#bbb">Entregue</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:6px">
-      <div style="width:7px;height:7px;border-radius:50%;background:#d07800"></div>
-      <span style="font-family:var(--font-t);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#bbb">Em Obras</span>
-    </div>
-  </div>
-
-  <div style="position:absolute;bottom:13px;right:60px;display:flex;align-items:center;gap:8px;font-family:var(--font-t);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#ccc;animation:ptl-hint 2.8s ease-in-out infinite;z-index:10">
-    <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M1 5h18M13.5 1.5L18 5l-4.5 3.5" stroke="#c0bbb5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Arraste
-  </div>
-
-  <script>
-  (function(){
-    var B='https://www.arskammer.com.br/';
-    var DEVS=[
-      {n:'Classic',f:'Classic Residence',y:2012,c:'Itapema',s:'e',h:118,pos:'center 25%',img:'img/empreendimentos/listagem/25-listagem-c1.webp',u:'empreendimento/classic-residence/25/'},
-      {n:'Kammer',f:'Kammer Center',y:2013,c:'Itapema',s:'e',h:134,pos:'center 20%',img:'img/empreendimentos/listagem/28-listagem-k1.webp',u:'empreendimento/kammer-center/28/'},
-      {n:'Cannes',f:'Cannes Residence',y:2015,c:'Itapema',s:'e',h:152,pos:'center 28%',img:'img/empreendimentos/listagem/24-listagem-97c238b125b18af4f9a473af40fd7158cannes-quebra.jpg',u:'empreendimento/cannes-residence/24/'},
-      {n:'Lunen',f:'Lunen Residence',y:2016,c:'Itapema',s:'e',h:164,pos:'center 18%',img:'img/empreendimentos/listagem/27-listagem-02.webp',u:'empreendimento/lunen-residence/27/'},
-      {n:'Linz',f:'Linz Residence',y:2017,c:'Itapema',s:'e',h:180,pos:'center 32%',img:'img/empreendimentos/listagem/26-listagem-linz-sacada-a-01.webp',u:'empreendimento/linz-residence/26/'},
-      {n:'Hanôver',f:'Hanôver Residence',y:2018,c:'Itapema',s:'e',h:210,pos:'center 18%',img:'img/empreendimentos/listagem/23-listagem-hanover-2.webp',u:'empreendimento/hanover-residence/23/'},
-      {n:'Kalin',f:'Kalin Residence',y:2019,c:'Itapema',s:'e',h:228,pos:'center 12%',img:'img/empreendimentos/listagem/22-listagem-d09cef3bd8594d211ee334c75b082d67topkalin.jpg',u:'empreendimento/kalin-residence/22/'},
-      {n:'Lisboa',f:'Lisboa Residence',y:2021,c:'Itapema',s:'e',h:255,pos:'center 22%',img:'img/empreendimentos/listagem/21-listagem-d38f5a96fb1c0c8879515ce53ccfce4blisboa-externa-detalhes.jpg',u:'empreendimento/lisboa-residence/21/'},
-      {n:'Denver',f:'Denver Residence',y:2021,c:'Itapema',s:'e',h:244,pos:'center 18%',img:'img/empreendimentos/listagem/20-listagem-a1e175354ad6e2203383cc76dc814cbbdenver-intro-web1.jpg',u:'empreendimento/denver-residence/20/'},
-      {n:'Acqua Blue',f:'Acqua Blue Residence',y:2023,c:'Itapema',s:'e',h:338,pos:'center 18%',img:'img/empreendimentos/destaque/19-destaque-rua-269-externa-aerea-avenida-a-02.webp',tip:'img/empreendimentos/listagem/19-listagem-d28f6e385321fd0dfbf83403aa62454eacqua-intro-web.jpg',u:'empreendimento/acqua-blue-residence/19/'},
-      {n:'Riverside',f:'Riverside Residence',y:2024,c:'Itapema',s:'e',h:308,pos:'center 18%',img:'img/empreendimentos/listagem/18-listagem-ca502dbec5345b745b8f73a86f9fee2ccapariver.jpg',u:'empreendimento/riverside-residence/18/'},
-      {n:'Horizon',f:'Horizon Palace',y:2025,c:'Itapema',s:'e',h:282,pos:'center 16%',img:'img/empreendimentos/listagem/15-listagem-d012f0f6c146792f076bc36f47e346d9horizon-intro-web.jpg',u:'empreendimento/horizon-palace/15/'},
-      {n:'Soltéro',f:'Soltéro Residence',y:2026,c:'Itapema',s:'e',h:265,pos:'center 20%',img:'img/empreendimentos/listagem/17-listagem-7618e8e07e8d8c842a219229c8feeac6123123.jpg',u:'empreendimento/soltero-residence/17/'},
-      {n:'Thiesen',f:'Thiesen Residence',y:2026,c:'Itapema',s:'e',h:250,pos:'center 18%',img:'img/empreendimentos/listagem/8-listagem-fc42c6770db36fa9ee66bd0859fdf8e5thiesencapa.jpg',u:'empreendimento/thiesen-residence/8/'},
-      {n:'Serenity',f:'Serenity Residence',y:2027,c:'Itapema',s:'o',h:268,pos:'center 22%',img:'img/empreendimentos/listagem/14-listagem-12124ee91044f303bd0b37ae3c89463f3233.webp',u:'empreendimento/serenity-residence/14/'},
-      {n:'Mellizo',f:'Mellizo Residence',y:2028,c:'Itapema',s:'o',h:252,pos:'center 18%',img:'img/empreendimentos/listagem/16-listagem-16topo20d059b1c34099b0af76a78d32510e5bbgdesktop2158x1798.webp',u:'empreendimento/mellizo-residence/16/'},
-      {n:'Accendis',f:'Accendis Home Living',y:2031,c:'Itapema',s:'o',h:238,pos:'center 20%',img:'img/empreendimentos/listagem/10-listagem-a35c441cb69bb224067ccbae1b17fe6cbackgrounddesktop.jpg',u:'empreendimento/accendis-home-living/10/'},
-      {n:'Vieiras',f:'Vieiras',y:2032,c:'Porto Belo',s:'o',h:224,pos:'center 38%',wdev:155,wbldg:143,img:'img/empreendimentos/listagem/31-listagem-3-ars-vie-fotomontagem-vista-de-portobelo-ef-1.webp',u:'empreendimento/vieiras/31/'}
-    ];
-    var track=document.getElementById('ptl-track');
-    var scroll=document.getElementById('ptl-scroll');
-    var tip=document.getElementById('ptl-tip');
-    var slide=document.getElementById('s6');
-    var outer=document.getElementById('ptl-outer');
-    DEVS.forEach(function(d){
-      var isO=d.s==='o';
-      var div=document.createElement('div');
-      div.className='ptl-dev'+(isO?' ptl-future':'');
-      if(d.wdev)div.style.width=d.wdev+'px';
-      var badge=isO
-        ?'<div class="ptl-obras-badge">Em Obras</div>'
-        :'<div class="ptl-entregue-badge">Entregue</div>';
-      div.innerHTML=
-        '<div class="ptl-top">'+
-          '<div class="ptl-name">'+d.n+'</div>'+
-          '<div class="ptl-city">'+d.c+'</div>'+
-          '<div class="'+(isO?'ptl-dot-o':'ptl-dot-e')+'"></div>'+
-        '</div>'+
-        '<div class="ptl-bot">'+
-          '<div class="ptl-year">'+d.y+'</div>'+
-          '<div class="ptl-bwrap" style="width:'+(d.wbldg||80)+'px">'+
-            '<div class="ptl-bldg" style="height:'+d.h+'px;background-image:url('+B+d.img+');background-position:'+d.pos+'">'+
-              badge+
-            '</div>'+
-          '</div>'+
-        '</div>';
-      div.addEventListener('mouseenter',function(){
-        var sr=div.getBoundingClientRect();
-        var pr=slide.getBoundingClientRect();
-        var ot=outer.getBoundingClientRect().top-pr.top;
-        var tw=210,bx=(sr.left-pr.left)+sr.width/2-tw/2;
-        bx=Math.max(8,Math.min(bx,pr.width-tw-8));
-        var by=ot+161+18;
-        var sl=isO?'ptl-st-o':'ptl-st-e';
-        var slTx=isO?'Em Obras':'Entregue';
-        tip.innerHTML='<div class="ptl-card">'+
-          '<div class="ptl-card-acc '+sl+'"></div>'+
-          '<img class="ptl-card-img" src="'+B+(d.tip||d.img)+'" alt="'+d.f+'" loading="lazy">'+
-          '<div class="ptl-card-body">'+
-            '<div class="ptl-card-name">'+d.f+'</div>'+
-            '<div class="ptl-card-info">'+d.c+', SC &middot; '+d.y+'</div>'+
-            '<div class="ptl-card-badge '+sl+'">'+slTx+'</div>'+
-            '<a class="ptl-card-cta" href="'+B+d.u+'" target="_blank" rel="noopener">Ver empreendimento &#8599;</a>'+
-          '</div>'+
-        '</div>';
-        tip.style.cssText='display:block;position:absolute;z-index:300;width:210px;left:'+bx+'px;top:'+by+'px;pointer-events:all';
-      });
-      div.addEventListener('mouseleave',function(e){
-        if(!tip.contains(e.relatedTarget))tip.style.display='none';
-      });
-      tip.addEventListener('mouseleave',function(){tip.style.display='none';});
-      div.addEventListener('click',function(){window.open(B+d.u,'_blank','noopener');});
-      track.appendChild(div);
-    });
-    var isDown=false,startX=0,scrollL=0;
-    scroll.addEventListener('mousedown',function(e){isDown=true;startX=e.pageX-scroll.offsetLeft;scrollL=scroll.scrollLeft;scroll.classList.add('ptl-grab');e.preventDefault();});
-    document.addEventListener('mouseup',function(){isDown=false;scroll.classList.remove('ptl-grab');});
-    scroll.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();scroll.scrollLeft=scrollL-(e.pageX-scroll.offsetLeft-startX)*1.5;});
-  })();
-  </script>
+<div class="slide sl" id="s6" style="overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center">
+  <img src="portfolio_skyline.png" alt="Portfólio ARS Kammer" style="width:100%;height:100%;object-fit:contain;display:block">
 </div>
 
 <!-- ══════════════════════════════════════
@@ -909,7 +792,7 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- DENVER -->
     <div class="val-panel">
-      <div class="val-ph" style="background-image:url(denver.png);background-position:center 30%">
+      <div class="val-ph" style="background-image:url(denver_render.png);background-position:center 20%">
         <div class="val-name">DENVER</div>
         <div class="val-sub">RESIDENCE</div>
         <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
@@ -930,7 +813,7 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- LISBOA -->
     <div class="val-panel">
-      <div class="val-ph" style="background-image:url(lisboa.png);background-position:left 25%">
+      <div class="val-ph" style="background-image:url(lisboa_render.jpg);background-position:center 15%">
         <div class="val-name">LISBOA</div>
         <div class="val-sub">RESIDENCE</div>
         <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
@@ -967,7 +850,7 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- ACQUA BLUE -->
     <div class="val-panel">
-      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/19-destaque-rua-269-externa-aerea-avenida-a-02.webp);background-position:95% 18%">
+      <div class="val-ph" style="background-image:url(acqua_render.jpg);background-position:center 15%">
         <div class="val-name">ACQUA BLUE</div>
         <div class="val-sub">RESIDENCE</div>
         <div class="val-loc">&#x1F4CD; Meia Praia, Itapema &middot; SC</div>
@@ -988,7 +871,7 @@ p,span,div{font-family:var(--font-b)}
 
     <!-- RIVERSIDE -->
     <div class="val-panel">
-      <div class="val-ph" style="background-image:url(https://www.arskammer.com.br/img/empreendimentos/destaque/18-destaque-dsc09971.webp);background-position:center 18%">
+      <div class="val-ph" style="background-image:url(riverside_render.jpg);background-position:center 15%">
         <div class="val-name">RIVERSIDE</div>
         <div class="val-sub">RESIDENCE</div>
         <div class="val-loc">&#x1F4CD; Bal. Perequê, Porto Belo &middot; SC</div>
@@ -1196,69 +1079,25 @@ p,span,div{font-family:var(--font-b)}
   S11 · CTA FINAL
 ══════════════════════════════════════ -->
 <div class="slide sd" id="s11" style="overflow:hidden">
-  <!-- YouTube showroom — fullscreen sem controles -->
-  <div id="s11-yt-wrap" style="position:absolute;inset:0;overflow:hidden;z-index:1;pointer-events:none;background:#030c1a"></div>
-  <!-- video_cta.mp4 — toca após o YouTube terminar -->
+  <!-- Vieiras — video_cta.mp4 em loop, toca ao entrar no slide -->
   <video id="s11-vid" muted playsinline loop
-         style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.05) saturate(1.7) contrast(1.12);z-index:0">
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
     <source src="video_cta.mp4" type="video/mp4">
   </video>
   <script>
-  /* define callback ANTES de carregar o script da API */
-  var s11ytPlayer=null;
-  function s11fallback(){
-    var wrap=document.getElementById('s11-yt-wrap');
-    var vid=document.getElementById('s11-vid');
-    if(wrap)wrap.style.display='none';
-    if(vid){vid.style.display='block';vid.play();}
-  }
-  window.onYouTubeIframeAPIReady=function(){
-    var wrap=document.getElementById('s11-yt-wrap');
-    var vid=document.getElementById('s11-vid');
-    var d=document.createElement('div');
-    d.id='s11-yt-player';
-    wrap.appendChild(d);
-    s11ytPlayer=new YT.Player('s11-yt-player',{
-      videoId:'Rmkc1bMfxkE',
-      playerVars:{autoplay:1,mute:1,controls:0,rel:0,
-                  modestbranding:1,iv_load_policy:3,
-                  disablekb:1,showinfo:0,fs:0,playsinline:1},
-      events:{
-        onReady:function(e){
-          /* aplica allow=autoplay e estilo fullscreen */
-          var f=e.target.getIframe();
-          if(f){
-            f.setAttribute('allow','autoplay; fullscreen');
-            f.style.cssText='position:absolute;width:177.78vh;min-width:100%;'+
-              'height:177.78vw;min-height:100%;top:50%;left:50%;'+
-              'transform:translate(-50%,-50%);border:none;'+
-              'filter:brightness(1.05) saturate(1.7) contrast(1.12)';
-          }
-          e.target.playVideo();
-        },
-        onStateChange:function(e){
-          if(e.data===YT.PlayerState.ENDED){s11fallback();}
-        },
-        onError:function(){s11fallback();}
-      }
-    });
-    /* inicia o vídeo quando o slide 11 ficar ativo */
-    var slide=document.getElementById('s11');
-    if(slide){
-      new MutationObserver(function(muts){
-        muts.forEach(function(m){
-          if(slide.classList.contains('active')&&s11ytPlayer){
-            try{s11ytPlayer.playVideo();}catch(e){}
-          }
-        });
-      }).observe(slide,{attributes:true,attributeFilter:['class']});
-    }
-  };
-  /* carrega a API após definir o callback */
   (function(){
-    var s=document.createElement('script');
-    s.src='https://www.youtube.com/iframe_api';
-    document.head.appendChild(s);
+    var vid=document.getElementById('s11-vid');
+    var slide=document.getElementById('s11');
+    new MutationObserver(function(muts){
+      muts.forEach(function(){
+        if(slide.classList.contains('active')){
+          vid.currentTime=0;
+          vid.play();
+        } else {
+          vid.pause();
+        }
+      });
+    }).observe(slide,{attributes:true,attributeFilter:['class']});
   })();
   </script>
   <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,12,26,.35) 0%,rgba(3,12,26,.08) 50%,rgba(3,12,26,.30) 100%)"></div>
@@ -1355,11 +1194,19 @@ function goTo(n){
 }
 function go(d){goTo(cur+d);}
 document.addEventListener('keydown',function(e){
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();go(1);}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();go(-1);}
+  if(e.key===' '){e.preventDefault();go(1);}
   if(e.key==='Home') goTo(1);
   if(e.key==='End') goTo(TOTAL);
 });
+/* nav aparece ao mover o mouse, some após 2,5 s parado */
+(function(){
+  var nav=document.getElementById('nav');
+  var t;
+  function showNav(){nav.style.opacity='1';clearTimeout(t);t=setTimeout(function(){nav.style.opacity='0';},2500);}
+  document.addEventListener('mousemove',showNav);
+})();
 let sx=0;
 document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;});
 document.addEventListener('touchend',function(e){
