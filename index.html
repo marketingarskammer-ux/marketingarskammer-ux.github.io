@@ -1187,17 +1187,16 @@ p,span,div{font-family:var(--font-b)}
 </div>
 
   <!-- ── MODAL DE VÍDEO ── -->
-  <div id="vid-modal" onclick="if(event.target===this)closeVidModal()"
-       style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;align-items:center;justify-content:center;flex-direction:column">
-    <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay"
-            style="display:none;width:92vw;height:86vh;border:none;background:#000;box-shadow:0 0 60px rgba(0,0,0,.8)"></iframe>
+  <div id="vid-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:9999">
+    <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay; fullscreen"
+            style="display:none;position:absolute;inset:0;width:100%;height:100%;border:none"></iframe>
     <video id="vid-modal-player" controls playsinline
-           style="display:none;max-width:92vw;max-height:86vh;outline:none;background:#000;box-shadow:0 0 60px rgba(0,0,0,.8)">
+           style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;object-fit:contain;outline:none;background:#000">
     </video>
     <button onclick="closeVidModal()"
-            style="position:absolute;top:18px;right:26px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:1.6rem;width:44px;height:44px;cursor:pointer;border-radius:50%;line-height:1;transition:background .2s"
-            onmouseover="this.style.background='rgba(255,255,255,.25)'"
-            onmouseout="this.style.background='rgba(255,255,255,.1)'">&#215;</button>
+            style="position:absolute;top:16px;right:20px;z-index:10001;background:rgba(0,0,0,.7);border:1.5px solid rgba(255,255,255,.4);color:#fff;font-size:1.6rem;width:44px;height:44px;cursor:pointer;border-radius:50%;line-height:1;transition:background .2s"
+            onmouseover="this.style.background='rgba(180,0,0,.85)'"
+            onmouseout="this.style.background='rgba(0,0,0,.7)'">&#215;</button>
   </div>
 
   <div id="lang">
