@@ -12,9 +12,8 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--blue:#1a3a6e;--dark:#1e1e1e;--mid:#434142;--white:#fff;--lg:#f0f2f5;--font-t:'Barlow Condensed','Arial Narrow',Arial,sans-serif;--font-b:'Raleway','Gill Sans',sans-serif}
-html,body{width:100%;height:100%;overflow:hidden;background:#030c1a;margin:0;padding:0}
-body{width:100%;height:100%;overflow:hidden}
-.pres{width:100vw;height:100vh;position:relative;overflow:hidden}
+html,body{width:100%;height:100%;overflow:hidden;background:#030c1a;margin:0;padding:0;display:flex;align-items:center;justify-content:center}
+.pres{width:1440px;height:900px;position:relative;overflow:hidden;flex-shrink:0;transform-origin:center center}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;display:flex;flex-direction:column}
 .slide.active{opacity:1;pointer-events:all}
 .sd{background:#0d1b2e;color:#fff}
@@ -94,7 +93,7 @@ p,span,div{font-family:var(--font-b)}
 .lbtn-flag:hover{border-color:rgba(255,255,255,.8);transform:scale(1.1)}
 .lbtn-flag.active{border-color:#fff;box-shadow:0 0 0 2px var(--blue)}
 #ctr{position:absolute;bottom:20px;right:22px;font-family:var(--font-t);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.12em;z-index:200}
-@media(max-width:768px){.inner{padding:74px 24px 50px}}
+@media(max-width:768px) and (orientation:portrait){#rotate-hint{display:flex!important}}
 
 /* ── PINOS INTERATIVOS LAND BANK ── */
 .mpin{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:30;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.02)}
@@ -1290,6 +1289,13 @@ p,span,div{font-family:var(--font-b)}
   <div id="ctr">1 / 11</div>
 </div><!-- /pres -->
 
+<!-- AVISO ROTAÇÃO MOBILE -->
+<div id="rotate-hint" style="display:none;position:fixed;inset:0;background:#030c1a;z-index:99999;flex-direction:column;align-items:center;justify-content:center;gap:18px">
+  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22h6"/><circle cx="12" cy="17" r="1"/></svg>
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);text-align:center;padding:0 32px">Gire o dispositivo para melhor visualização</div>
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)">Rotate device for best experience</div>
+</div>
+
 <script>
 const TOTAL=15;let cur=1;
 function buildDots(){
@@ -1927,10 +1933,12 @@ document.addEventListener('click', fecharTodosPinos);
 // ── RESPONSIVIDADE — imagem preenche tela toda, conteúdo escala proporcional ──
 function fitContent() {
   var scale = Math.min(window.innerWidth / 1440, window.innerHeight / 900);
+  document.getElementById('pres').style.transform = 'scale(' + scale + ')';
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
 window.addEventListener('resize', fitContent);
+window.addEventListener('orientationchange', fitContent);
 fitContent();
 </script>
 </body>
