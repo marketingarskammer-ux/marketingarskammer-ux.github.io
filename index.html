@@ -12,8 +12,8 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--blue:#1a3a6e;--dark:#1e1e1e;--mid:#434142;--white:#fff;--lg:#f0f2f5;--font-t:'Barlow Condensed','Arial Narrow',Arial,sans-serif;--font-b:'Raleway','Gill Sans',sans-serif}
-html,body{width:100%;height:100%;overflow:hidden;background:#030c1a;margin:0;padding:0;display:flex;align-items:center;justify-content:center}
-.pres{width:1440px;height:900px;position:relative;overflow:hidden;flex-shrink:0;transform-origin:center center}
+html,body{width:100%;height:100%;overflow:hidden;background:#030c1a;margin:0;padding:0}
+.pres{width:100vw;height:100vh;position:relative;overflow:hidden;transform-origin:top left}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;display:flex;flex-direction:column}
 .slide.active{opacity:1;pointer-events:all}
 .sd{background:#0d1b2e;color:#fff}
@@ -1932,8 +1932,13 @@ document.addEventListener('click', fecharTodosPinos);
 
 // ── RESPONSIVIDADE — imagem preenche tela toda, conteúdo escala proporcional ──
 function fitContent() {
-  var scale = Math.min(window.innerWidth / 1440, window.innerHeight / 900);
-  document.getElementById('pres').style.transform = 'scale(' + scale + ')';
+  var vw = window.innerWidth;
+  var vh = window.innerHeight;
+  var scale = Math.min(vw / 1440, vh / 900);
+  var pres = document.getElementById('pres');
+  pres.style.width  = Math.ceil(vw / scale) + 'px';
+  pres.style.height = Math.ceil(vh / scale) + 'px';
+  pres.style.transform = 'scale(' + scale + ')';
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
