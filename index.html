@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>ARS Kammer | Pesquisa de Mercado Imobiliário</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1393,11 +1393,16 @@ function closeVidModal(){
   if(s11 && s11.classList.contains('active')) document.getElementById('s15-vid').play();
 }
 
-let sx=0;
-document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;});
+let sx=0, touchCount=0;
+document.addEventListener('touchstart',function(e){
+  touchCount=e.touches.length;
+  sx=e.touches[0].clientX;
+});
 document.addEventListener('touchend',function(e){
+  if(touchCount>1){touchCount=0;return;} // pinch — ignora navegação
   const dx=e.changedTouches[0].clientX-sx;
   if(Math.abs(dx)>50) go(dx<0?1:-1);
+  touchCount=0;
 });
 buildDots();
 
@@ -1951,6 +1956,7 @@ document.addEventListener('click', fecharTodosPinos);
 
 // ── RESPONSIVIDADE — imagem preenche tela toda, conteúdo escala proporcional ──
 function fitContent() {
+  if(window.visualViewport && window.visualViewport.scale > 1.05) return; // usuário com zoom — não resetar
   var vw = window.innerWidth;
   var vh = window.innerHeight;
   var isMobile = vw < 1024;
