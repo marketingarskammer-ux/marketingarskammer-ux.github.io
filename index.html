@@ -1397,13 +1397,14 @@ let sx=0, touchCount=0;
 document.addEventListener('touchstart',function(e){
   touchCount=e.touches.length;
   sx=e.touches[0].clientX;
-});
+},{passive:true});
 document.addEventListener('touchend',function(e){
-  if(touchCount>1){touchCount=0;return;} // pinch — ignora navegação
+  if(touchCount>1){touchCount=0;return;}                                          // pinch — ignora
+  if(window.visualViewport && window.visualViewport.scale>1.05){touchCount=0;return;} // zoom ativo — não troca slide
   const dx=e.changedTouches[0].clientX-sx;
   if(Math.abs(dx)>50) go(dx<0?1:-1);
   touchCount=0;
-});
+},{passive:true});
 buildDots();
 
 // ── DICIONÁRIO I18N ──
@@ -1955,21 +1956,35 @@ document.addEventListener('click', fecharTodosPinos);
 })();
 
 // ── RESPONSIVIDADE — imagem preenche tela toda, conteúdo escala proporcional ──
+var _baseScale = 1;
 function fitContent() {
-  if(window.visualViewport && window.visualViewport.scale > 1.05) return; // usuário com zoom — não resetar
+  if(window.visualViewport && window.visualViewport.scale > 1.05) return;
   var vw = window.innerWidth;
   var vh = window.innerHeight;
-  var isMobile = vw < 1024;
-  var scale = isMobile ? (vw / 1440) : Math.min(vw / 1440, vh / 900);
   var pres = document.getElementById('pres');
-  pres.style.width  = Math.ceil(vw / scale) + 'px';
-  pres.style.height = Math.ceil(vh / scale) + 'px';
-  pres.style.transform = 'scale(' + scale + ')';
+  var isMobile = vw < 1024;
+  if(isMobile){
+    // Mobile: usa CSS zoom (não cria layer GPU separada — evita crash Safari)
+    var scale = vw / 1440;
+    _baseScale = scale;
+    pres.style.transform = 'none';
+    pres.style.zoom = String(scale);
+    pres.style.width  = '1440px';
+    pres.style.height = Math.round(vh / scale) + 'px';
+  } else {
+    // Desktop: transform scale (funciona perfeitamente)
+    var scale = Math.min(vw / 1440, vh / 900);
+    _baseScale = scale;
+    pres.style.zoom = '';
+    pres.style.width  = Math.ceil(vw / scale) + 'px';
+    pres.style.height = Math.ceil(vh / scale) + 'px';
+    pres.style.transform = 'scale(' + scale + ')';
+  }
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
 window.addEventListener('resize', fitContent);
-window.addEventListener('orientationchange', fitContent);
+window.addEventListener('orientationchange', function(){ setTimeout(fitContent, 200); });
 fitContent();
 </script>
 </body>
