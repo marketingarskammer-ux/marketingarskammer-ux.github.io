@@ -93,7 +93,7 @@ p,span,div{font-family:var(--font-b)}
 .lbtn-flag:hover{border-color:rgba(255,255,255,.8);transform:scale(1.1)}
 .lbtn-flag.active{border-color:#fff;box-shadow:0 0 0 2px var(--blue)}
 #ctr{position:fixed;bottom:20px;right:22px;font-family:var(--font-t);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.12em;z-index:100000}
-@media(max-width:768px) and (orientation:portrait){#rotate-hint{display:flex!important}}
+@media(max-width:599px) and (orientation:portrait){#rotate-hint{display:flex!important}}
 
 /* ── PINOS INTERATIVOS LAND BANK ── */
 .mpin{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:30;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.02)}
@@ -2247,30 +2247,38 @@ function fitContent() {
   var vw = window.innerWidth;
   var vh = window.innerHeight;
   var pres = document.getElementById('pres');
-  var isMobile = vw < 1024;
-  if(isMobile){
-    // Mobile/iPad portrait: usa CSS zoom
-    var scale = Math.min(vw / 1440, vh / 900);
-    _baseScale = scale;
-    pres.style.transform = 'none';
-    pres.style.zoom = String(scale);
-    pres.style.width  = Math.ceil(vw / scale) + 'px';
-    pres.style.height = Math.ceil(vh / scale) + 'px';
+  var isPhone   = Math.min(vw,vh) < 600;   // telefone (menor dimensão < 600px)
+  var isTablet  = !isPhone && vw < 1024;    // tablet portrait
+  var isPortrait = vh > vw;
+  var scale;
+
+  if(isPhone && isPortrait){
+    // Phone portrait — tela de rotação cuida disso, usa escala mínima
+    scale = vw / 1440;
+  } else if(isPhone && !isPortrait){
+    // Phone landscape — escala pela ALTURA para maximizar legibilidade
+    scale = Math.max(vh / 900, vw / 1440);
+  } else if(isTablet){
+    // Tablet portrait — escala pela largura, melhor legibilidade
+    scale = vw / 1440;
   } else {
-    // Desktop: transform scale (funciona perfeitamente)
-    var scale = Math.min(vw / 1440, vh / 900);
-    _baseScale = scale;
-    pres.style.zoom = '';
-    pres.style.width  = Math.ceil(vw / scale) + 'px';
-    pres.style.height = Math.ceil(vh / scale) + 'px';
-    pres.style.transform = 'scale(' + scale + ')';
+    // Desktop / iPad landscape — escala perfeita Math.min
+    scale = Math.min(vw / 1440, vh / 900);
   }
+
+  _baseScale = scale;
+  pres.style.zoom = '';
+  pres.style.width  = Math.ceil(vw / scale) + 'px';
+  pres.style.height = Math.ceil(vh / scale) + 'px';
+  pres.style.transform = 'scale(' + scale + ')';
+  pres.style.transformOrigin = 'top left';
+
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
 function fitVideoFrames(){
   var vw=window.innerWidth, vh=window.innerHeight, s=_baseScale||1;
-  var isMob=vw<1024;
+  var isMob=vw<1024||vh<600;
   ['s12-frame','s13-frame','s15-frame'].forEach(function(id){
     var f=document.getElementById(id);
     if(!f) return;
