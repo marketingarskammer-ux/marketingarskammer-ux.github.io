@@ -1187,9 +1187,11 @@ document.addEventListener('keydown',function(e){
 ══════════════════════════════════════ -->
 <div class="slide sl" id="s12" style="overflow:hidden;background:#000">
   <iframe id="s12-frame" src=""
-    data-src="https://www.youtube.com/embed/S9N_x0U3-Fk?autoplay=1&mute=1&loop=1&controls=0&playlist=S9N_x0U3-Fk&modestbranding=1&rel=0&vq=hd1080&enablejsapi=1"
+    data-src="https://www.youtube.com/embed/S9N_x0U3-Fk?autoplay=1&mute=1&loop=1&controls=0&playlist=S9N_x0U3-Fk&modestbranding=1&rel=0&vq=hd1080&iv_load_policy=3&fs=0&disablekb=1&playsinline=1"
     style="position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);border:none;pointer-events:none;z-index:0"
     allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <!-- Div que intercepta mouse para suprimir overlay do YouTube -->
+  <div style="position:absolute;inset:0;z-index:1;pointer-events:all;background:transparent;cursor:default"></div>
   <script>
   (function(){
     var frame=document.getElementById('s12-frame');
