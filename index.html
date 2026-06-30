@@ -2247,32 +2247,25 @@ function fitContent() {
   var vw = window.innerWidth;
   var vh = window.innerHeight;
   var pres = document.getElementById('pres');
-  var isPhone   = Math.min(vw,vh) < 600;   // telefone (menor dimensão < 600px)
-  var isTablet  = !isPhone && vw < 1024;    // tablet portrait
-  var isPortrait = vh > vw;
+  var isMobile = vw < 1024;
   var scale;
-
-  if(isPhone && isPortrait){
-    // Phone portrait — tela de rotação cuida disso, usa escala mínima
+  if(isMobile){
+    // Mobile/tablet: CSS zoom (evita crash Safari)
     scale = vw / 1440;
-  } else if(isPhone && !isPortrait){
-    // Phone landscape — escala pela ALTURA para maximizar legibilidade
-    scale = Math.max(vh / 900, vw / 1440);
-  } else if(isTablet){
-    // Tablet portrait — escala pela largura, melhor legibilidade
-    scale = vw / 1440;
+    _baseScale = scale;
+    pres.style.transform = 'none';
+    pres.style.zoom = String(scale);
+    pres.style.width  = Math.ceil(vw / scale) + 'px';
+    pres.style.height = Math.ceil(vh / scale) + 'px';
   } else {
-    // Desktop / iPad landscape — escala perfeita Math.min
+    // Desktop: transform scale
     scale = Math.min(vw / 1440, vh / 900);
+    _baseScale = scale;
+    pres.style.zoom = '';
+    pres.style.width  = Math.ceil(vw / scale) + 'px';
+    pres.style.height = Math.ceil(vh / scale) + 'px';
+    pres.style.transform = 'scale(' + scale + ')';
   }
-
-  _baseScale = scale;
-  pres.style.zoom = '';
-  pres.style.width  = Math.ceil(vw / scale) + 'px';
-  pres.style.height = Math.ceil(vh / scale) + 'px';
-  pres.style.transform = 'scale(' + scale + ')';
-  pres.style.transformOrigin = 'top left';
-
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
