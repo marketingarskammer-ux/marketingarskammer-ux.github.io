@@ -1237,18 +1237,22 @@ document.addEventListener('keydown',function(e){
   S13 · VIEIRAS · VÍDEO
 ══════════════════════════════════════ -->
 <div class="slide sd" id="s13" style="overflow:hidden">
-  <video id="s13-vid" muted playsinline loop
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
-    <source src="file:///C:/Users/usuario/Desktop/VIDEO%20VIEIRAS%20ATUAL.mp4" type="video/mp4">
-  </video>
+  <iframe id="s13-frame" src=""
+    data-src="https://www.youtube.com/embed/-FuVQao1i3g?autoplay=1&mute=1&loop=1&controls=0&playlist=-FuVQao1i3g&modestbranding=1&rel=0&vq=hd1080&iv_load_policy=3&fs=0&disablekb=1&playsinline=1"
+    style="position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);border:none;pointer-events:none;z-index:0"
+    allow="autoplay; fullscreen" allowfullscreen></iframe>
   <script>
   (function(){
-    var vid=document.getElementById('s13-vid');
+    var frame=document.getElementById('s13-frame');
     var slide=document.getElementById('s13');
     new MutationObserver(function(muts){
       muts.forEach(function(){
-        if(slide.classList.contains('active')){vid.currentTime=0;vid.play();}
-        else{vid.pause();}
+        if(slide.classList.contains('active')){
+          if(!frame.src||frame.src===window.location.href)
+            frame.src=frame.dataset.src;
+        } else {
+          frame.src='';
+        }
       });
     }).observe(slide,{attributes:true,attributeFilter:['class']});
   })();
