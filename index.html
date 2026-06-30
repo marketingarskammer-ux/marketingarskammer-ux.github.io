@@ -1188,7 +1188,7 @@ document.addEventListener('keydown',function(e){
 <div class="slide sl" id="s12" style="overflow:hidden;background:#000">
   <iframe id="s12-frame" src=""
     data-src="https://www.youtube.com/embed/S9N_x0U3-Fk?autoplay=1&mute=1&loop=1&controls=0&playlist=S9N_x0U3-Fk&modestbranding=1&rel=0&vq=hd1080&iv_load_policy=3&fs=0&disablekb=1&playsinline=1"
-    style="position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);border:none;pointer-events:none;z-index:0"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;z-index:0"
     allow="autoplay; fullscreen" allowfullscreen></iframe>
   <script>
   (function(){
@@ -1238,7 +1238,7 @@ document.addEventListener('keydown',function(e){
 <div class="slide sd" id="s13" style="overflow:hidden">
   <iframe id="s13-frame" src=""
     data-src="https://www.youtube.com/embed/-FuVQao1i3g?autoplay=1&mute=1&loop=1&controls=0&playlist=-FuVQao1i3g&modestbranding=1&rel=0&vq=hd1080&iv_load_policy=3&fs=0&disablekb=1&playsinline=1"
-    style="position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);border:none;pointer-events:none;z-index:0"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;z-index:0"
     allow="autoplay; fullscreen" allowfullscreen></iframe>
   <script>
   (function(){
@@ -1358,7 +1358,7 @@ document.addEventListener('keydown',function(e){
 <div class="slide sd" id="s15" style="overflow:hidden">
   <iframe id="s15-frame" src=""
     data-src="https://www.youtube.com/embed/p0-eQilXLr8?autoplay=1&mute=1&loop=1&controls=0&playlist=p0-eQilXLr8&modestbranding=1&rel=0&vq=hd1080&iv_load_policy=3&fs=0&disablekb=1&playsinline=1"
-    style="position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);border:none;pointer-events:none;z-index:0"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;z-index:0"
     allow="autoplay; fullscreen" allowfullscreen></iframe>
   <script>
   (function(){
@@ -2249,13 +2249,13 @@ function fitContent() {
   var pres = document.getElementById('pres');
   var isMobile = vw < 1024;
   if(isMobile){
-    // Mobile: usa CSS zoom (não cria layer GPU separada — evita crash Safari)
-    var scale = vw / 1440;
+    // Mobile/iPad portrait: usa CSS zoom
+    var scale = Math.min(vw / 1440, vh / 900);
     _baseScale = scale;
     pres.style.transform = 'none';
     pres.style.zoom = String(scale);
-    pres.style.width  = '1440px';
-    pres.style.height = Math.round(vh / scale) + 'px';
+    pres.style.width  = Math.ceil(vw / scale) + 'px';
+    pres.style.height = Math.ceil(vh / scale) + 'px';
   } else {
     // Desktop: transform scale (funciona perfeitamente)
     var scale = Math.min(vw / 1440, vh / 900);
@@ -2268,9 +2268,29 @@ function fitContent() {
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
-window.addEventListener('resize', fitContent);
-window.addEventListener('orientationchange', function(){ setTimeout(fitContent, 200); });
+function fitVideoFrames(){
+  var vw=window.innerWidth, vh=window.innerHeight, s=_baseScale||1;
+  var pw=vw/s, ph=vh/s;
+  var vW,vH,vX,vY;
+  if(pw/ph > 16/9){
+    vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2;
+  } else {
+    vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2;
+  }
+  ['s12-frame','s13-frame','s15-frame'].forEach(function(id){
+    var f=document.getElementById(id);
+    if(!f) return;
+    f.style.width=Math.ceil(vW)+'px';
+    f.style.height=Math.ceil(vH)+'px';
+    f.style.left=Math.floor(vX)+'px';
+    f.style.top=Math.floor(vY)+'px';
+    f.style.position='absolute';
+  });
+}
+window.addEventListener('resize', function(){ fitContent(); fitVideoFrames(); });
+window.addEventListener('orientationchange', function(){ setTimeout(function(){ fitContent(); fitVideoFrames(); }, 300); });
 fitContent();
+fitVideoFrames();
 </script>
 </body>
 </html>
