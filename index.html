@@ -2289,11 +2289,11 @@ function fitVideoFrames(){
       f.style.left=Math.floor(vX)+'px';
       f.style.top=Math.floor(vY)+'px';
     } else {
-      // Desktop: -60px nas bordas para esconder controles YouTube
-      f.style.top='-60px';
-      f.style.left='-60px';
-      f.style.width='calc(100% + 120px)';
-      f.style.height='calc(100% + 120px)';
+      // Desktop: oversized 120% para esconder barras pretas e controles YouTube
+      f.style.top='-10%';
+      f.style.left='-10%';
+      f.style.width='120%';
+      f.style.height='120%';
     }
     f.style.position='absolute';
   });
