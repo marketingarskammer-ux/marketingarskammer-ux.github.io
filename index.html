@@ -2258,8 +2258,8 @@ function fitContent() {
     pres.style.width  = Math.ceil(vw / scale) + 'px';
     pres.style.height = Math.ceil(vh / scale) + 'px';
   } else {
-    // Desktop: transform scale
-    scale = Math.min(vw / 1440, vh / 900);
+    // Desktop: base 1366×768 → escala real em laptops comuns, maior em telas grandes
+    scale = Math.min(vw / 1366, vh / 768);
     _baseScale = scale;
     pres.style.zoom = '';
     pres.style.width  = Math.ceil(vw / scale) + 'px';
@@ -2271,31 +2271,26 @@ function fitContent() {
 }
 function fitVideoFrames(){
   var vw=window.innerWidth, vh=window.innerHeight, s=_baseScale||1;
-  var isMob=vw<1024||vh<600;
+  var pw=vw/s, ph=vh/s; // dimensões pré-escala do pres
+  // Cálculo 16:9 cover: garante que o vídeo cobre o container sem barras
+  var vW,vH,vX,vY;
+  if(pw/ph > 16/9){
+    vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2;
+  } else {
+    vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2;
+  }
+  // +15% margem extra em todos os lados para esconder barras baked-in e controles
+  var m=0.15;
+  var fw=vW*(1+2*m), fh=vH*(1+2*m);
+  var fx=vX-vW*m,    fy=vY-vH*m;
   ['s12-frame','s13-frame','s15-frame'].forEach(function(id){
     var f=document.getElementById(id);
     if(!f) return;
-    if(isMob){
-      // Mobile/iPad: calcula dimensões para cobrir o viewport 16:9
-      var pw=vw/s, ph=vh/s;
-      var vW,vH,vX,vY;
-      if(pw/ph > 16/9){
-        vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2;
-      } else {
-        vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2;
-      }
-      f.style.width=Math.ceil(vW)+'px';
-      f.style.height=Math.ceil(vH)+'px';
-      f.style.left=Math.floor(vX)+'px';
-      f.style.top=Math.floor(vY)+'px';
-    } else {
-      // Desktop: oversized 120% para esconder barras pretas e controles YouTube
-      f.style.top='-10%';
-      f.style.left='-10%';
-      f.style.width='120%';
-      f.style.height='120%';
-    }
     f.style.position='absolute';
+    f.style.width=Math.ceil(fw)+'px';
+    f.style.height=Math.ceil(fh)+'px';
+    f.style.left=Math.floor(fx)+'px';
+    f.style.top=Math.floor(fy)+'px';
   });
 }
 window.addEventListener('resize', function(){ fitContent(); fitVideoFrames(); });
