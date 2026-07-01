@@ -1114,74 +1114,6 @@ p,span,div{font-family:var(--font-b)}
   </div>
 </div>
 
-<!-- ── MODAL TIPOLOGIAS E PLANTA LAZER ── -->
-<div id="plantas-modal" style="display:none;position:fixed;inset:0;background:#f5f4f1;z-index:9000">
-  <button onclick="closePlantasModal()" style="position:absolute;top:20px;right:28px;background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:9010;line-height:1">✕</button>
-
-  <!-- Área do slide — tela cheia -->
-  <div style="position:absolute;inset:0">
-
-    <!-- Tipologia 01/02 -->
-    <div id="pslide-0" style="position:absolute;inset:0;background:#f5f4f1;border-radius:6px;overflow:hidden">
-      <div style="padding:14px 20px;background:#fff;border-bottom:2px solid #e8e6e0">
-        <div style="font-family:var(--font-t);font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#111">PLANTAS · TORRE ARAÇÁ, ESTALEIRO E PEREQUÊ</div>
-        <div style="font-family:var(--font-b);font-size:.73rem;color:#555;margin-top:2px;letter-spacing:.08em">Tipologia 01 e Tipologia 02 · 3 suítes · 134m² privativos · 3 vagas</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;height:calc(100% - 62px)">
-        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_01.jpg" style="width:100%;height:100%;object-fit:contain"></div>
-        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_02.jpg" style="width:100%;height:100%;object-fit:contain"></div>
-      </div>
-    </div>
-
-    <!-- Tipologia 03 -->
-    <div id="pslide-1" style="display:none;position:absolute;inset:0;background:#f5f4f1;border-radius:6px;overflow:hidden">
-      <div style="padding:14px 20px;background:#fff;border-bottom:2px solid #e8e6e0">
-        <div style="font-family:var(--font-t);font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#111">PLANTAS · TIPOLOGIA 03</div>
-        <div style="font-family:var(--font-b);font-size:.73rem;color:#555;margin-top:2px;letter-spacing:.08em">Torre Araçá e Estaleiro · Torre Perequê · 3 suítes · 123m² privativos · 2 vagas</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;height:calc(100% - 62px)">
-        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_03.jpg" style="width:100%;height:100%;object-fit:contain"></div>
-        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_04.jpg" style="width:100%;height:100%;object-fit:contain"></div>
-      </div>
-    </div>
-
-    <!-- Planta Lazer -->
-    <div id="pslide-2" style="display:none;position:absolute;inset:0;background:#f5f4f1;border-radius:6px;overflow:hidden">
-      <div style="padding:14px 20px;background:#fff;border-bottom:2px solid #e8e6e0">
-        <div style="font-family:var(--font-t);font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#111">PLANTA DE LAZER</div>
-        <div style="font-family:var(--font-b);font-size:.73rem;color:#555;margin-top:2px;letter-spacing:.08em">7º Pavimento · Térreo e G1 · Área de lazer completa</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;height:calc(100% - 62px)">
-        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="lazer_7pav.png" style="width:100%;height:100%;object-fit:contain"></div>
-        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="lazer_terreo.png" style="width:100%;height:100%;object-fit:contain"></div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-<script>
-var pCur=0;
-function openPlantasModal(){document.getElementById('plantas-modal').style.display='block';showPSlide(0);}
-function closePlantasModal(){document.getElementById('plantas-modal').style.display='none';}
-function showPSlide(n){
-  for(var i=0;i<3;i++){
-    document.getElementById('pslide-'+i).style.display=i===n?'block':'none';
-  }
-  pCur=n;
-}
-function pNav(d){
-  if(d>0&&pCur===2){closePlantasModal();return;}
-  showPSlide(Math.max(0,Math.min(2,pCur+d)));
-}
-document.addEventListener('keydown',function(e){
-  var m=document.getElementById('plantas-modal');
-  if(m.style.display==='block'){
-    if(e.key==='Escape')closePlantasModal();
-  }
-});
-</script>
-
 <!-- ══════════════════════════════════════
   S12 · ACCENDIS · VÍDEO 3D
 ══════════════════════════════════════ -->
@@ -1437,20 +1369,74 @@ document.addEventListener('keydown',function(e){
   </div>
 </div>
 
-  <!-- ── MODAL DE VÍDEO ── -->
-  <div id="vid-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:9999;overflow:hidden">
-    <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay; fullscreen"
-            style="display:none;position:absolute;top:-8%;left:-8%;width:116%;height:116%;border:none"></iframe>
-    <video id="vid-modal-player" controls playsinline
-           style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;outline:none;background:#000">
-    </video>
-    <button onclick="closeVidModal()"
-            style="position:absolute;top:16px;right:20px;z-index:10001;background:rgba(0,0,0,.7);border:1.5px solid rgba(255,255,255,.4);color:#fff;font-size:1.6rem;width:44px;height:44px;cursor:pointer;border-radius:50%;line-height:1;transition:background .2s"
-            onmouseover="this.style.background='rgba(180,0,0,.85)'"
-            onmouseout="this.style.background='rgba(0,0,0,.7)'">&#215;</button>
-  </div>
-
 </div><!-- /pres -->
+
+<!-- ── MODAL DE VÍDEO — fora do #pres ── -->
+<div id="vid-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:99999;overflow:hidden">
+  <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay; fullscreen"
+          style="display:none;position:absolute;top:-8%;left:-8%;width:116%;height:116%;border:none"></iframe>
+  <video id="vid-modal-player" controls playsinline
+         style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;outline:none;background:#000">
+  </video>
+  <button onclick="closeVidModal()"
+          style="position:absolute;top:16px;right:20px;z-index:10001;background:rgba(0,0,0,.7);border:1.5px solid rgba(255,255,255,.4);color:#fff;font-size:1.6rem;width:44px;height:44px;cursor:pointer;border-radius:50%;line-height:1;transition:background .2s"
+          onmouseover="this.style.background='rgba(180,0,0,.85)'"
+          onmouseout="this.style.background='rgba(0,0,0,.7)'">&#215;</button>
+</div>
+
+<!-- ── MODAL TIPOLOGIAS E PLANTA LAZER — fora do #pres ── -->
+<div id="plantas-modal" style="display:none;position:fixed;inset:0;background:#f5f4f1;z-index:99999">
+  <button onclick="closePlantasModal()" style="position:absolute;top:20px;right:28px;background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:9010;line-height:1">✕</button>
+  <div style="position:absolute;inset:0">
+    <div id="pslide-0" style="position:absolute;inset:0;background:#f5f4f1;overflow:hidden">
+      <div style="padding:14px 20px;background:#fff;border-bottom:2px solid #e8e6e0">
+        <div style="font-family:'Barlow Condensed',Arial,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#111">PLANTAS · TORRE ARAÇÁ, ESTALEIRO E PEREQUÊ</div>
+        <div style="font-family:'Raleway',sans-serif;font-size:.73rem;color:#555;margin-top:2px;letter-spacing:.08em">Tipologia 01 e Tipologia 02 · 3 suítes · 134m² privativos · 3 vagas</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;height:calc(100% - 62px)">
+        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_01.jpg" style="width:100%;height:100%;object-fit:contain"></div>
+        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_02.jpg" style="width:100%;height:100%;object-fit:contain"></div>
+      </div>
+    </div>
+    <div id="pslide-1" style="display:none;position:absolute;inset:0;background:#f5f4f1;overflow:hidden">
+      <div style="padding:14px 20px;background:#fff;border-bottom:2px solid #e8e6e0">
+        <div style="font-family:'Barlow Condensed',Arial,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#111">PLANTAS · TIPOLOGIA 03</div>
+        <div style="font-family:'Raleway',sans-serif;font-size:.73rem;color:#555;margin-top:2px;letter-spacing:.08em">Torre Araçá e Estaleiro · Torre Perequê · 3 suítes · 123m² privativos · 2 vagas</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;height:calc(100% - 62px)">
+        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_03.jpg" style="width:100%;height:100%;object-fit:contain"></div>
+        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="planta_04.jpg" style="width:100%;height:100%;object-fit:contain"></div>
+      </div>
+    </div>
+    <div id="pslide-2" style="display:none;position:absolute;inset:0;background:#f5f4f1;overflow:hidden">
+      <div style="padding:14px 20px;background:#fff;border-bottom:2px solid #e8e6e0">
+        <div style="font-family:'Barlow Condensed',Arial,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#111">PLANTA DE LAZER</div>
+        <div style="font-family:'Raleway',sans-serif;font-size:.73rem;color:#555;margin-top:2px;letter-spacing:.08em">7º Pavimento · Térreo e G1 · Área de lazer completa</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;height:calc(100% - 62px)">
+        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="lazer_7pav.png" style="width:100%;height:100%;object-fit:contain"></div>
+        <div style="background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="lazer_terreo.png" style="width:100%;height:100%;object-fit:contain"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var pCur=0;
+function openPlantasModal(){document.getElementById('plantas-modal').style.display='block';showPSlide(0);}
+function closePlantasModal(){document.getElementById('plantas-modal').style.display='none';}
+function showPSlide(n){
+  for(var i=0;i<3;i++){document.getElementById('pslide-'+i).style.display=i===n?'block':'none';}
+  pCur=n;
+}
+function pNav(d){
+  if(d>0&&pCur===2){closePlantasModal();return;}
+  showPSlide(Math.max(0,Math.min(2,pCur+d)));
+}
+document.addEventListener('keydown',function(e){
+  var m=document.getElementById('plantas-modal');
+  if(m.style.display==='block'&&e.key==='Escape')closePlantasModal();
+});
+</script>
 <div id="lang">
   <button class="lbtn-flag active" id="btn-pt" onclick="changeLang('pt')" title="Português"><span class="fi fi-br fis"></span></button>
   <button class="lbtn-flag" id="btn-en" onclick="changeLang('en')" title="English"><span class="fi fi-gb fis"></span></button>
