@@ -1214,7 +1214,7 @@ p,span,div{font-family:var(--font-b)}
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
       <div id="s13-drop-menu" style="display:none;position:absolute;bottom:calc(100% + 8px);right:0;background:rgba(10,20,40,.92);backdrop-filter:blur(18px);border:1.5px solid rgba(255,255,255,.2);border-radius:6px;overflow:hidden;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,.5)">
-        <button onclick="openDriveVid('1nKLY8d2hMxDNF-baKvyll1rIZzkJBlG3');closeS13Drop()"
+        <button onclick="openYTVid('i-XrkMgp6IY');closeS13Drop()"
           style="display:flex;align-items:center;gap:10px;width:100%;padding:12px 18px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--font-t);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-align:left;transition:background .2s;white-space:nowrap"
           onmouseover="this.style.background='rgba(26,58,110,.7)'"
           onmouseout="this.style.background='transparent'">
@@ -1619,6 +1619,16 @@ function openDriveVid(id){
   var iframe=document.getElementById('vid-modal-iframe');
   var player=document.getElementById('vid-modal-player');
   iframe.src='https://drive.google.com/file/d/'+id+'/preview?autoplay=1';
+  iframe.style.display='block';
+  player.style.display='none';
+  modal.style.display='flex';
+  var _f15=document.getElementById('s15-frame');if(_f15)_f15.src='about:blank';
+}
+function openYTVid(id){
+  var modal=document.getElementById('vid-modal');
+  var iframe=document.getElementById('vid-modal-iframe');
+  var player=document.getElementById('vid-modal-player');
+  iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=1&rel=0&modestbranding=1';
   iframe.style.display='block';
   player.style.display='none';
   modal.style.display='flex';
