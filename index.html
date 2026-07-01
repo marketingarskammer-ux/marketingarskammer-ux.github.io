@@ -2258,8 +2258,8 @@ function fitContent() {
     pres.style.width  = Math.ceil(vw / scale) + 'px';
     pres.style.height = Math.ceil(vh / scale) + 'px';
   } else {
-    // Desktop: sem clip lateral (vw/1440), texto maior (vh/840), cap 1.4 para TVs/4K
-    scale = Math.min(vw / 1440, vh / 840, 1.4);
+    // Desktop: sem clip lateral (vw/1440), texto maior (vh/840), cap 1.2 para 27"+/TVs
+    scale = Math.min(vw / 1440, vh / 840, 1.2);
     _baseScale = scale;
     pres.style.zoom = '';
     pres.style.width  = Math.ceil(vw / scale) + 'px';
