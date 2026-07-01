@@ -2249,23 +2249,19 @@ function fitContent() {
   var pres = document.getElementById('pres');
   var isMobile = vw < 1024;
   var scale;
+  // Todos os dispositivos: transform:scale (zoom tinha bug no iOS Safari com position:absolute)
+  // Mobile: vw/1440 | Desktop: Math.min(vw/1440, vh/840, 1.1) — cap 1.1 para telas 27"+
   if(isMobile){
-    // Mobile/tablet: CSS zoom (evita crash Safari)
     scale = vw / 1440;
-    _baseScale = scale;
-    pres.style.transform = 'none';
-    pres.style.zoom = String(scale);
-    pres.style.width  = Math.ceil(vw / scale) + 'px';
-    pres.style.height = Math.ceil(vh / scale) + 'px';
   } else {
-    // Desktop: sem clip lateral (vw/1440), texto maior (vh/840), cap 1.2 para 27"+/TVs
-    scale = Math.min(vw / 1440, vh / 840, 1.2);
-    _baseScale = scale;
-    pres.style.zoom = '';
-    pres.style.width  = Math.ceil(vw / scale) + 'px';
-    pres.style.height = Math.ceil(vh / scale) + 'px';
-    pres.style.transform = 'scale(' + scale + ')';
+    scale = Math.min(vw / 1440, vh / 840, 1.1);
   }
+  _baseScale = scale;
+  pres.style.zoom = '';
+  pres.style.width  = Math.ceil(vw / scale) + 'px';
+  pres.style.height = Math.ceil(vh / scale) + 'px';
+  pres.style.transform = 'scale(' + scale + ')';
+  pres.style.transformOrigin = 'top left';
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
