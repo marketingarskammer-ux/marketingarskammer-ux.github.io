@@ -1461,7 +1461,7 @@ function closeAcModal(){document.getElementById('ac-modal').style.display='none'
 
 <!-- ── MODAL TIPOLOGIA E PLANTA LAZER (imagens 58–64) — fora do #pres ── -->
 <div id="book-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:99999">
-  <img id="book-img" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;user-select:none">
+  <img id="book-img" src="" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:82%;max-height:82%;object-fit:contain;z-index:0;user-select:none">
   <button onclick="closeBookModal()" style="position:absolute;top:20px;right:28px;background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;line-height:1">✕</button>
   <button onclick="bookNav(-1)" id="book-prev" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:56px;height:56px;border-radius:50%;font-size:2.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;line-height:1">‹</button>
   <button onclick="bookNav(1)"  id="book-next" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:56px;height:56px;border-radius:50%;font-size:2.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;line-height:1">›</button>
@@ -1486,7 +1486,7 @@ function bookNav(d){
 
 <!-- ── MODAL O EMPREENDIMENTO (imagens 15–23) — fora do #pres para position:fixed funcionar corretamente ── -->
 <div id="emp-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:99999">
-  <img id="emp-img" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;user-select:none">
+  <img id="emp-img" src="" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:82%;max-height:82%;object-fit:contain;z-index:0;user-select:none">
   <button onclick="closeEmpModal()" style="position:absolute;top:20px;right:28px;background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;line-height:1">✕</button>
   <button onclick="empNav(-1)" id="emp-prev" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:56px;height:56px;border-radius:50%;font-size:2.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;line-height:1">‹</button>
   <button onclick="empNav(1)"  id="emp-next" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:56px;height:56px;border-radius:50%;font-size:2.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;line-height:1">›</button>
