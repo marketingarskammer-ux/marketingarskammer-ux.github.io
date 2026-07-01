@@ -2235,53 +2235,44 @@ function fitContent() {
   var pres = document.getElementById('pres');
   var isMobile = vw < 1024;
   var scale;
+  // Todos os dispositivos: transform:scale (zoom tinha bug no iOS Safari com position:absolute)
+  // Mobile: vw/1440 | Desktop: Math.min(vw/1440, vh/840, 1.1) — cap 1.1 para telas 27"+
   if(isMobile){
-    // Mobile: CSS zoom (estável no iOS Safari)
     scale = vw / 1440;
-    _baseScale = scale;
-    pres.style.transform = 'none';
-    pres.style.transformOrigin = '';
-    pres.style.zoom = String(scale);
-    pres.style.width  = '1440px';
-    pres.style.height = Math.ceil(vh / scale) + 'px';
   } else {
-    // Desktop: transform:scale, cap 1.1 para 27"+
     scale = Math.min(vw / 1440, vh / 840, 1.1);
-    _baseScale = scale;
-    pres.style.zoom = '';
-    pres.style.width  = Math.ceil(vw / scale) + 'px';
-    pres.style.height = Math.ceil(vh / scale) + 'px';
-    pres.style.transform = 'scale(' + scale + ')';
-    pres.style.transformOrigin = 'top left';
   }
+  _baseScale = scale;
+  pres.style.zoom = '';
+  pres.style.width  = Math.ceil(vw / scale) + 'px';
+  pres.style.height = Math.ceil(vh / scale) + 'px';
+  pres.style.transform = 'scale(' + scale + ')';
+  pres.style.transformOrigin = 'top left';
   document.documentElement.style.setProperty('--vscale', scale);
   document.documentElement.style.fontSize = (scale * 16) + 'px';
 }
 function fitVideoFrames(){
   var vw=window.innerWidth, vh=window.innerHeight, s=_baseScale||1;
-  var isMob=vw<1024;
+  var pw=vw/s, ph=vh/s; // dimensões pré-escala do pres
+  // Cálculo 16:9 cover: garante que o vídeo cobre o container sem barras
+  var vW,vH,vX,vY;
+  if(pw/ph > 16/9){
+    vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2;
+  } else {
+    vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2;
+  }
+  // +5% margem para esconder controles sem zoom excessivo no vídeo
+  var m=0.05;
+  var fw=vW*(1+2*m), fh=vH*(1+2*m);
+  var fx=vX-vW*m,    fy=vY-vH*m;
   ['s12-frame','s13-frame','s15-frame'].forEach(function(id){
     var f=document.getElementById(id);
     if(!f) return;
-    if(isMob){
-      // Mobile: position:fixed em pixels de tela (não afetado pelo zoom)
-      f.style.position='fixed';
-      f.style.top='0'; f.style.left='0';
-      f.style.width=vw+'px'; f.style.height=vh+'px';
-      f.style.zIndex='0';
-    } else {
-      // Desktop: cálculo 16:9 cover em coordenadas pré-escala
-      var pw=vw/s, ph=vh/s;
-      var vW,vH,vX,vY;
-      if(pw/ph > 16/9){ vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2; }
-      else { vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2; }
-      var m=0.05;
-      f.style.position='absolute';
-      f.style.width=Math.ceil(vW*(1+2*m))+'px';
-      f.style.height=Math.ceil(vH*(1+2*m))+'px';
-      f.style.left=Math.floor(vX-vW*m)+'px';
-      f.style.top=Math.floor(vY-vH*m)+'px';
-    }
+    f.style.position='absolute';
+    f.style.width=Math.ceil(fw)+'px';
+    f.style.height=Math.ceil(fh)+'px';
+    f.style.left=Math.floor(fx)+'px';
+    f.style.top=Math.floor(fy)+'px';
   });
 }
 window.addEventListener('resize', function(){ fitContent(); fitVideoFrames(); });
