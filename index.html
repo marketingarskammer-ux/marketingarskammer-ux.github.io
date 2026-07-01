@@ -1460,7 +1460,7 @@ function closeAcModal(){document.getElementById('ac-modal').style.display='none'
 </script>
 
 <!-- ── MODAL TIPOLOGIA E PLANTA LAZER (imagens 58–64) — fora do #pres ── -->
-<div id="book-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#111;z-index:99999">
+<div id="book-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#111;z-index:99999;display:flex;align-items:center;justify-content:center">
   <img id="book-img" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;z-index:0;user-select:none">
   <button onclick="closeBookModal()" style="position:absolute;top:20px;right:28px;background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;line-height:1">✕</button>
   <button onclick="bookNav(-1)" id="book-prev" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:56px;height:56px;border-radius:50%;font-size:2.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;line-height:1">‹</button>
@@ -1485,7 +1485,7 @@ function bookNav(d){
 </script>
 
 <!-- ── MODAL O EMPREENDIMENTO (imagens 15–23) — fora do #pres para position:fixed funcionar corretamente ── -->
-<div id="emp-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#111;z-index:99999">
+<div id="emp-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#111;z-index:99999;display:flex;align-items:center;justify-content:center">
   <img id="emp-img" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;z-index:0;user-select:none">
   <button onclick="closeEmpModal()" style="position:absolute;top:20px;right:28px;background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;line-height:1">✕</button>
   <button onclick="empNav(-1)" id="emp-prev" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.3);color:#fff;width:56px;height:56px;border-radius:50%;font-size:2.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;line-height:1">‹</button>
@@ -2236,7 +2236,7 @@ function fitContent() {
   var isMobile = vw < 1024;
   var scale;
   if(isMobile){
-    // Mobile: CSS zoom — estável no iOS/Android Safari
+    // Mobile: CSS zoom (estável no iOS Safari)
     scale = vw / 1440;
     _baseScale = scale;
     pres.style.transform = 'none';
@@ -2264,26 +2264,24 @@ function fitVideoFrames(){
     var f=document.getElementById(id);
     if(!f) return;
     if(isMob){
-      // Mobile: position:fixed em px de tela (CSS zoom não afeta fixed)
+      // Mobile: position:fixed em pixels de tela (não afetado pelo zoom)
       f.style.position='fixed';
       f.style.top='0'; f.style.left='0';
       f.style.width=vw+'px'; f.style.height=vh+'px';
       f.style.zIndex='0';
-      return;
+    } else {
+      // Desktop: cálculo 16:9 cover em coordenadas pré-escala
+      var pw=vw/s, ph=vh/s;
+      var vW,vH,vX,vY;
+      if(pw/ph > 16/9){ vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2; }
+      else { vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2; }
+      var m=0.05;
+      f.style.position='absolute';
+      f.style.width=Math.ceil(vW*(1+2*m))+'px';
+      f.style.height=Math.ceil(vH*(1+2*m))+'px';
+      f.style.left=Math.floor(vX-vW*m)+'px';
+      f.style.top=Math.floor(vY-vH*m)+'px';
     }
-    // Desktop: cálculo 16:9 cover em coordenadas pré-escala
-    var pw=vw/s, ph=vh/s;
-    var vW,vH,vX,vY;
-    if(pw/ph > 16/9){ vW=pw; vH=pw*9/16; vX=0; vY=-(vH-ph)/2; }
-    else { vH=ph; vW=ph*16/9; vY=0; vX=-(vW-pw)/2; }
-    var m=0.05;
-    var fw=vW*(1+2*m), fh=vH*(1+2*m);
-    var fx=vX-vW*m,    fy=vY-vH*m;
-    f.style.position='absolute';
-    f.style.width=Math.ceil(fw)+'px';
-    f.style.height=Math.ceil(fh)+'px';
-    f.style.left=Math.floor(fx)+'px';
-    f.style.top=Math.floor(fy)+'px';
   });
 }
 window.addEventListener('resize', function(){ fitContent(); fitVideoFrames(); });
