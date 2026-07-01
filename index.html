@@ -1659,6 +1659,8 @@ document.addEventListener('touchend',function(e){
   touchCount=0;
 },{passive:true});
 buildDots();
+document.getElementById('s'+cur).classList.add('active');
+document.getElementById('ctr').textContent='1 / '+SLIDES.length;
 
 // ── DICIONÁRIO I18N ──
 var i18n = {
