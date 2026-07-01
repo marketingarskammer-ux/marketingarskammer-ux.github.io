@@ -1438,9 +1438,9 @@ document.addEventListener('keydown',function(e){
 </div>
 
   <!-- ── MODAL DE VÍDEO ── -->
-  <div id="vid-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:9999">
+  <div id="vid-modal" style="display:none;position:fixed;inset:0;background:#000;z-index:9999;overflow:hidden">
     <iframe id="vid-modal-iframe" allowfullscreen allow="autoplay; fullscreen"
-            style="display:none;position:absolute;inset:0;width:100%;height:100%;border:none"></iframe>
+            style="display:none;position:absolute;top:-10%;left:-10%;width:120%;height:120%;border:none"></iframe>
     <video id="vid-modal-player" controls playsinline
            style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;outline:none;background:#000">
     </video>
